@@ -42,3 +42,4 @@ public class JodaDateTimeProvider extends PerRequestTypeInjectableProvider<Query
         };
     }
 }
+
