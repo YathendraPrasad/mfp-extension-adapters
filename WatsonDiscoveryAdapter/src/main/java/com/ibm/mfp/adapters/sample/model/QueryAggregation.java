@@ -27,7 +27,7 @@ import javax.validation.constraints.*;
  * An aggregation produced by the Discovery service to analyze the input provided.
  */
 @ApiModel(description = "An aggregation produced by the Discovery service to analyze the input provided.")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-15T10:26:38.328+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T15:47:02.385+05:30")
 public class QueryAggregation   {
   @JsonProperty("type")
   private String type = null;

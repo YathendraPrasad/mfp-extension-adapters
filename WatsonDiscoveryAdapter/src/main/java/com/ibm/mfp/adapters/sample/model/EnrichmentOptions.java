@@ -25,7 +25,7 @@ import javax.validation.constraints.*;
  * options which are specific to a particular enrichment
  */
 @ApiModel(description = "options which are specific to a particular enrichment")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-15T10:26:38.328+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T15:47:02.385+05:30")
 public class EnrichmentOptions   {
   @JsonProperty("extract")
   private String extract = "entity,keyword,concept,taxonomy";

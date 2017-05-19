@@ -1,0 +1,2984 @@
+{
+   "swagger":"2.0",
+   "info":{
+      "title":"Discovery",
+      "version":"1.0",
+      "description":"The IBM Watson&trade; Discovery Service is a cognitive search and content analytics engine that you can add to applications to identify patterns, trends and actionable insights to drive better decision-making. Securely unify structured and unstructured data with pre-enriched content, and use a simplified query language to eliminate the need for manual filtering of results. "
+   },
+   "securityDefinitions":{
+      "basicAuth":{
+         "type":"basic",
+         "description":"HTTP Basic Authentication."
+      }
+   },
+   "security":[
+      {
+         "basicAuth":[
+
+         ]
+      }
+   ],
+   "externalDocs":{
+      "description":"For more information about these methods, check out the API Reference",
+      "url":"http://www.ibm.com/watson/developercloud/discovery/api/v1/"
+   },
+   "host":"gateway.watsonplatform.net",
+   "schemes":[
+      "https"
+   ],
+   "basePath":"/discovery/api",
+   "paths":{
+      "/v1/environments":{
+         "post":{
+            "operationId":"createEnvironment",
+            "summary":"Add an environment",
+            "description":"Creates a new environment.\n\nYou can create only one environment per service instance. An attempt to create another environment will result in an error.\n\nThe size of the new environment can be controlled by specifying the\n`size` parameter. Use the table below to map size values to the size of\nthe environment which is created:\n\n| Size | Disk (GB)  | RAM (GB) | Included Standard Enrichments | Notes |\n| ---:  | -----------: | -----------: | --------------------------------------------: | -------- |\n| 0  | 2              | 1              | n/a (effectively unlimited)   | Free Plan only, no HA (single node in elastic.co)|\n| 1     | 48             | 2              | 4,000    | |\n| 2     | 192            | 8              | 16,000   | |\n| 3     | 384            | 16             | 32,000   | |\n\n**Note:** you cannot set the size property when using the free plan.",
+            "tags":[
+               "Environments"
+            ],
+             "produces":["application/json"],
+            "consumes":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/versionParam"
+               },
+               {
+                  "name":"body",
+                  "in":"body",
+                  "description":"A JSON object where you define an environment name, description, and size.",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/CreateEnvironmentRequest"
+                  }
+               }
+            ],
+            "responses":{
+               "201":{
+                  "description":"Environment successfuly added",
+                  "schema":{
+                     "$ref":"#/definitions/Environment"
+                  }
+               },
+               "400":{
+                  "description":"Bad request.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         },
+         "get":{
+            "operationId":"listEnvironments",
+            "summary":"List environments",
+            "description":"List existing environments for the service instance.",
+            "tags":[
+               "Environments"
+            ],
+           
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "name":"name",
+                  "in":"query",
+                  "description":"Show only the environment with the given name.",
+                  "required":false,
+                  "type":"string"
+               },
+               {
+                  "$ref":"#/parameters/versionParam"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Successful response",
+                  "schema":{
+                     "$ref":"#/definitions/ListEnvironmentsResponse"
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         }
+      },
+      "/v1/environments/{environment_id}":{
+         "get":{
+            "operationId":"getEnvironment",
+            "summary":"Get environment info",
+            "produces":["application/json"],
+            "tags":[
+               "Environments"
+            ],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/environmentIdParam"
+               },
+               {
+                  "$ref":"#/parameters/versionParam"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Environment fetched",
+                  "schema":{
+                     "$ref":"#/definitions/Environment"
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         },
+         "put":{
+            "operationId":"updateEnvironment",
+            "summary":"Update an environment",
+            "description":"Updates an environment. The environment's `name` and  `description` parameters can be changed. You can increase the value of the `size` parameter. If you need to decrease an environment's size, contact IBM Support.",
+            "tags":[
+               "Environments"
+            ],
+            "produces":["application/json"],
+            "consumes":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/environmentIdParam"
+               },
+               {
+                  "$ref":"#/parameters/versionParam"
+               },
+               {
+                  "name":"body",
+                  "in":"body",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/UpdateEnvironmentRequest"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Environment successfully updated",
+                  "schema":{
+                     "$ref":"#/definitions/Environment"
+                  }
+               },
+               "400":{
+                  "description":"Bad request.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               },
+               "403":{
+                  "description":"Forbidden. Returned if you attempt to update a read-only environment.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         },
+         "delete":{
+            "operationId":"deleteEnvironment",
+            "summary":"Delete environment",
+            "tags":[
+               "Environments"
+            ],
+             "produces":["application/json"],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/environmentIdParam"
+               },
+               {
+                  "$ref":"#/parameters/versionParam"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Environment successfully deleted",
+                  "schema":{
+                     "$ref":"#/definitions/DeleteEnvironmentResponse"
+                  }
+               },
+               "400":{
+                  "description":"Bad request.\nExample error messages:\n\n* `Invalid environment id. Please check if the format is correct.`",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               },
+               "403":{
+                  "description":"Forbidden. Returned if you attempt to delete a read-only environment.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               },
+               "404":{
+                  "description":"Returned any time the environment is not found (even immediately after the environment was successfully deleted).\n\nExample error message:\n\n`An environment with ID '2cd8bc72-d737-46e3-b26b-05a585111111' was not found.`",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         }
+      },
+      "/v1/environments/{environment_id}/preview":{
+         "post":{
+            "operationId":"testConfigurationInEnvironment",
+            "summary":"Test configuration",
+            "description":"Runs a sample document through the default or your configuration and returns diagnostic information designed to help you understand how the document was processed. The document is not added to the index.",
+            "tags":[
+               "TestConfigurationInEnvironment"
+            ],
+            "consumes":[
+               "multipart/form-data"
+            ],
+             "produces":["application/json"],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/environmentIdParam"
+               },
+               {
+                  "$ref":"#/parameters/configurationPart"
+               },
+               {
+                  "name":"step",
+                  "in":"query",
+                  "type":"string",
+                  "enum":[
+                     "html_input",
+                     "html_output",
+                     "json_output",
+                     "json_normalizations_output",
+                     "enrichments_output",
+                     "normalizations_output"
+                  ],
+                  "required":false,
+                  "description":"Specify to only run the input document through the given step instead of running the input document through the entire ingestion workflow. Valid values are `convert`, `enrich`, and `normalize`."
+               },
+               {
+                  "$ref":"#/parameters/configurationIdQueryParam"
+               },
+               {
+                  "$ref":"#/parameters/filePart"
+               },
+               {
+                  "$ref":"#/parameters/metadataPart"
+               },
+               {
+                  "$ref":"#/parameters/versionParam"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"The document was successfully processed.",
+                  "schema":{
+                     "$ref":"#/definitions/TestDocument"
+                  }
+               },
+               "400":{
+                  "description":"Bad request if:\n  * The request is incorrectly formatted\n  * The `configuration_id` parameter refers to a non-existent configuration\n  * The default `configuration_id` of the collection refers to a non-existent configuration (and no override has been provided).\nThe error message contains details about what caused the request to be rejected.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         }
+      },
+      "/v1/environments/{environment_id}/configurations":{
+         "post":{
+            "operationId":"createConfiguration",
+            "summary":"Add configuration",
+            "description":"Creates a new configuration.\n\nIf the input configuration contains the `configuration_id`, `created`, or `updated` properties, then they are ignored and overridden by the system, and an error is not returned so that the overridden fields do not need to be removed when copying a configuration.\n\nThe configuration can contain unrecognized JSON fields. Any such fields are ignored and do not generate an error. This makes it easier to use newer configuration files with older versions of the API and the service. It also makes it possible for the tooling to add additional metadata and information to the configuration.",
+            "tags":[
+               "Configurations"
+            ],
+            "produces":[
+               "application/json"
+            ],
+            "consumes":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/environmentIdParam"
+               },
+               {
+                  "$ref":"#/parameters/versionParam"
+               },
+               {
+                  "name":"configuration",
+                  "description":"Input a JSON object that enables you to customize how your content is ingested and what enrichments are added to your data. \n\n`name` is required and must be unique within the current `environment`. All other properties are optional.\n\nIf the input configuration contains the `configuration_id`, `created`, or `updated` properties, then they will be ignored and overridden by the system (an error is not returned so that the overridden fields do not need to be removed when copying a configuration). \n\nThe configuration can contain unrecognized JSON fields. Any such fields will be ignored and will not generate an error. This makes it easier to use newer configuration files with older versions of the API and the service. It also makes it possible for the tooling to add additional metadata and information to the configuration.",
+                  "in":"body",
+                  "required":true,
+                  "schema":{
+                     "$ref":"#/definitions/Configuration"
+                  }
+               }
+            ],
+            "responses":{
+               "201":{
+                  "description":"Configuration successfuly created",
+                  "schema":{
+                     "$ref":"#/definitions/Configuration"
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               },
+               "403":{
+                  "description":"Forbidden. Returned if you attempt to add a configuration to a read-only environment.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         },
+         "get":{
+            "operationId":"listConfigurations",
+            "summary":"List configurations",
+            "description":"Lists existing configurations for the service instance.",
+            "tags":[
+               "Configurations"
+            ],
+            
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/environmentIdParam"
+               },
+               {
+                  "name":"name",
+                  "in":"query",
+                  "description":"Find configurations with the given name.",
+                  "required":false,
+                  "type":"string"
+               },
+               {
+                  "$ref":"#/parameters/versionParam"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Successful response",
+                  "schema":{
+                     "$ref":"#/definitions/ListConfigurationsResponse"
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         }
+      },
+      "/v1/environments/{environment_id}/configurations/{configuration_id}":{
+         "get":{
+            "operationId":"getConfiguration",
+            "summary":"Get configuration details",
+            "tags":[
+               "Configurations"
+            ],
+             "produces":["application/json"],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/environmentIdParam"
+               },
+               {
+                  "$ref":"#/parameters/configurationIdParam"
+               },
+               {
+                  "$ref":"#/parameters/versionParam"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Configuration successfully fetched",
+                  "schema":{
+                     "$ref":"#/definitions/Configuration"
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         },
+         "put":{
+            "operationId":"updateConfiguration",
+            "summary":"Update a configuration",
+            "description":"Replaces an existing configuration.\n  * Completely replaces the original configuration.\n  * The `configuration_id`, `updated`, and `created` fields are accepted in the request, but they are ignored, and an error is not generated. It is also acceptable for users to submit an updated configuration with none of the three properties.\n  * Documents are processed with a snapshot of the configuration as it was at the time the document was submitted to be ingested. This means that already submitted documents will not see any updates made to the configuration.",
+            "tags":[
+               "Configurations"
+            ],
+             "produces":["application/json"],
+              "consumes":["application/json"],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/environmentIdParam"
+               },
+               {
+                  "$ref":"#/parameters/configurationIdParam"
+               },
+               {
+                  "$ref":"#/parameters/versionParam"
+               },
+               {
+                  "name":"configuration",
+                  "in":"body",
+                  "required":true,
+                  "description":"Input a JSON object that enables you to update and customize how your data is ingested and what enrichments are added to your data. \nThe `name` parameter is required and must be unique within the current `environment`. All other properties are optional, but if they are omitted  the default values replace the current value of each omitted property.\n\nIf the input configuration contains the `configuration_id`, `created`, or `updated` properties, they are ignored and overridden by the system, and an error is not returned so that the overridden fields do not need to be removed when updating a configuration. \n\nThe configuration can contain unrecognized JSON fields. Any such fields are ignored and do not generate an error. This makes it easier to use newer configuration files with older versions of the API and the service. It also makes it possible for the tooling to add additional metadata and information to the configuration.",
+                  "schema":{
+                     "$ref":"#/definitions/Configuration"
+                  }
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Configuration successfully updated",
+                  "schema":{
+                     "$ref":"#/definitions/Configuration"
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               },
+               "403":{
+                  "description":"Forbidden. Returned if you attempt to update a read-only configuration or if you attempt to update a configuration in a read-only environment.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         },
+         "delete":{
+            "operationId":"deleteConfiguration",
+            "summary":"Delete a configuration",
+            "description":"The deletion is performed unconditionally. A configuration deletion request succeeds even if the configuration is referenced by a collection or document ingestion. However, documents that have already been submitted for processing continue to use the deleted configuration. Documents are always processed with a snapshot of the configuration as it existed at the time the document was submitted.",
+            "tags":[
+               "Configurations"
+            ],
+             "produces":["application/json"],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/environmentIdParam"
+               },
+               {
+                  "$ref":"#/parameters/configurationIdParam"
+               },
+               {
+                  "$ref":"#/parameters/versionParam"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Configuration successfully deleted.\nThe response contains a warning if the configuration was referenced by at least one collection.",
+                  "schema":{
+                     "$ref":"#/definitions/DeleteConfigurationResponse"
+                  }
+               },
+               "400":{
+                  "description":"Bad request.\n\nA bad request is returned any time there is a problem with the request itself.\n\nExample error messages:\n\n* `Invalid Configuration ID` - if the configuration ID is not correctly formatted.\n* `Invalid configurationId: 2c3a981b-dade-488c-b8c6-01ae8d111111` - if the configuration is not found.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               },
+               "403":{
+                  "description":"Forbidden. Returned if you attempt to delete a read-only configuration, or if you attempt to delete a configuration from a read-only environment.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         }
+      },
+      "/v1/environments/{environment_id}/collections":{
+         "post":{
+            "operationId":"createCollection",
+            "summary":"Create a collection",
+            "tags":[
+               "Collections"
+            ],
+            "produces":["application/json"],
+            "consumes":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/environmentIdParam"
+               },
+               {
+                  "$ref":"#/parameters/versionParam"
+               },
+               {
+                  "name":"body",
+                  "in":"body",
+                  "required":false,
+                  "description":"Input a JSON object that allows you to add a collection.",
+                  "schema":{
+                     "$ref":"#/definitions/CreateCollectionRequest"
+                  }
+               }
+            ],
+            "responses":{
+               "201":{
+                  "description":"Collection successfuly created",
+                  "schema":{
+                     "$ref":"#/definitions/Collection"
+                  }
+               },
+               "400":{
+                  "description":"Bad request if the collection body does not match the expected format or if the `configuration_id` references a configuration that does not exist. The error string will describe why the request was rejected.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               },
+               "403":{
+                  "description":"Forbidden. Returned if you attempt to add a collection to a read-only environment.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         },
+         "get":{
+            "operationId":"listCollections",
+            "summary":"List collections",
+            "description":"Lists existing collections for the service instance.",
+            "tags":[
+               "Collections"
+            ],
+             "produces":["application/json"],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/environmentIdParam"
+               },
+               {
+                  "name":"name",
+                  "in":"query",
+                  "description":"Find collections with the given name.",
+                  "required":false,
+                  "type":"string"
+               },
+               {
+                  "$ref":"#/parameters/versionParam"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Successful response",
+                  "schema":{
+                     "$ref":"#/definitions/ListCollectionsResponse"
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         }
+      },
+      "/v1/environments/{environment_id}/collections/{collection_id}":{
+         "get":{
+            "operationId":"getCollection",
+            "summary":"Get collection details",
+            "tags":[
+               "Collections"
+            ],
+             "produces":["application/json"],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/environmentIdParam"
+               },
+               {
+                  "$ref":"#/parameters/collectionIdParam"
+               },
+               {
+                  "$ref":"#/parameters/versionParam"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Collection fetched",
+                  "schema":{
+                     "$ref":"#/definitions/Collection"
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         },
+         "put":{
+            "operationId":"updateCollection",
+            "summary":"Update a collection",
+            "tags":[
+               "Collections"
+            ],
+             "produces":["application/json"],
+            "consumes":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/environmentIdParam"
+               },
+               {
+                  "$ref":"#/parameters/collectionIdParam"
+               },
+               {
+                  "$ref":"#/parameters/versionParam"
+               },
+               {
+                  "name":"body",
+                  "in":"body",
+                  "required":false,
+                  "description":"Input a JSON object that allows you to update a collection.",
+                  "schema":{
+                     "$ref":"#/definitions/UpdateCollectionRequest"
+                  }
+               }
+            ],
+            "responses":{
+               "201":{
+                  "description":"Collection successfuly updated",
+                  "schema":{
+                     "$ref":"#/definitions/Collection"
+                  }
+               },
+               "400":{
+                  "description":"Bad request if the collection body does not match the expected format or if the `configuration_id` references a configuration that does not exist. The error string will describe why the request was rejected.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               },
+               "403":{
+                  "description":"Forbidden. Returned if you attempt to update a collection in a read-only environment.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         },
+         "delete":{
+            "operationId":"deleteCollection",
+            "summary":"Delete a collection",
+            "tags":[
+               "Collections"
+            ],
+             "produces":["application/json"],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/environmentIdParam"
+               },
+               {
+                  "$ref":"#/parameters/collectionIdParam"
+               },
+               {
+                  "$ref":"#/parameters/versionParam"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Collection successfully deleted",
+                  "schema":{
+                     "$ref":"#/definitions/DeleteCollectionResponse"
+                  }
+               },
+               "400":{
+                  "description":"Bad request.\n\nA bad request is returned any time there is a problem with the request itself.\n\nExample error messages:\n\n* `Could not find listed collection` - if the ID is incorrectly formatted.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               },
+               "403":{
+                  "description":"Forbidden. Returned if you attempt to delete a collection in a read-only environment.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               },
+               "404":{
+                  "description":"Returned any time the collection is not found (even immediately after the collection was successfully deleted).\n\nExample error message:\n\n`A collection with ID '2cd8bc72-d737-46e3-b26b-05a585111111' was not found.`",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         }
+      },
+      "/v1/environments/{environment_id}/collections/{collection_id}/documents":{
+         "post":{
+            "operationId":"addDocument",
+            "summary":"Add a document",
+            "description":"Add a document to a collection with optional metadata and optional configuration.\n\n Set the `Content-Type` header on the request to indicate the media type of the document. If the `Content-Type` header is missing or is one of the generic media types (for example,  `application/octet-stream`), then the service attempts to automatically detect the document's media type.\n   \n  * The configuration to use to process the document can be provided by using the `configuration_id` query parameter.\n   \n  * The `version` query parameter is still required.\n\n  * Returns immediately after the system has accepted the document for processing.\n\n  * The user must provide document content, metadata, or both. If the request is missing both document content and metadata, it is  rejected. \n  \n  * The user can set the `Content-Type` parameter on the `file` part to indicate the media type of the document. If the `Content-Type` parameter is missing or is one of the generic media types (for example, `application/octet-stream`), then the service attempts to automatically detect the document's media type.",
+            "tags":[
+               "Documents"
+            ],
+            "consumes":[
+               "multipart/form-data"
+            ],
+            "produces":["application/json"],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/environmentIdParam"
+               },
+               {
+                  "$ref":"#/parameters/collectionIdParam"
+               },
+               {
+                  "$ref":"#/parameters/versionParam"
+               },
+               {
+                  "$ref":"#/parameters/configurationIdQueryParam"
+               },
+               {
+                  "$ref":"#/parameters/filePart"
+               },
+               {
+                  "$ref":"#/parameters/metadataPart"
+               },
+               {
+                  "$ref":"#/parameters/configurationPart"
+               }
+            ],
+            "responses":{
+               "202":{
+                  "description":"The document has been accepted and will be processed.",
+                  "schema":{
+                     "$ref":"#/definitions/DocumentAccepted"
+                  }
+               },
+               "400":{
+                  "description":"Bad request if:\n  * The request is incorrectly formatted\n  * The `configuration_id` parameter refers to a non-existent configuration.\n  * The default `configuration_id` of the collection refers to a non-existent configuration and no override has been provided.\nThe error message contains details about what caused the request to be rejected.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               },
+               "403":{
+                  "description":"Forbidden. Returned if you attempt to add a document to a collection in a read-only environment.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         }
+      },
+      "/v1/environments/{environment_id}/collections/{collection_id}/documents/{document_id}":{
+         "get":{
+            "operationId":"getDocument",
+            "summary":"Get document details",
+            "description":"Fetch status details about a submitted document. **Note:** this operation does not return the document itself. Instead, it returns only the document's processing status and any notices (warnings or errors) that were generated when the document was ingested. Use the query API to retrieve the actual document content.",
+            "tags":[
+               "Documents"
+            ],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/environmentIdParam"
+               },
+               {
+                  "$ref":"#/parameters/collectionIdParam"
+               },
+               {
+                  "$ref":"#/parameters/documentIdParam"
+               },
+               {
+                  "$ref":"#/parameters/versionParam"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Successfully fetched document details.",
+                  "schema":{
+                     "$ref":"#/definitions/DocumentStatus"
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               },
+               "403":{
+                  "description":"Forbidden. Returned if you attempt to get the status of a document in a collection in a read-only environment.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         },
+         "post":{
+            "operationId":"updateDocument",
+            "summary":"Update a document",
+            "description":"Replace an existing document. Starts ingesting a document with optional metadata and optional configurations.",
+            "tags":[
+               "Documents"
+            ],
+            "consumes":[
+               "multipart/form-data"
+            ],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/environmentIdParam"
+               },
+               {
+                  "$ref":"#/parameters/collectionIdParam"
+               },
+               {
+                  "$ref":"#/parameters/documentIdParam"
+               },
+               {
+                  "$ref":"#/parameters/versionParam"
+               },
+               {
+                  "$ref":"#/parameters/configurationIdQueryParam"
+               },
+               {
+                  "$ref":"#/parameters/filePart"
+               },
+               {
+                  "$ref":"#/parameters/metadataPart"
+               },
+               {
+                  "$ref":"#/parameters/configurationPart"
+               }
+            ],
+            "responses":{
+               "202":{
+                  "description":"The document has been accepted and it will be processed.",
+                  "schema":{
+                     "$ref":"#/definitions/DocumentAccepted"
+                  }
+               },
+               "400":{
+                  "description":"Bad request if:\n  * the request is incorrectly formatted\n  * the configuration_id query parameter refers to a non-existant configuration.\n  * the default configuration_id of the collection refers to a non-existent configuration (and no override has been povided).\nThe error message will contain details about what caused the request to be rejected.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               },
+               "403":{
+                  "description":"Forbidden. Returned if you attempt to add or update a document in a collection in a read-only environment.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         },
+         "delete":{
+            "operationId":"deleteDocument",
+            "summary":"Delete a document",
+            "description":"If the given document id is invalid, or if the document is not found, then the a success response is returned (HTTP status code `200`) with the status set to 'deleted'.",
+            "tags":[
+               "Documents"
+            ],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/environmentIdParam"
+               },
+               {
+                  "$ref":"#/parameters/collectionIdParam"
+               },
+               {
+                  "$ref":"#/parameters/documentIdParam"
+               },
+               {
+                  "$ref":"#/parameters/versionParam"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"the document was successfuly deleted.",
+                  "schema":{
+                     "$ref":"#/definitions/DeleteDocumentResponse"
+                  }
+               },
+               "400":{
+                  "description":"Bad request.\n\nA bad request is returned any time there is a problem with the request itself.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               },
+               "403":{
+                  "description":"Forbidden. Returned if you attempt to delete a document in a collection in a read-only environment.",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         }
+      },
+      "/v1/environments/{environment_id}/collections/{collection_id}/fields":{
+         "get":{
+            "operationId":"listCollectionFields",
+            "summary":"List unique fields",
+            "description":"Gets a list of the the unique fields (and their types) stored in the index.",
+            "tags":[
+               "Collections"
+            ],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/environmentIdParam"
+               },
+               {
+                  "$ref":"#/parameters/collectionIdParam"
+               },
+               {
+                  "$ref":"#/parameters/versionParam"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"The list of fetched fields.\n\nThe fields are returned using a fully-qualified name format, however, the format differs slightly from that used by the query operations. Specifically:\n  \n  * fields which contain nested JSON objects are assigned a type of \"nested\".\n  \n  * fields which belong to a nested object are prefixed with `.properties` (e.g., `warnings.properties.severity` means that the `warnings` object has a property called `severity`).\n  \n  * fields returned from the News collection are prefixed with `v[N]-fullnews-t3-[YEAR].mappings` (e.g., `v5-fullnews-t3-2016.mappings.text.properties.author`).",
+                  "schema":{
+                     "$ref":"#/definitions/ListCollectionFieldsResponse"
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         }
+      },
+      "/v1/environments/{environment_id}/collections/{collection_id}/query":{
+         "get":{
+            "operationId":"query",
+            "summary":"Query documents",
+            "description":"See the [Discovery service documentation](https://www.ibm.com/watson/developercloud/doc/discovery/using.html) for more details.",
+            "tags":[
+               "Queries"
+            ],
+             "produces":["application/json"],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/environmentIdParam"
+               },
+               {
+                  "$ref":"#/parameters/collectionIdParam"
+               },
+               {
+                  "$ref":"#/parameters/filterParam"
+               },
+               {
+                  "$ref":"#/parameters/queryParam"
+               },
+               {
+                  "$ref":"#/parameters/nlqParam"
+               },
+               {
+                  "$ref":"#/parameters/passagesParam"
+               },
+               {
+                  "$ref":"#/parameters/aggregationParam"
+               },
+               {
+                  "$ref":"#/parameters/countParam"
+               },
+               {
+                  "$ref":"#/parameters/returnParam"
+               },
+               {
+                  "$ref":"#/parameters/offsetParam"
+               },
+               {
+                  "$ref":"#/parameters/sortParam"
+               },
+               {
+                  "$ref":"#/parameters/versionParam"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Query executed successfully.",
+                  "schema":{
+                     "$ref":"#/definitions/QueryResponse"
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         }
+      },
+      "/v1/environments/{environment_id}/collections/{collection_id}/notices":{
+         "get":{
+            "operationId":"queryNotices",
+            "description":"Queries for notices (errors or warnings) that may have been generated by the system. Currently, notices are only generated when ingesting documents. See the [Discovery service documentation](https://www.ibm.com/watson/developercloud/doc/discovery/using.html) for more details on the query language.",
+            "tags":[
+               "Queries"
+            ],
+             "produces":["application/json"],
+            "parameters":[
+               {
+                  "$ref":"#/parameters/environmentIdParam"
+               },
+               {
+                  "$ref":"#/parameters/collectionIdParam"
+               },
+               {
+                  "$ref":"#/parameters/filterParam"
+               },
+               {
+                  "$ref":"#/parameters/queryParam"
+               },
+               {
+                  "$ref":"#/parameters/nlqParam"
+               },
+               {
+                  "$ref":"#/parameters/passagesParam"
+               },
+               {
+                  "$ref":"#/parameters/aggregationParam"
+               },
+               {
+                  "$ref":"#/parameters/countParam"
+               },
+               {
+                  "$ref":"#/parameters/returnParam"
+               },
+               {
+                  "$ref":"#/parameters/offsetParam"
+               },
+               {
+                  "$ref":"#/parameters/sortParam"
+               },
+               {
+                  "$ref":"#/parameters/versionParam"
+               }
+            ],
+            "responses":{
+               "200":{
+                  "description":"Query for notices executed successfully.",
+                  "schema":{
+                     "$ref":"#/definitions/NoticeQueryResponse"
+                  }
+               },
+               "400":{
+                  "description":"Bad request",
+                  "schema":{
+                     "$ref":"#/definitions/ErrorResponse"
+                  }
+               }
+            }
+         }
+      }
+   },
+   "definitions":{
+      "Environment":{
+         "type":"object",
+         "description":"Details about an environment",
+         "properties":{
+            "environment_id":{
+               "type":"string",
+               "readOnly":true,
+               "description":"Unique identifier for this environment"
+            },
+            "name":{
+               "type":"string",
+               "default":"",
+               "minLength":0,
+               "maxLength":255,
+               "description":"Name that identifies this environment"
+            },
+            "description":{
+               "type":"string",
+               "default":"",
+               "description":"Description of the environment"
+            },
+            "created":{
+               "type":"string",
+               "format":"date-time",
+               "readOnly":true,
+               "description":"Creation date of the environment, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            },
+            "updated":{
+               "type":"string",
+               "format":"date-time",
+               "readOnly":true,
+               "description":"Date of most recent environment update, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            },
+            "status":{
+               "type":"string",
+               "readOnly":true,
+               "description":"Status of the environment"
+            },
+            "read_only":{
+               "type":"boolean",
+               "readOnly":true,
+               "description":"If true, then the environment contains read-only collections which are maintained by IBM."
+            },
+            "size":{
+               "type":"string",
+               "enum":[
+                  0,
+                  1,
+                  2,
+                  3
+               ],
+               "default":1,
+               "description":"Size of the environment"
+            },
+            "index_capacity":{
+               "$ref":"#/definitions/IndexCapacity",
+               "description":"Object containing information about disk and memory usage"
+            }
+         },
+         "example":{
+            "environment_id":"2cd8bc72-d737-46e3-b26b-05a58546ae32",
+            "name":"test_environment",
+            "description":"Test environment\"",
+            "created":"2016-11-21T14:50:57.898Z",
+            "updated":"2016-11-21T14:50:57.898Z",
+            "status":"active",
+            "read_only":false,
+            "index_capacity":{
+               "disk_usage":{
+                  "used_bytes":318,
+                  "total_bytes":2147483648,
+                  "used":"0.31 KB",
+                  "total":"2 GB",
+                  "percent_used":0.01
+               },
+               "memory_usage":{
+                  "used_bytes":264536200,
+                  "total_bytes":518979584,
+                  "used":"252.28 MB",
+                  "total":"494.94 MB",
+                  "percent_used":50.97
+               }
+            }
+         }
+      },
+      "IndexCapacity":{
+         "type":"object",
+         "description":"Details about the disk and memory usage of this environment.",
+         "properties":{
+            "disk_usage":{
+               "description":"Summary of the disk usage of the environment",
+               "$ref":"#/definitions/DiskUsage"
+            },
+            "memory_usage":{
+               "description":"Summary of the memory usage of the environment",
+               "$ref":"#/definitions/MemoryUsage"
+            }
+         }
+      },
+      "DiskUsage":{
+         "type":"object",
+         "readOnly":true,
+         "description":"Summary of the disk usage statistics for this environment",
+         "properties":{
+            "used_bytes":{
+               "type":"integer",
+               "readOnly":true,
+               "description":"Number of bytes used on the environment's disk capacity"
+            },
+            "total_bytes":{
+               "type":"string",
+               "format":"number",
+               "readOnly":true,
+               "description":"Total number of bytes available in the environment's disk capacity"
+            },
+            "used":{
+               "type":"string",
+               "readOnly":true,
+               "description":"Amount of disk capacity used, in KB or GB format"
+            },
+            "total":{
+               "type":"string",
+               "readOnly":true,
+               "description":"Total amount of the environment's disk capacity, in KB or GB format"
+            },
+            "percent_used":{
+               "type":"number",
+               "format":"double",
+               "readOnly":true,
+               "description":"Percentage of the environment's disk capacity that is being used"
+            }
+         }
+      },
+      "MemoryUsage":{
+         "type":"object",
+         "readOnly":true,
+         "description":"Summary of the memory usage statistics for this environment",
+         "properties":{
+            "used_bytes":{
+               "type":"string",
+               "format":"number",
+               "readOnly":true,
+               "description":"Number of bytes used in the environment's memory capacity"
+            },
+            "total_bytes":{
+               "type":"string",
+               "format":"number",
+               "readOnly":true,
+               "description":"Total number of bytes available in the environment's memory capacity"
+            },
+            "used":{
+               "type":"string",
+               "readOnly":true,
+               "description":"Amount of memory capacity used, in KB or GB format"
+            },
+            "total":{
+               "type":"string",
+               "readOnly":true,
+               "description":"Total amount of the environment's memory capacity, in KB or GB format"
+            },
+            "percent_used":{
+               "type":"number",
+               "format":"double",
+               "readOnly":true,
+               "description":"Percentage of the environment's memory capacity that is being used"
+            }
+         }
+      },
+      "CreateEnvironmentRequest":{
+         "type":"object",
+         "properties":{
+            "name":{
+               "type":"string",
+               "default":"",
+               "minLength":0,
+               "maxLength":255,
+               "description":"Name that identifies the environment"
+            },
+            "description":{
+               "type":"string",
+               "default":"",
+               "description":"Description of the environment"
+            },
+            "size":{
+               "type":"string",
+               
+               "enum":[
+                  0,
+                  1,
+                  2,
+                  3
+               ],
+               "default":1,
+               "description":"Size of the environment"
+            }
+         },
+         "x-java-builder":true
+      },
+      "UpdateEnvironmentRequest":{
+         "type":"object",
+         "properties":{
+            "name":{
+               "type":"string",
+               "default":"",
+               "minLength":0,
+               "maxLength":255,
+               "description":"Name that identifies the environment"
+            },
+            "description":{
+               "type":"string",
+               "default":"",
+               "description":"Description of the environment"
+            }
+         },
+         "x-java-builder":true
+      },
+      "ListEnvironmentsResponse":{
+         "type":"object",
+         "properties":{
+            "environments":{
+               "type":"array",
+               "description":"An array of [environments] that are available for the service instance.",
+               "items":{
+                  "$ref":"#/definitions/Environment"
+               }
+            }
+         }
+      },
+      "DeleteEnvironmentResponse":{
+         "type":"object",
+         "required":[
+            "environment_id",
+            "status"
+         ],
+         "properties":{
+            "environment_id":{
+               "type":"string",
+               "description":"The unique identifier for this environment"
+            },
+            "status":{
+               "type":"string",
+               "description":"Status of the environment"
+            }
+         }
+      },
+      "ListCollectionsResponse":{
+         "type":"object",
+         "properties":{
+            "collections":{
+               "type":"array",
+               "description":"An array containing information about each collection in the environment",
+               "items":{
+                  "$ref":"#/definitions/Collection"
+               }
+            }
+         },
+         "example":{
+            "collections":[
+               {
+                  "collection_id":"f1360220-ea2d-4271-9d62-89a910b13c37",
+                  "name":"example",
+                  "description":"this is a demo collection",
+                  "created":"2015-08-24T18:42:25.324Z",
+                  "updated":"2015-08-24T18:42:25.324Z",
+                  "status":"active",
+                  "configuration_id":"6963be41-2dea-4f79-8f52-127c63c479b0",
+                  "language":"en_us"
+               }
+            ]
+         }
+      },
+      "CreateCollectionRequest":{
+         "type":"object",
+         "required":[
+            "name"
+         ],
+         "properties":{
+            "name":{
+               "type":"string",
+               "default":"",
+               "minLength":0,
+               "maxLength":255,
+               "description":"The name of the collection to be created"
+            },
+            "description":{
+               "type":"string",
+               "default":"",
+               "description":"A description of the collection"
+            },
+            "configuration_id":{
+               "type":"string",
+               "default":"",
+               "description":"The ID of the configuration in which the collection is to be created"
+            }
+         },
+         "x-java-builder":true
+      },
+      "UpdateCollectionRequest":{
+         "type":"object",
+         "required":[
+            "name"
+         ],
+         "properties":{
+            "name":{
+               "type":"string",
+               "default":"",
+               "minLength":0,
+               "maxLength":255,
+               "description":"The name of the collection"
+            },
+            "description":{
+               "type":"string",
+               "default":"",
+               "description":"A description of the collection"
+            },
+            "configuration_id":{
+               "type":"string",
+               "default":"",
+               "description":"The ID of the configuration in which the collection is to be updated"
+            }
+         },
+         "x-java-builder":true
+      },
+      "DeleteCollectionResponse":{
+         "type":"object",
+         "required":[
+            "collection_id",
+            "status"
+         ],
+         "properties":{
+            "collection_id":{
+               "type":"string",
+               "description":"The unique identifier of the collection that is being deleted"
+            },
+            "status":{
+               "type":"string",
+               "description":"The status of the collection. The status of a successful deletion operation is <tt>deleted</tt>"
+            }
+         }
+      },
+      "Collection":{
+         "type":"object",
+         "description":"A collection for storing documents",
+         "properties":{
+            "collection_id":{
+               "type":"string",
+               "readOnly":true,
+               "description":"The unique identifier of the collection"
+            },
+            "name":{
+               "type":"string",
+               "minLength":0,
+               "maxLength":255,
+               "description":"The name of the collection"
+            },
+            "description":{
+               "type":"string",
+               "description":"The description of the collection"
+            },
+            "created":{
+               "type":"string",
+               "format":"date-time",
+               "readOnly":true,
+               "description":"The creation date of the collection in the format yyyy-MM-dd'T'HH:mmcon:ss.SSS'Z'"
+            },
+            "updated":{
+               "type":"string",
+               "format":"date-time",
+               "readOnly":true,
+               "description":"The timestamp of when the collection was last updated in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            },
+            "status":{
+               "type":"string",
+               "readOnly":true,
+               "description":"The status of the collection"
+            },
+            "configuration_id":{
+               "type":"string",
+               "description":"The unique identifier of the collection's configuration"
+            },
+            "language":{
+               "type":"string",
+               "description":"The language of the documents stored in the collection. The only currently accepted value is en_us (U.S. English)"
+            },
+            "document_counts":{
+               "$ref":"#/definitions/DocumentCounts",
+               "description":"The object providing information about the documents in the collection. Present only when retrieving details of a colleciton"
+            }
+         },
+         "example":{
+            "collection_id":"f1360220-ea2d-4271-9d62-89a910b13c37",
+            "name":"democollection",
+            "description":"this is a demo collection",
+            "created":"2015-08-24T18:42:25.324Z",
+            "updated":"2015-08-24T18:42:25.324Z",
+            "status":"active",
+            "configuration_id":"6963be41-2dea-4f79-8f52-127c63c479b0",
+            "language":"en_us",
+            "document_counts":{
+               "available":1000,
+               "processing":20,
+               "failed":180
+            }
+         }
+      },
+      "DocumentCounts":{
+         "type":"object",
+         "readOnly":true,
+         "properties":{
+            "available":{
+               "type":"integer",
+               "format":"int64",
+               "readOnly":true,
+               "description":"The total number of available documents in the collection"
+            },
+            "processing":{
+               "type":"integer",
+               "format":"int64",
+               "readOnly":true,
+               "description":"The number of documents in the collection that are currently being processed"
+            },
+            "failed":{
+               "type":"integer",
+               "format":"int64",
+               "readOnly":true,
+               "description":"The number of documents in the collection that failed to be ingested"
+            }
+         }
+      },
+      "Configuration":{
+         "type":"object",
+         "required":[
+            "name"
+         ],
+         "description":"A custom configuration for the environment.",
+         "properties":{
+            "configuration_id":{
+               "type":"string",
+               "readOnly":true,
+               "description":"The unique identifier of the configuration"
+            },
+            "name":{
+               "type":"string",
+               "default":"",
+               "minLength":0,
+               "maxLength":255,
+               "description":"The name of the configuration"
+            },
+            "created":{
+               "type":"string",
+               "format":"date-time",
+               "readOnly":true,
+               "description":"The creation date of the configuration in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            },
+            "updated":{
+               "type":"string",
+               "format":"date-time",
+               "readOnly":true,
+               "description":"The timestamp of when the configuration was last updated in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            },
+            "description":{
+               "type":"string",
+               "description":"The description of the configuration, if available"
+            },
+            "conversions":{
+               "$ref":"#/definitions/Conversions",
+               "description":"An array of document conversion settings for the configuration"
+            },
+            "enrichments":{
+               "$ref":"#/definitions/Enrichments",
+               "description":"An array of document enrichment settings for the configuration"
+            },
+            "normalizations":{
+               "$ref":"#/definitions/Normalizations",
+               "description":"An array of document normalization settings for the configuration"
+            }
+         },
+         "example":{
+            "configuration_id":"448e3545-51ca-4530-a03b-6ff282ceac2e",
+            "name":"IBM News",
+            "created":"2015-08-24T18:42:25.324Z",
+            "updated":"2015-08-24T18:42:25.324Z",
+            "description":"A configuration useful for ingesting IBM press releases.",
+            "conversions":{
+               "html":{
+                  "exclude_tags_keep_content":[
+                     "span"
+                  ],
+                  "exclude_content":{
+                     "xpaths":[
+                        "/home"
+                     ]
+                  }
+               },
+               "json_normalizations":[
+                  {
+                     "operation":"move",
+                     "source_field":"extracted_metadata.title",
+                     "destination_field":"metadata.title"
+                  },
+                  {
+                     "operation":"move",
+                     "source_field":"extracted_metadata.author",
+                     "destination_field":"metadata.author"
+                  },
+                  {
+                     "operation":"remove",
+                     "source_field":"extracted_metadata"
+                  }
+               ]
+            },
+            "enrichments":[
+               {
+                  "source_field":"text",
+                  "destination_field":"alchemy_enriched_text",
+                  "enrichment":"alchemy_language",
+                  "options":{
+                     "extract":"keyword",
+                     "showSourceText":1
+                  }
+               },
+               {
+                  "source_field":"alchemy_enriched_text.text",
+                  "destination_field":"sire_enriched_text",
+                  "enrichment":"alchemy_language",
+                  "options":{
+                     "extract":"typed-rels",
+                     "model":"ie-en-news"
+                  }
+               }
+            ],
+            "normalizations":[
+               {
+                  "operation":"move",
+                  "source_field":"metadata.title",
+                  "destination_field":"title"
+               },
+               {
+                  "operation":"move",
+                  "source_field":"metadata.author",
+                  "destination_field":"author"
+               },
+               {
+                  "operation":"move",
+                  "source_field":"alchemy_enriched_text.language",
+                  "destination_field":"language"
+               },
+               {
+                  "operation":"remove",
+                  "source_field":"html"
+               },
+               {
+                  "operation":"remove",
+                  "source_field":"alchemy_enriched_text.status"
+               },
+               {
+                  "operation":"remove",
+                  "source_field":"alchemy_enriched_text.text"
+               },
+               {
+                  "operation":"remove",
+                  "source_field":"sire_enriched_text.language"
+               },
+               {
+                  "operation":"remove",
+                  "source_field":"sire_enriched_text.model"
+               },
+               {
+                  "operation":"remove",
+                  "source_field":"sire_enriched_text.status"
+               },
+               {
+                  "operation":"remove_nulls"
+               }
+            ]
+         },
+         "x-example":{
+            "name":"give the configuration a human-readable name",
+            "description":"describe how you intend to use this configuration",
+            "conversions":{
+               "word":{
+                  "heading":{
+                     "fonts":[
+                        {
+                           "level":1,
+                           "min_size":24,
+                           "bold":false,
+                           "italic":false
+                        },
+                        {
+                           "level":2,
+                           "min_size":18,
+                           "max_size":23,
+                           "bold":true,
+                           "italic":false
+                        },
+                        {
+                           "level":3,
+                           "min_size":14,
+                           "max_size":17,
+                           "bold":false,
+                           "italic":false
+                        },
+                        {
+                           "level":4,
+                           "min_size":13,
+                           "max_size":13,
+                           "bold":true,
+                           "italic":false
+                        }
+                     ],
+                     "styles":[
+                        {
+                           "level":1,
+                           "names":[
+                              "pullout heading",
+                              "pulloutheading",
+                              "header"
+                           ]
+                        },
+                        {
+                           "level":2,
+                           "names":[
+                              "subtitle"
+                           ]
+                        }
+                     ]
+                  }
+               },
+               "pdf":{
+                  "heading":{
+                     "fonts":[
+                        {
+                           "level":1,
+                           "min_size":24,
+                           "max_size":80
+                        },
+                        {
+                           "level":2,
+                           "min_size":18,
+                           "max_size":24,
+                           "bold":false,
+                           "italic":false
+                        },
+                        {
+                           "level":2,
+                           "min_size":18,
+                           "max_size":24,
+                           "bold":true
+                        },
+                        {
+                           "level":3,
+                           "min_size":13,
+                           "max_size":18,
+                           "bold":false,
+                           "italic":false
+                        },
+                        {
+                           "level":3,
+                           "min_size":13,
+                           "max_size":18,
+                           "bold":true
+                        },
+                        {
+                           "level":4,
+                           "min_size":11,
+                           "max_size":13,
+                           "bold":false,
+                           "italic":false
+                        }
+                     ]
+                  }
+               },
+               "html":{
+                  "exclude_tags_completely":[
+                     "script",
+                     "sup"
+                  ],
+                  "exclude_tags_keep_content":[
+                     "font",
+                     "em",
+                     "span"
+                  ],
+                  "exclude_content":{
+                     "xpaths":[
+
+                     ]
+                  },
+                  "keep_content":{
+                     "xpaths":[
+
+                     ]
+                  },
+                  "exclude_tag_attributes":[
+                     "EVENT_ACTIONS"
+                  ]
+               },
+               "json_normalizations":[
+
+               ]
+            },
+            "enrichments":[
+               {
+                  "destination_field":"enriched_text",
+                  "source_field":"text",
+                  "enrichment":"alchemy_language",
+                  "options":{
+                     "extract":"keyword, entity, doc-sentiment, taxonomy, concept, relation",
+                     "sentiment":true,
+                     "quotations":true
+                  }
+               }
+            ],
+            "normalizations":[
+
+            ]
+         }
+      },
+      "Conversions":{
+         "type":"object",
+         "description":"Document conversion settings",
+         "properties":{
+            "pdf":{
+               "$ref":"#/definitions/PdfSettings",
+               "description":"A list of PDF conversion settings"
+            },
+            "word":{
+               "$ref":"#/definitions/WordSettings",
+               "description":"A list of Word conversion settings"
+            },
+            "html":{
+               "$ref":"#/definitions/HtmlSettings",
+               "description":"A list of HTML conversion settings"
+            },
+            "json_normalizations":{
+               "$ref":"#/definitions/Normalizations",
+               "description":"An array of JSON normalization operations"
+            }
+         }
+      },
+      "PdfSettings":{
+         "type":"object",
+         "description":"A list of PDF conversion settings",
+         "properties":{
+            "heading":{
+               "$ref":"#/definitions/PdfHeadingDetection"
+            }
+         }
+      },
+      "PdfHeadingDetection":{
+         "type":"object",
+         "properties":{
+            "fonts":{
+               "$ref":"#/definitions/FontSettings"
+            }
+         }
+      },
+      "WordSettings":{
+         "type":"object",
+         "description":"A list of Word conversion settings",
+         "properties":{
+            "heading":{
+               "$ref":"#/definitions/WordHeadingDetection"
+            }
+         }
+      },
+      "WordHeadingDetection":{
+         "type":"object",
+         "properties":{
+            "fonts":{
+               "$ref":"#/definitions/FontSettings"
+            },
+            "styles":{
+               "$ref":"#/definitions/WordStyles"
+            }
+         }
+      },
+      "WordStyles":{
+         "type":"array",
+         "items":{
+            "$ref":"#/definitions/WordStyle"
+         }
+      },
+      "WordStyle":{
+         "type":"object",
+         "properties":{
+            "level":{
+               "type":"number",
+               "format":"integer"
+            },
+            "names":{
+               "type":"array",
+               "items":{
+                  "type":"string"
+               }
+            }
+         }
+      },
+      "HtmlSettings":{
+         "type":"object",
+         "description":"A list of HTML conversion settings",
+         "properties":{
+            "exclude_tags_completely":{
+               "type":"array",
+               "items":{
+                  "type":"string"
+               }
+            },
+            "exclude_tags_keep_content":{
+               "type":"array",
+               "items":{
+                  "type":"string"
+               }
+            },
+            "keep_content":{
+               "$ref":"#/definitions/XPathPatterns"
+            },
+            "exclude_content":{
+               "$ref":"#/definitions/XPathPatterns"
+            },
+            "keep_tag_attributes":{
+               "type":"array",
+               "items":{
+                  "type":"string"
+               }
+            },
+            "exclude_tag_attributes":{
+               "type":"array",
+               "items":{
+                  "type":"string"
+               }
+            }
+         }
+      },
+      "XPathPatterns":{
+         "type":"object",
+         "properties":{
+            "xpaths":{
+               "type":"array",
+               "items":{
+                  "type":"string"
+               }
+            }
+         }
+      },
+      "FontSettings":{
+         "type":"array",
+         "items":{
+            "$ref":"#/definitions/FontSetting"
+         }
+      },
+      "FontSetting":{
+         "type":"object",
+         "properties":{
+            "level":{
+               "type":"number",
+               "format":"integer"
+            },
+            "min_size":{
+               "type":"number",
+               "format":"integer"
+            },
+            "max_size":{
+               "type":"number",
+               "format":"integer"
+            },
+            "bold":{
+               "type":"boolean"
+            },
+            "italic":{
+               "type":"boolean"
+            },
+            "name":{
+               "type":"string"
+            }
+         }
+      },
+      "Enrichments":{
+         "type":"array",
+         "description":"An array of document enrichment settings for the configuration",
+         "items":{
+            "$ref":"#/definitions/Enrichment"
+         }
+      },
+      "Enrichment":{
+         "type":"object",
+         "required":[
+            "source_field",
+            "destination_field",
+            "enrichment"
+         ],
+         "properties":{
+            "description":{
+               "type":"string",
+               "default":"",
+               "description":"Describes what the enrichment step does"
+            },
+            "destination_field":{
+               "type":"string",
+               "description":"Field where enrichments will be stored. This field must already exist or be at most 1 level deeper than an existing field. For example, if `text` is a top-level field with no sub-fields, `text.foo` is a valid destination but `text.foo.bar` is not."
+            },
+            "source_field":{
+               "type":"string",
+               "description":"Field to be enriched."
+            },
+            "overwrite":{
+               "type":"boolean",
+               "default":false,
+               "description":"Indicates that the enrichments will overwrite the destination_field field if it already exists."
+            },
+            "enrichment":{
+               "type":"string",
+               "description":"Name of the enrichment service to call. Currently the only valid value is `alchemy_language`."
+            },
+            "ignore_downstream_errors":{
+               "type":"boolean",
+               "default":false,
+               "description":"If true, then most errors generated during the enrichment process will be treated as warnings and wil not cause the document to fail processing."
+            },
+            "options":{
+               "$ref":"#/definitions/EnrichmentOptions",
+               "description":"A list of options specific to the enrichment"
+            }
+         }
+      },
+      "EnrichmentOptions":{
+         "description":"options which are specific to a particular enrichment",
+         "allOf":[
+            {
+               "$ref":"#/definitions/LanguageEnrichmentOptions"
+            }
+         ]
+      },
+      "LanguageEnrichmentOptions":{
+         "type":"object",
+         "description":"options specific to the `alchemy_language` enrichment",
+         "properties":{
+            "extract":{
+               "type":"string",
+               "description":"A comma sepeated list of analyses that should be applied when using the `alchemy_language` enrichment. See the the service documentation for details on each extract option.\n\nPossible values include:\n\n  * entity\n  * keyword\n  * taxonomy\n  * concept\n  * relation\n  * doc-sentiment\n  * doc-emotion\n  * typed-rels",
+               "default":"entity,keyword,concept,taxonomy"
+            },
+            "sentiment":{
+               "type":"boolean",
+               "default":false
+            },
+            "quotations":{
+               "type":"boolean",
+               "default":false
+            },
+            "showSourceText":{
+               "type":"boolean",
+               "default":false
+            },
+            "hierarchicalTypedRelations":{
+               "type":"boolean",
+               "default":false
+            },
+            "model":{
+               "type":"string",
+               "description":"Required when using the `typed-rel` extract option. Should be set to the ID of a previously published custom Watson Knowledge Studio model."
+            },
+            "language":{
+               "type":"string",
+               "enum":[
+                  "english",
+                  "german",
+                  "french",
+                  "italian",
+                  "portuguese",
+                  "russian",
+                  "spanish",
+                  "swedish",
+                  "en",
+                  "eng",
+                  "de",
+                  "ger",
+                  "deu",
+                  "fr",
+                  "fre",
+                  "fra",
+                  "it",
+                  "ita",
+                  "pt",
+                  "por",
+                  "ru",
+                  "rus",
+                  "es",
+                  "spa",
+                  "sv",
+                  "swe"
+               ],
+               "description":"If provided, then do not attempt to detect the language of the input document. Instead, assume the language is the one specified in this field.\n\nYou can set this property to work around `unsupported-text-language` errors.\n\nSupported languages include English, German, French, Italian, Portuguese, Russian, Spanish and Swedish. Supported language codes are the ISO-639-1, ISO-639-2, ISO-639-3, and the plain english name of the language (e.g. \"russian\")."
+            }
+         }
+      },
+      "Normalizations":{
+         "description":"Defines operations that can be used to transform the final output JSON into a normalized form. Operations are executed in the order that they appear in the array.",
+         "type":"array",
+         "items":{
+            "$ref":"#/definitions/NormalizationOperation"
+         }
+      },
+      "NormalizationOperation":{
+         "type":"object",
+         "properties":{
+            "operation":{
+               "description":"Identifies what type of operation to perform. \n\n**copy** - Copies the value of the `source_field` to the `destination_field` field. If the `destination_field` already exists, then the value of the `source_field` overwrites the original value of the `destination_field`. \n\n**move** - Renames (moves) the `source_field` to the `destination_field`. If the `destination_field` already exists, then the value of the `source_field` overwrites the original value of the `destination_field`. Rename is identical to copy, except that the `source_field` is removed after the value has been copied to the `destination_field` (it is the same as a _copy_ followed by a _remove_). \n\n**merge** - Merges the value of the `source_field` with the value of the `destination_field`. The `destination_field` is converted into an array if it is not already an array, and the value of the `source_field` is appended to the array. This operation removes the `source_field` after the merge. If the `source_field` does not exist in the current document, then the `destination_field` is still converted into an array (if it is not an array already). This is ensures the type for `destination_field` is consistent across all documents. \n\n**remove** - Deletes the `source_field` field. The `destination_field` is ignored for this operation. \n\n**remove_nulls** - Removes all nested null (blank) leif values from the JSON tree. `source_field` and `destination_field` are ignored by this operation because _remove_nulls_ operates on the entire JSON tree. Typically, `remove_nulls` is invoked as the last normalization operation (if it is inoked at all, it can be time-expensive).",
+               "type":"string",
+               "enum":[
+                  "copy",
+                  "move",
+                  "merge",
+                  "remove",
+                  "remove_nulls"
+               ]
+            },
+            "source_field":{
+               "type":"string",
+               "description":"The source field for the operation"
+            },
+            "destination_field":{
+               "type":"string",
+               "description":"The destination field for the operation"
+            }
+         }
+      },
+      "ListConfigurationsResponse":{
+         "type":"object",
+         "properties":{
+            "configurations":{
+               "type":"array",
+               "description":"An array of Configurations that are available for the service instance.",
+               "items":{
+                  "$ref":"#/definitions/Configuration"
+               }
+            }
+         }
+      },
+      "DeleteConfigurationResponse":{
+         "type":"object",
+         "required":[
+            "configuration_id",
+            "status"
+         ],
+         "properties":{
+            "configuration_id":{
+               "type":"string",
+               "description":"The unique identifier for the configuration"
+            },
+            "status":{
+               "type":"string",
+               "description":"Status of the configuration. A deleted configuration has the status deleted"
+            },
+            "notices":{
+               "type":"array",
+               "description":"An array of notice messages, if any",
+               "items":{
+                  "$ref":"#/definitions/Notice"
+               }
+            }
+         },
+         "example":{
+            "configuration_id":"123abc",
+            "status":"deleted",
+            "notices":[
+               {
+                  "notice_id":"configuration_in_use",
+                  "created":"2016-09-28T12:34:00.000Z",
+                  "severity":"warning",
+                  "description":"The configuration was deleted, but it is referenced by one or more collections."
+               }
+            ]
+         }
+      },
+      "DocumentAccepted":{
+         "type":"object",
+         "properties":{
+            "document_id":{
+               "type":"string",
+               "description":"The unique identifier of the ingested document"
+            },
+            "status":{
+               "type":"string",
+               "description":"Status of the document in the ingestion process"
+            },
+            "notices":{
+               "type":"array",
+               "description":"Array of notices produced by the document-ingestion process",
+               "items":{
+                  "$ref":"#/definitions/Notice"
+               }
+            }
+         },
+         "example":{
+            "document_id":"f1360220-ea2d-4271-9d62-89a910b13c37",
+            "status":"processing"
+         }
+      },
+      "DeleteDocumentResponse":{
+         "type":"object",
+         "properties":{
+            "document_id":{
+               "type":"string",
+               "description":"The unique identifier of the document"
+            },
+            "status":{
+               "type":"string",
+               "description":"Status of the document. A deleted document has the status deleted."
+            }
+         }
+      },
+      "DocumentStatus":{
+         "type":"object",
+         "description":"Status information about a submitted document",
+         "properties":{
+            "document_id":{
+               "type":"string",
+               "description":"The unique identifier of the document"
+            },
+            "configuration_id":{
+               "type":"string"
+            },
+            "created":{
+               "type":"string",
+               "format":"date-time"
+            },
+            "updated":{
+               "type":"string",
+               "format":"date-time"
+            },
+            "status":{
+               "type":"string",
+               "description":"Status of the document in the ingestion process"
+            },
+            "status_description":{
+               "type":"string",
+               "description":"Description of the document status"
+            },
+            "notices":{
+               "type":"array",
+               "description":"Array of notices produced by the document-ingestion process",
+               "items":{
+                  "$ref":"#/definitions/Notice"
+               }
+            }
+         },
+         "example":{
+            "document_id":"f1360220-ea2d-4271-9d62-89a910b13c37",
+            "configuration_id":"e8b9d793-b163-452a-9373-bce07efb510b",
+            "created":"2015-08-24T18:42:25.324Z",
+            "updated":"2015-08-24T18:42:25.324Z",
+            "status":"available",
+            "notices":[
+               {
+                  "notice_id":"index_342",
+                  "severity":"warning",
+                  "step":"indexing",
+                  "description":"something bad happened"
+               }
+            ]
+         }
+      },
+      "TestDocument":{
+         "type":"object",
+         "readOnly":true,
+         "properties":{
+            "configuration_id":{
+               "type":"string"
+            },
+            "status":{
+               "type":"string"
+            },
+            "enriched_field_units":{
+               "type":"number",
+               "format":"integer",
+               "description":"The number of 10 Kilobytes of field data that was enriched. This can be used to estimate the cost of running a real ingestion."
+            },
+            "original_media_type":{
+               "type":"string",
+               "description":"Format of the test document"
+            },
+            "snapshots":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/DocumentSnapshot"
+               }
+            },
+            "notices":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/Notice"
+               }
+            }
+         },
+         "example":{
+            "configuration_id":"e8b9d793-b163-452a-9373-bce07efb510b",
+            "status":"completed",
+            "enriched_field_units":5,
+            "original_media_type":"text/html",
+            "snapshots":[
+               {
+                  "step":"html_input",
+                  "snapshot":{
+                     "html":"<html><head><title>IBM Forms New Watson Group to Meet Growing Demand for Cognitive Innovations</title><meta name=\"author\" content=\"Jake Bake\"></head><body><p><span>Mr. Rhodin will lead the IBM Watson Group,<span>a new IBM business unit headquartered in the heart of New York City's Silicon Alley</span> that will develop products and collaborate with start-ups on cloud-based cognitive apps and services powered by Watson.</span></p></body></html>"
+                  }
+               },
+               {
+                  "step":"html_output",
+                  "snapshot":{
+                     "html":"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><html><head><title>IBM Forms New Watson Group to Meet Growing Demand for Cognitive Innovations</title><meta name=\"author\" content=\"Jake Bake\"/></head><body><p>Mr. Rhodin will lead the IBM Watson Group, a new IBM business unit headquartered in the heart of New York City's Silicon Alley that will develop products and collaborate with start-ups on cloud-based cognitive apps and services powered by Watson.</p></body></html>"
+                  }
+               },
+               {
+                  "step":"json_output",
+                  "snapshot":{
+                     "text":"IBM Forms New Watson Group to Meet Growing Demand for Cognitive Innovations\n\nMr. Rhodin will lead the IBM Watson Group, a new IBM business unit headquartered in the heart of New York City's Silicon Alley that will develop products and collaborate with start-ups on cloud-based cognitive apps and services powered by Watson.",
+                     "html":"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><html><head><title>IBM Forms New Watson Group to Meet Growing Demand for Cognitive Innovations</title><meta name=\"author\" content=\"Jake Bake\"/></head><body><p>Mr. Rhodin will lead the IBM Watson Group, a new IBM business unit headquartered in the heart of New York City's Silicon Alley that will develop products and collaborate with start-ups on cloud-based cognitive apps and services powered by Watson.</p></body></html>",
+                     "metadata":{
+                        "title":"Press Release 2014-01-09",
+                        "category":"news"
+                     },
+                     "extracted_metadata":{
+                        "title":"IBM Forms New Watson Group to Meet Growing Demand for Cognitive Innovations",
+                        "author":"Jake Bake"
+                     }
+                  }
+               },
+               {
+                  "step":"json_normalizations_output",
+                  "snapshot":{
+                     "text":"IBM Forms New Watson Group to Meet Growing Demand for Cognitive Innovations\n\nMr. Rhodin will lead the IBM Watson Group, a new IBM business unit headquartered in the heart of New York City's Silicon Alley that will develop products and collaborate with start-ups on cloud-based cognitive apps and services powered by Watson.",
+                     "html":"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><html><head><title>IBM Forms New Watson Group to Meet Growing Demand for Cognitive Innovations</title><meta name=\"author\" content=\"Jake Bake\"/></head><body><p>Mr. Rhodin will lead the IBM Watson Group, a new IBM business unit headquartered in the heart of New York City's Silicon Alley that will develop products and collaborate with start-ups on cloud-based cognitive apps and services powered by Watson.</p></body></html>",
+                     "metadata":{
+                        "title":"IBM Forms New Watson Group to Meet Growing Demand for Cognitive Innovations",
+                        "author":"Jake Bake",
+                        "category":"news"
+                     }
+                  }
+               },
+               {
+                  "step":"enrichments_output",
+                  "snapshot":{
+                     "html":"<?xml version='1.0' encoding='UTF-8' standalone='yes'?><html><head><title>IBM Forms New Watson Group to Meet Growing Demand for Cognitive Innovations</title><meta name=\"author\" content=\"Jake Bake\"/></head><body><p>Mr. Rhodin will lead the IBM Watson Group, a new IBM business unit headquartered in the heart of New York City's Silicon Alley that will develop products and collaborate with start-ups on cloud-based cognitive apps and services powered by Watson.</p></body></html>",
+                     "text":"IBM Forms New Watson Group to Meet Growing Demand for Cognitive Innovations\n\nMr. Rhodin will lead the IBM Watson Group, a new IBM business unit headquartered in the heart of New York City's Silicon Alley that will develop products and collaborate with start-ups on cloud-based cognitive apps and services powered by Watson.",
+                     "metadata":{
+                        "title":"IBM Forms New Watson Group to Meet Growing Demand for Cognitive Innovations",
+                        "author":"Jake Bake",
+                        "category":"news"
+                     },
+                     "alchemy_enriched_text":{
+                        "status":"OK",
+                        "language":"english",
+                        "text":"IBM Forms New Watson Group to Meet Growing Demand for Cognitive Innovations\n\nMr. Rhodin will lead the IBM Watson Group, a new IBM business unit headquartered in the heart of New York City's Silicon Alley that will develop products and collaborate with start-ups on cloud-based cognitive apps and services powered by Watson.",
+                        "keywords":[
+                           {
+                              "relevance":0.978167,
+                              "text":"IBM Watson Group"
+                           },
+                           {
+                              "relevance":0.932488,
+                              "text":"cloud-based cognitive apps"
+                           },
+                           {
+                              "relevance":0.838797,
+                              "text":"IBM business unit"
+                           },
+                           {
+                              "relevance":0.830576,
+                              "text":"New York City"
+                           },
+                           {
+                              "relevance":0.736028,
+                              "text":"Silicon Alley"
+                           },
+                           {
+                              "relevance":0.67098,
+                              "text":"Title sample"
+                           },
+                           {
+                              "relevance":0.648253,
+                              "text":"Mr. Rhodin"
+                           },
+                           {
+                              "relevance":0.49768,
+                              "text":"start-ups"
+                           },
+                           {
+                              "relevance":0.433437,
+                              "text":"heart"
+                           },
+                           {
+                              "relevance":0.432563,
+                              "text":"products"
+                           }
+                        ]
+                     },
+                     "sire_enriched_text":{
+                        "status":"OK",
+                        "language":"english",
+                        "model":"ie-en-news",
+                        "typedRelations":[
+                           {
+                              "arguments":[
+                                 {
+                                    "entities":[
+                                       {
+                                          "id":"-E3",
+                                          "text":"Silicon Alley",
+                                          "type":"GeopoliticalEntity"
+                                       }
+                                    ],
+                                    "part":"first",
+                                    "text":"Silicon Alley"
+                                 },
+                                 {
+                                    "entities":[
+                                       {
+                                          "id":"-E2",
+                                          "text":"New York City",
+                                          "type":"GeopoliticalEntity"
+                                       }
+                                    ],
+                                    "part":"second",
+                                    "text":"New York City"
+                                 }
+                              ],
+                              "score":"0.898437",
+                              "sentence":"Mr. Rhodin will lead the IBM Watson Group, a new IBM business unit headquartered in the heart of New York City's Silicon Alley that will develop products and collaborate with start-ups on cloud-based cognitive apps and services powered by Watson.",
+                              "type":"locatedAt"
+                           }
+                        ]
+                     }
+                  }
+               },
+               {
+                  "step":"normalizations_output",
+                  "snapshot":{
+                     "title":"IBM Forms New Watson Group to Meet Growing Demand for Cognitive Innovations",
+                     "author":"Jake Bake",
+                     "language":"english",
+                     "text":"IBM Forms New Watson Group to Meet Growing Demand for Cognitive Innovations\n\nMr. Rhodin will lead the IBM Watson Group, a new IBM business unit headquartered in the heart of New York City's Silicon Alley that will develop products and collaborate with start-ups on cloud-based cognitive apps and services powered by Watson.",
+                     "alchemy_enriched_text":{
+                        "keywords":[
+                           {
+                              "relevance":0.978167,
+                              "text":"IBM Watson Group"
+                           },
+                           {
+                              "relevance":0.932488,
+                              "text":"cloud-based cognitive apps"
+                           },
+                           {
+                              "relevance":0.838797,
+                              "text":"IBM business unit"
+                           },
+                           {
+                              "relevance":0.830576,
+                              "text":"New York City"
+                           },
+                           {
+                              "relevance":0.736028,
+                              "text":"Silicon Alley"
+                           },
+                           {
+                              "relevance":0.67098,
+                              "text":"Title sample"
+                           },
+                           {
+                              "relevance":0.648253,
+                              "text":"Mr. Rhodin"
+                           },
+                           {
+                              "relevance":0.49768,
+                              "text":"start-ups"
+                           },
+                           {
+                              "relevance":0.433437,
+                              "text":"heart"
+                           },
+                           {
+                              "relevance":0.432563,
+                              "text":"products"
+                           }
+                        ]
+                     },
+                     "sire_enriched_text":{
+                        "typedRelations":[
+                           {
+                              "arguments":[
+                                 {
+                                    "entities":[
+                                       {
+                                          "id":"-E3",
+                                          "text":"Silicon Alley",
+                                          "type":"GeopoliticalEntity"
+                                       }
+                                    ],
+                                    "part":"first",
+                                    "text":"Silicon Alley"
+                                 },
+                                 {
+                                    "entities":[
+                                       {
+                                          "id":"-E2",
+                                          "text":"New York City",
+                                          "type":"GeopoliticalEntity"
+                                       }
+                                    ],
+                                    "part":"second",
+                                    "text":"New York City"
+                                 }
+                              ],
+                              "score":"0.898437",
+                              "sentence":"Mr. Rhodin will lead the IBM Watson Group, a new IBM business unit headquartered in the heart of New York City's Silicon Alley that will develop products and collaborate with start-ups on cloud-based cognitive apps and services powered by Watson.",
+                              "type":"locatedAt"
+                           }
+                        ]
+                     }
+                  }
+               }
+            ],
+            "notices":[
+               {
+                  "notice_id":"xpath_not_found",
+                  "severity":"warning",
+                  "step":"html-to-html",
+                  "description":"xpath '/home' not found"
+               }
+            ]
+         }
+      },
+      "DocumentSnapshot":{
+         "type":"object",
+         "properties":{
+            "step":{
+               "type":"string",
+               "enum":[
+                  "html_input",
+                  "html_output",
+                  "json_output",
+                  "json_normalizations_output",
+                  "enrichments_output",
+                  "normalizations_output"
+               ]
+            },
+            "snapshot":{
+               "type":"object"
+            }
+         }
+      },
+      "ListCollectionFieldsResponse":{
+         "type":"object",
+         "description":"The list of fetched fields.\n\nThe fields are returned using a fully-qualified name format, however, the format differs slightly from that used by the query operations. Specifically:\n  \n  * fields which contain nested JSON objects are assigned a type of \"nested\".\n  \n  * fields which belong to a nested object are prefixed with `.properties` (e.g., `warnings.properties.severity` means that the `warnings` object has a property called `severity`).\n  \n  * fields returned from the News collection are prefixed with `v[N]-fullnews-t3-[YEAR].mappings` (e.g., `v5-fullnews-t3-2016.mappings.text.properties.author`).",
+         "properties":{
+            "fields":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/Field"
+               }
+            }
+         },
+         "example":{
+            "fields":[
+               {
+                  "field":"warnings",
+                  "type":"nested"
+               },
+               {
+                  "field":"warnings.properties.description",
+                  "type":"string"
+               },
+               {
+                  "field":"warnings.properties.phase",
+                  "type":"string"
+               },
+               {
+                  "field":"warnings.properties.warning_id",
+                  "type":"string"
+               }
+            ]
+         }
+      },
+      "Field":{
+         "type":"object",
+         "readOnly":true,
+         "properties":{
+            "field":{
+               "type":"string"
+            },
+            "type":{
+               "type":"string",
+               "enum":[
+                  "nested",
+                  "string",
+                  "date",
+                  "long",
+                  "integer",
+                  "short",
+                  "byte",
+                  "double",
+                  "float",
+                  "boolean",
+                  "binary"
+               ]
+            }
+         }
+      },
+      "QueryResponse":{
+         "type":"object",
+         "description":"A response containing the documents and aggregations for the query",
+         "properties":{
+            "matching_results":{
+               "type":"integer",
+               "format":"int32"
+            },
+            "results":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/QueryResult"
+               }
+            },
+            "aggregations":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/QueryAggregation"
+               }
+            }
+         },
+         "example":{
+            "matching_results":24,
+            "results":[
+               {
+                  "id":"watson-generated ID",
+                  "score":1
+               }
+            ],
+            "aggregations":{
+               "term":{
+                  "results":[
+                     {
+                        "key":"active",
+                        "matching_results":34
+                     }
+                  ]
+               }
+            }
+         }
+      },
+      "QueryResult":{
+         "type":"object",
+         "properties":{
+            "id":{
+               "type":"string",
+               "description":"The unique identifier of the document."
+            },
+            "score":{
+               "type":"number",
+               "format":"double",
+               "description":"The confidence score of the result's analysis. Scores range from 0 to 1, with a higher score indicating greater confidence."
+            },
+            "metadata":{
+               "type":"object",
+               "description":"Metadata of the document."
+            }
+         },
+         "additionalProperties":{
+            "type":"object"
+         }
+      },
+      "NoticeQueryResponse":{
+         "type":"object",
+         "properties":{
+            "matching_results":{
+               "type":"integer",
+               "format":"int32"
+            },
+            "results":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/NoticeQueryResult"
+               }
+            },
+            "aggregations":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/QueryAggregation"
+               }
+            }
+         },
+         "example":{
+            "matching_results":24,
+            "results":[
+               {
+                  "id":"watson-generated ID",
+                  "score":1,
+                  "notice_id":"xpath_not_found",
+                  "created":"2016-09-20T17:26:17.000Z",
+                  "document_id":"030ba125-29db-43f2-8552-f941ae30a7a8",
+                  "severity":"warning",
+                  "step":"html-to-html",
+                  "description":"The xpath expression \"boom\" was not found."
+               }
+            ],
+            "aggregations":{
+               "term":{
+                  "results":[
+                     {
+                        "key":"warning",
+                        "matching_results":34
+                     }
+                  ]
+               }
+            }
+         }
+      },
+      "NoticeQueryResult":{
+         "allOf":[
+            {
+               "$ref":"#/definitions/QueryResult"
+            },
+            {
+               "$ref":"#/definitions/Notice"
+            }
+         ]
+      },
+      "QueryAggregation":{
+         "type":"object",
+         "description":"An aggregation produced by the Discovery service to analyze the input provided.",
+         "properties":{
+            "type":{
+               "type":"string",
+               "description":"The type of aggregation command used. e.g. term, filter, max, min, etc."
+            },
+            "field":{
+               "type":"string",
+               "description":"The field where the aggregation is located in the document."
+            },
+            "results":{
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/AggregationResult"
+               }
+            },
+            "match":{
+               "type":"string",
+               "description":"The match the aggregated results queried for."
+            },
+            "matching_results":{
+               "type":"integer",
+               "format":"int32",
+               "description":"Number of matching results."
+            },
+            "aggregations":{
+               "type":"array",
+               "description":"Aggregations returned by the Discovery service.",
+               "items":{
+                  "$ref":"#/definitions/QueryAggregation"
+               }
+            },
+            "interval":{
+               "type":"integer",
+               "format":"int32",
+               "description":"Interval specified by using aggregation type 'timeslice'."
+            },
+            "value":{
+               "type":"number",
+               "format":"double",
+               "description":"Value of the aggregation. (For 'max' and 'min' type)."
+            }
+         }
+      },
+      "AggregationResult":{
+         "type":"object",
+         "properties":{
+            "key":{
+               "type":"string",
+               "description":"Key that matched the aggregation type."
+            },
+            "matching_results":{
+               "type":"integer",
+               "format":"int32",
+               "description":"Number of matching results."
+            },
+            "aggregations":{
+               "type":"array",
+               "description":"Aggregations returned in the case of chained aggregations.",
+               "items":{
+                  "$ref":"#/definitions/QueryAggregation"
+               }
+            }
+         }
+      },
+      "Notice":{
+         "type":"object",
+         "readOnly":true,
+         "description":"A notice produced by the ingestion process.",
+         "properties":{
+            "notice_id":{
+               "type":"string",
+               "description":"Identifies the notice. Many notices may have the same ID. This field exists so that user applications can programatically identify a notice and take automatic corrective action."
+            },
+            "created":{
+               "type":"string",
+               "format":"date-time",
+               "description":"The creation date of the collection in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'"
+            },
+            "document_id":{
+               "type":"string",
+               "description":"Unique identifier of the ingested document"
+            },
+            "severity":{
+               "type":"string",
+               "enum":[
+                  "warning",
+                  "error"
+               ],
+               "description":"Severity level of the notice"
+            },
+            "step":{
+               "type":"string",
+               "description":"Ingestion step in which the notice occurred"
+            },
+            "description":{
+               "type":"string",
+               "description":"The description of the notice"
+            }
+         }
+      },
+      "ErrorResponse":{
+         "type":"object",
+         "required":[
+            "code",
+            "error"
+         ],
+         "properties":{
+            "code":{
+               "description":"the HTTP error status code",
+               "type":"integer",
+               "format":"int32",
+               "minimum":100,
+               "maximum":600
+            },
+            "error":{
+               "description":"a message describing the error",
+               "type":"string"
+            }
+         }
+      }
+   },
+   "parameters":{
+      "versionParam":{
+         "name":"version",
+         "in":"query",
+         "description":"a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",
+         "required":true,
+         "type":"string",
+         "default":"2016-12-01",
+         "pattern":"^\\d{4}-\\d{2}-\\d{2}$"
+      },
+      "environmentIdParam":{
+         "name":"environment_id",
+         "in":"path",
+         "description":"the ID of your environment",
+         "required":true,
+         "type":"string",
+         "minLength":1,
+         "maxLength":255,
+         "pattern":"^[a-zA-Z0-9_-]*$"
+      },
+      "collectionIdParam":{
+         "name":"collection_id",
+         "in":"path",
+         "description":"the ID of your collection",
+         "required":true,
+         "type":"string",
+         "minLength":1,
+         "maxLength":255,
+         "pattern":"^[a-zA-Z0-9_-]*$"
+      },
+      "configurationIdParam":{
+         "name":"configuration_id",
+         "in":"path",
+         "description":"the ID of your configuration",
+         "required":true,
+         "type":"string",
+         "minLength":1,
+         "maxLength":255,
+         "pattern":"^[a-zA-Z0-9_-]*$"
+      },
+      "documentIdParam":{
+         "name":"document_id",
+         "in":"path",
+         "description":"the ID of your document",
+         "required":true,
+         "type":"string",
+         "minLength":1,
+         "maxLength":255,
+         "pattern":"^[a-zA-Z0-9_-]*$"
+      },
+      "configurationIdQueryParam":{
+         "name":"configuration_id",
+         "in":"query",
+         "type":"string",
+         "required":false,
+         "description":"The ID of the configuration to use to process the document. If the `configuration` form part is also provided (both are present at the same time), then request will be rejected."
+      },
+      "filePart":{
+         "name":"file",
+         "in":"formData",
+         "type":"file",
+         "required":false,
+         "description":"The content of the document to ingest.The maximum supported file size is 50 megabytes. Files larger than 50 megabytes is rejected."
+      },
+      "metadataPart":{
+         "name":"metadata",
+         "in":"formData",
+         "required":false,
+         "type":"string",
+         "description":"If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected.\nExample:  ``` {\n  \"Creator\": \"Johnny Appleseed\",\n  \"Subject\": \"Apples\"\n} ```"
+      },
+      "configurationPart":{
+         "name":"configuration",
+         "in":"formData",
+         "required":false,
+         "type":"string",
+         "description":"The configuration to use to process the document. If this part is provided, then the provided configuration is used to process the document. If the `configuration_id` is also provided (both are present at the same time), then request is rejected. The maximum supported configuration size is 1 MB. Configuration parts larger than 1 MB are rejected.\nSee the `GET /configurations/{configuration_id}` operation for an example configuration."
+      },
+      "filterParam":{
+         "name":"filter",
+         "in":"query",
+         "type":"string",
+         "description":"A cacheable query that limits the documents returned to exclude any documents that don't mention the query content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the data set."
+      },
+      "queryParam":{
+         "name":"query",
+         "in":"query",
+         "type":"string",
+         "description":"A query search returns all documents in your data set with full enrichments and full text, but with the most relevant documents listed first. Use a query search when you want to find the most relevant search results. You cannot use `natural_language_query` and `query` at the same time."
+      },
+      "nlqParam":{
+         "name":"natural_language_query",
+         "in":"query",
+         "type":"string",
+         "description":"A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time."
+      },
+      "passagesParam":{
+         "name":"passages",
+         "in":"query",
+         "type":"boolean",
+         "description":"A passages query that returns the most relevant passages from the document."
+      },
+      "aggregationParam":{
+         "name":"aggregation",
+         "in":"query",
+         "type":"string",
+         "description":"An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and time series. For a full list of possible aggregrations, see the Query reference."
+      },
+      "countParam":{
+         "name":"count",
+         "in":"query",
+         "type":"integer",
+         "default":10,
+         "description":"Number of documents to return"
+      },
+      "returnParam":{
+         "name":"return",
+         "in":"query",
+         "type":"array",
+         "items":{
+            "type":"string"
+         },
+         "description":"A comma separated list of the portion of the document hierarchy to return.",
+         "x-alternate-name":"returnFields"
+      },
+      "offsetParam":{
+         "name":"offset",
+         "in":"query",
+         "type":"integer",
+         "description":"The number of query results to skip at the beginning. For example, if the total number of results that are returned is 10, and the offset is 8, it returns the last two results."
+      },
+      "sortParam":{
+         "name":"sort",
+         "in":"query",
+         "type":"string",
+         "description":"A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no prefix is specified."
+      }
+   }
+}
