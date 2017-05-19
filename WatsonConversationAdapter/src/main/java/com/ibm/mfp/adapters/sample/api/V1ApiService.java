@@ -3,7 +3,7 @@ package com.ibm.mfp.adapters.sample.api;
 import com.ibm.mfp.adapters.sample.api.*;
 import com.ibm.mfp.adapters.sample.model.*;
 
-
+import org.glassfish.jersey.media.multipart.FormDataContentDisposition;
 
 import com.ibm.mfp.adapters.sample.model.CounterexampleCollectionResponse;
 import com.ibm.mfp.adapters.sample.model.CreateEntity;
@@ -44,86 +44,211 @@ import java.util.List;
 import com.ibm.mfp.adapters.sample.api.NotFoundException;
 
 import java.io.InputStream;
-import com.sun.jersey.multipart.*;
-import com.sun.jersey.core.header.*;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
-
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-08T13:53:48.254+05:30")
-public interface V1ApiService {
-      public Response createCounterexample(String workspaceId,String version,CreateExample body,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response createEntity(String workspaceId,String version,CreateEntity body,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response createExample(String workspaceId,String intent,String version,CreateExample body,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response createIntent(String workspaceId,String version,CreateIntent body,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response createSynonym(String workspaceId,String entity,String value,String version,CreateSynonym body,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response createValue(String workspaceId,String entity,String version,CreateValue body,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response createWorkspace(String version,CreateWorkspace body,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response deleteCounterexample(String workspaceId,String text,String version,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response deleteEntity(String workspaceId,String entity,String version,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response deleteExample(String workspaceId,String intent,String text,String version,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response deleteIntent(String workspaceId,String intent,String version,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response deleteSynonym(String workspaceId,String entity,String value,String synonym,String version,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response deleteValue(String workspaceId,String entity,String value,String version,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response deleteWorkspace(String workspaceId,String version,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response getCounterexample(String workspaceId,String text,String version,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response getEntity(String workspaceId,String entity,String version,Boolean export,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response getExample(String workspaceId,String intent,String text,String version,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response getIntent(String workspaceId,String intent,String version,Boolean export,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response getSynonym(String workspaceId,String entity,String value,String synonym,String version,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response getValue(String workspaceId,String entity,String value,String version,Boolean export,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response getWorkspace(String workspaceId,String version,Boolean export,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response listCounterexamples(String workspaceId,String version,Integer pageLimit,Boolean includeCount,String sort,String cursor,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response listEntities(String workspaceId,String version,Boolean export,Integer pageLimit,Boolean includeCount,String sort,String cursor,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response listExamples(String workspaceId,String intent,String version,Integer pageLimit,Boolean includeCount,String sort,String cursor,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response listIntents(String workspaceId,String version,Boolean export,Integer pageLimit,Boolean includeCount,String sort,String cursor,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response listSynonyms(String workspaceId,String entity,String value,String version,Integer pageLimit,Boolean includeCount,String sort,String cursor,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response listValues(String workspaceId,String entity,String version,Boolean export,Integer pageLimit,Boolean includeCount,String sort,String cursor,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response listWorkspaces(String version,Integer pageLimit,Boolean includeCount,String sort,String cursor,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response message(String workspaceId,String version,MessageRequest body,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response updateCounterexample(String workspaceId,String text,String version,UpdateExample body,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response updateEntity(String workspaceId,String entity,String version,UpdateEntity body,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response updateExample(String workspaceId,String intent,String text,String version,UpdateExample body,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response updateIntent(String workspaceId,String intent,String version,UpdateIntent body,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response updateSynonym(String workspaceId,String entity,String value,String synonym,String version,UpdateSynonym body,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response updateValue(String workspaceId,String entity,String value,String version,UpdateValue body,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response updateWorkspace(String workspaceId,String version,UpdateWorkspace body,SecurityContext securityContext)
-      throws NotFoundException;
-      public Response v1WorkspacesWorkspaceIdLogsGet(String workspaceId,String version,String sort,String filter,Integer pageLimit,String cursor,SecurityContext securityContext)
-      throws NotFoundException;
+import javax.validation.constraints.*;
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T13:34:31.991+05:30")
+public abstract class V1ApiService {
+    public abstract Response createCounterexample(String workspaceId
+,String version
+,CreateExample body
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response createEntity(String workspaceId
+,String version
+,CreateEntity body
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response createExample(String workspaceId
+,String intent
+,String version
+,CreateExample body
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response createIntent(String workspaceId
+,String version
+,CreateIntent body
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response createSynonym(String workspaceId
+,String entity
+,String value
+,String version
+,CreateSynonym body
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response createValue(String workspaceId
+,String entity
+,String version
+,CreateValue body
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response createWorkspace(String version
+,CreateWorkspace body
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response deleteCounterexample(String workspaceId
+,String text
+,String version
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response deleteEntity(String workspaceId
+,String entity
+,String version
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response deleteExample(String workspaceId
+,String intent
+,String text
+,String version
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response deleteIntent(String workspaceId
+,String intent
+,String version
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response deleteSynonym(String workspaceId
+,String entity
+,String value
+,String synonym
+,String version
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response deleteValue(String workspaceId
+,String entity
+,String value
+,String version
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response deleteWorkspace(String workspaceId
+,String version
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response getCounterexample(String workspaceId
+,String text
+,String version
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response getEntity(String workspaceId
+,String entity
+,String version
+,Boolean export
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response getExample(String workspaceId
+,String intent
+,String text
+,String version
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response getIntent(String workspaceId
+,String intent
+,String version
+,Boolean export
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response getSynonym(String workspaceId
+,String entity
+,String value
+,String synonym
+,String version
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response getValue(String workspaceId
+,String entity
+,String value
+,String version
+,Boolean export
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response getWorkspace(String workspaceId
+,String version
+,Boolean export
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response listCounterexamples(String workspaceId
+,String version
+,Integer pageLimit
+,Boolean includeCount
+,String sort
+,String cursor
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response listEntities(String workspaceId
+,String version
+,Boolean export
+,Integer pageLimit
+,Boolean includeCount
+,String sort
+,String cursor
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response listExamples(String workspaceId
+,String intent
+,String version
+,Integer pageLimit
+,Boolean includeCount
+,String sort
+,String cursor
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response listIntents(String workspaceId
+,String version
+,Boolean export
+,Integer pageLimit
+,Boolean includeCount
+,String sort
+,String cursor
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response listSynonyms(String workspaceId
+,String entity
+,String value
+,String version
+,Integer pageLimit
+,Boolean includeCount
+,String sort
+,String cursor
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response listValues(String workspaceId
+,String entity
+,String version
+,Boolean export
+,Integer pageLimit
+,Boolean includeCount
+,String sort
+,String cursor
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response listWorkspaces(String version
+,Integer pageLimit
+,Boolean includeCount
+,String sort
+,String cursor
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response message(String workspaceId
+,String version
+,MessageRequest body
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response updateCounterexample(String workspaceId
+,String text
+,String version
+,UpdateExample body
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response updateEntity(String workspaceId
+,String entity
+,String version
+,UpdateEntity body
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response updateExample(String workspaceId
+,String intent
+,String text
+,String version
+,UpdateExample body
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response updateIntent(String workspaceId
+,String intent
+,String version
+,UpdateIntent body
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response updateSynonym(String workspaceId
+,String entity
+,String value
+,String synonym
+,String version
+,UpdateSynonym body
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response updateValue(String workspaceId
+,String entity
+,String value
+,String version
+,UpdateValue body
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response updateWorkspace(String workspaceId
+,String version
+,UpdateWorkspace body
+,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response v1WorkspacesWorkspaceIdLogsGet(String workspaceId
+,String version
+,String sort
+,String filter
+,Integer pageLimit
+,String cursor
+,SecurityContext securityContext) throws NotFoundException;
 }

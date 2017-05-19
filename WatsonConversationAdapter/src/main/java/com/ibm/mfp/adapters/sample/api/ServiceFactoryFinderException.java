@@ -1,6 +1,6 @@
 package com.ibm.mfp.adapters.sample.api;
 
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-08T13:53:48.254+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T13:34:31.991+05:30")
 public class ServiceFactoryFinderException extends Exception {
 
 	public ServiceFactoryFinderException() {
