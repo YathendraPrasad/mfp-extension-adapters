@@ -2,7 +2,7 @@
 
 MFP Extension Adapters for Watson Congnitive Services such as Watson Conversation, Watson Natural Language Understanding and Watson Discovery. Using these MobleFirst Platform Adapters customer can quickly build a cognitive mobile apps and leverage IBM MobileFirst Platform capabilities
 
-# Pre-bulit Adapters
+# Pre-built Adapters
 
 The pre-built adapters for each of the Watson Cognitive Service can be found in the respective watson service
 discovery. These adapters can be downloaded and deployed to MFP Server to be used in the mobile app.
