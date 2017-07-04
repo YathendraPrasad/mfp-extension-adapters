@@ -1,4 +1,16 @@
 /*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
+/*
  * Natural Language Understanding
  * Analyze various features of text content at scale. Provide text, raw HTML, or a public URL, and IBM Watson Natural Language Understanding will give you results for the features you request. The service cleans HTML content before analysis by default, so the results can ignore most advertisements and other unwanted content.    ### Concepts  Identify general concepts that are referenced or alluded to in your content. Concepts that are detected typically have an associated link to a DBpedia resource.    ### Entities  Detect important people, places, geopolitical entities and other types of entities in your content. Entity detection recognizes consecutive coreferences of each entity. For example, analysis of the following text would count \"Barack Obama\" and \"He\" as the same entity:    \"Barack Obama was the 44th President of the United States. He took office in January 2009.\"    ### Keywords  Determine the most important keywords in your content. Keyword phrases are organized by relevance in the results.    ### Categories  Categorize your content into a hierarchical 5-level taxonomy. For example, \"Leonardo DiCaprio won an Oscar\" returns \"/art and entertainment/movies and tv/movies\" as the most confident classification.    ### Sentiment  Determine whether your content conveys postive or negative sentiment. Sentiment information can be returned for detected entities, keywords, or user-specified target phrases found in the text.    ### Emotion  Detect anger, disgust, fear, joy, or sadness that is conveyed by your content. Emotion information can be returned for detected entities, keywords, or user-specified target phrases found in the text.    ### Relations  Recognize when two entities are related, and identify the type of relation.  For example, you can identify an \"awardedTo\" relation between an award and its recipient.    ### Semantic Roles  Parse sentences into subject-action-object form, and identify entities and keywords that are subjects or objects of an action.    ### Metadata  Get author information, publication date, and the title of your text/HTML content.  
  *
@@ -32,11 +44,23 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.*;
 
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 /**
  * Results of the analysis, organized by feature
  */
 @ApiModel(description = "Results of the analysis, organized by feature")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T10:04:55.395+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:50:49.993+05:30")
 public class AnalysisResults   {
   @JsonProperty("concepts")
   private List<ConceptsResult> concepts = null;
@@ -96,7 +120,6 @@ public class AnalysisResults   {
   **/
   @JsonProperty("concepts")
   @ApiModelProperty(value = "The general concepts referenced or alluded to in the specified content")
-
   public List<ConceptsResult> getConcepts() {
     return concepts;
   }
@@ -124,7 +147,6 @@ public class AnalysisResults   {
   **/
   @JsonProperty("entities")
   @ApiModelProperty(value = "The important entities in the specified content")
-
   public List<EntitiesResult> getEntities() {
     return entities;
   }
@@ -152,7 +174,6 @@ public class AnalysisResults   {
   **/
   @JsonProperty("keywords")
   @ApiModelProperty(value = "The important keywords in content organized by relevance")
-
   public List<KeywordsResult> getKeywords() {
     return keywords;
   }
@@ -180,7 +201,6 @@ public class AnalysisResults   {
   **/
   @JsonProperty("categories")
   @ApiModelProperty(value = "The hierarchical 5-level taxonomy the content is categorized into")
-
   public List<CategoriesResult> getCategories() {
     return categories;
   }
@@ -200,7 +220,6 @@ public class AnalysisResults   {
   **/
   @JsonProperty("emotion")
   @ApiModelProperty(value = "The anger, disgust, fear, joy, or sadness conveyed by the content")
-
   public EmotionResult getEmotion() {
     return emotion;
   }
@@ -220,7 +239,6 @@ public class AnalysisResults   {
   **/
   @JsonProperty("metadata")
   @ApiModelProperty(value = "The metadata holds author information, publication date and the title of the text/HTML content")
-
   public MetadataResult getMetadata() {
     return metadata;
   }
@@ -248,7 +266,6 @@ public class AnalysisResults   {
   **/
   @JsonProperty("relations")
   @ApiModelProperty(value = "The relationships between entities in the content")
-
   public List<RelationsResult> getRelations() {
     return relations;
   }
@@ -276,7 +293,6 @@ public class AnalysisResults   {
   **/
   @JsonProperty("semantic_roles")
   @ApiModelProperty(value = "The subjects of actions and the objects the actions act upon")
-
   public List<SemanticRolesResult> getSemanticRoles() {
     return semanticRoles;
   }
@@ -296,7 +312,6 @@ public class AnalysisResults   {
   **/
   @JsonProperty("sentiment")
   @ApiModelProperty(value = "The sentiment of the content")
-
   public SentimentResult getSentiment() {
     return sentiment;
   }
@@ -316,7 +331,6 @@ public class AnalysisResults   {
   **/
   @JsonProperty("language")
   @ApiModelProperty(value = "Language used to analyze the text")
-
   public String getLanguage() {
     return language;
   }
@@ -336,7 +350,6 @@ public class AnalysisResults   {
   **/
   @JsonProperty("analyzed_text")
   @ApiModelProperty(value = "Text that was used in the analysis")
-
   public String getAnalyzedText() {
     return analyzedText;
   }
@@ -356,7 +369,6 @@ public class AnalysisResults   {
   **/
   @JsonProperty("retrieved_url")
   @ApiModelProperty(value = "URL that was used to retrieve HTML content")
-
   public String getRetrievedUrl() {
     return retrievedUrl;
   }
@@ -376,7 +388,6 @@ public class AnalysisResults   {
   **/
   @JsonProperty("usage")
   @ApiModelProperty(value = "API usage information for the request")
-
   public Usage getUsage() {
     return usage;
   }
@@ -449,3 +460,4 @@ public class AnalysisResults   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

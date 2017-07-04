@@ -1,8 +1,14 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 		 xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>mfp.server.adapter-extensions</groupId>
+        <artifactId>extentions</artifactId>
+        <version>8.0.2017062105</version>
+        <relativePath>../../</relativePath>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
     <groupId>com.ibm.mfp</groupId>
-    <artifactId>WatsonNLUAdapter</artifactId>
+    <artifactId>WatsonNLU</artifactId>
 	<version>1.0.0</version>
 	<packaging>adapter</packaging>
 	<dependencies>
@@ -96,7 +102,31 @@
     <version>${swagger-core-version}</version>
 </dependency>
 
-
+        <dependency>
+            <groupId>com.squareup.okhttp</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>${okhttp-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.squareup.okhttp</groupId>
+            <artifactId>logging-interceptor</artifactId>
+            <version>${okhttp-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>${gson-version}</version>
+        </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${jodatime-version}</version>
+        </dependency>
+       <dependency>
+          <groupId>com.fasterxml.jackson.core</groupId>
+	  <artifactId>jackson-annotations</artifactId>
+	  <version>2.7.3</version>
+     </dependency>
     <dependency>
       <groupId>ch.qos.logback</groupId>
       <artifactId>logback-classic</artifactId>
@@ -169,14 +199,17 @@
     <maven.compiler.source>${java.version}</maven.compiler.source>
     <maven.compiler.target>${java.version}</maven.compiler.target>
     <swagger-core-version>1.5.12</swagger-core-version>
+    <okhttp-version>2.7.5</okhttp-version>
+    <gson-version>2.6.2</gson-version>
+    <jodatime-version>2.9.3</jodatime-version>
+    <maven-plugin-version>1.0.0</maven-plugin-version>
+    <junit-version>4.12</junit-version>
     <jetty-version>9.2.9.v20150224</jetty-version>
     <jersey2-version>2.22.2</jersey2-version>
     <jackson-version>2.8.7</jackson-version>
-    <junit-version>4.12</junit-version>
     <logback-version>1.1.7</logback-version>
     <servlet-api-version>2.5</servlet-api-version>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-
 	</properties>
 		<build>
     <sourceDirectory>src/main/java</sourceDirectory>

@@ -1,4 +1,16 @@
 /*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
+/*
  * Natural Language Understanding
  * Analyze various features of text content at scale. Provide text, raw HTML, or a public URL, and IBM Watson Natural Language Understanding will give you results for the features you request. The service cleans HTML content before analysis by default, so the results can ignore most advertisements and other unwanted content.    ### Concepts  Identify general concepts that are referenced or alluded to in your content. Concepts that are detected typically have an associated link to a DBpedia resource.    ### Entities  Detect important people, places, geopolitical entities and other types of entities in your content. Entity detection recognizes consecutive coreferences of each entity. For example, analysis of the following text would count \"Barack Obama\" and \"He\" as the same entity:    \"Barack Obama was the 44th President of the United States. He took office in January 2009.\"    ### Keywords  Determine the most important keywords in your content. Keyword phrases are organized by relevance in the results.    ### Categories  Categorize your content into a hierarchical 5-level taxonomy. For example, \"Leonardo DiCaprio won an Oscar\" returns \"/art and entertainment/movies and tv/movies\" as the most confident classification.    ### Sentiment  Determine whether your content conveys postive or negative sentiment. Sentiment information can be returned for detected entities, keywords, or user-specified target phrases found in the text.    ### Emotion  Detect anger, disgust, fear, joy, or sadness that is conveyed by your content. Emotion information can be returned for detected entities, keywords, or user-specified target phrases found in the text.    ### Relations  Recognize when two entities are related, and identify the type of relation.  For example, you can identify an \"awardedTo\" relation between an award and its recipient.    ### Semantic Roles  Parse sentences into subject-action-object form, and identify entities and keywords that are subjects or objects of an action.    ### Metadata  Get author information, publication date, and the title of your text/HTML content.  
  *
@@ -23,11 +35,23 @@ import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import javax.validation.constraints.*;
 
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 /**
  * The important people, places, geopolitical entities and other types of entities in your content
  */
 @ApiModel(description = "The important people, places, geopolitical entities and other types of entities in your content")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T10:04:55.395+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:50:49.993+05:30")
 public class EntitiesResult   {
   @JsonProperty("type")
   private String type = null;
@@ -61,7 +85,6 @@ public class EntitiesResult   {
   **/
   @JsonProperty("type")
   @ApiModelProperty(value = "Entity type")
-
   public String getType() {
     return type;
   }
@@ -81,7 +104,6 @@ public class EntitiesResult   {
   **/
   @JsonProperty("relevance")
   @ApiModelProperty(value = "Relevance score from 0 to 1. Higher values indicate greater relevance")
-
   public BigDecimal getRelevance() {
     return relevance;
   }
@@ -101,7 +123,6 @@ public class EntitiesResult   {
   **/
   @JsonProperty("count")
   @ApiModelProperty(value = "How many times the entity was mentioned in the text")
-
   public Integer getCount() {
     return count;
   }
@@ -121,7 +142,6 @@ public class EntitiesResult   {
   **/
   @JsonProperty("text")
   @ApiModelProperty(value = "The name of the entity")
-
   public String getText() {
     return text;
   }
@@ -141,7 +161,6 @@ public class EntitiesResult   {
   **/
   @JsonProperty("emotion")
   @ApiModelProperty(value = "Emotion analysis results for the entity, enabled with the \"emotion\" option")
-
   public EmotionScores getEmotion() {
     return emotion;
   }
@@ -161,7 +180,6 @@ public class EntitiesResult   {
   **/
   @JsonProperty("sentiment")
   @ApiModelProperty(value = "Sentiment analysis results for the entity, enabled with the \"sentiment\" option")
-
   public FeatureSentimentResults getSentiment() {
     return sentiment;
   }
@@ -181,7 +199,6 @@ public class EntitiesResult   {
   **/
   @JsonProperty("disambiguation")
   @ApiModelProperty(value = "Disambiguation information for the entity")
-
   public DisambiguationResult getDisambiguation() {
     return disambiguation;
   }
@@ -242,3 +259,4 @@ public class EntitiesResult   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

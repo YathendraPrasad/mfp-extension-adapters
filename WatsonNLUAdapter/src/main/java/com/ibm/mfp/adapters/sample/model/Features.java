@@ -1,4 +1,16 @@
 /*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
+/*
  * Natural Language Understanding
  * Analyze various features of text content at scale. Provide text, raw HTML, or a public URL, and IBM Watson Natural Language Understanding will give you results for the features you request. The service cleans HTML content before analysis by default, so the results can ignore most advertisements and other unwanted content.    ### Concepts  Identify general concepts that are referenced or alluded to in your content. Concepts that are detected typically have an associated link to a DBpedia resource.    ### Entities  Detect important people, places, geopolitical entities and other types of entities in your content. Entity detection recognizes consecutive coreferences of each entity. For example, analysis of the following text would count \"Barack Obama\" and \"He\" as the same entity:    \"Barack Obama was the 44th President of the United States. He took office in January 2009.\"    ### Keywords  Determine the most important keywords in your content. Keyword phrases are organized by relevance in the results.    ### Categories  Categorize your content into a hierarchical 5-level taxonomy. For example, \"Leonardo DiCaprio won an Oscar\" returns \"/art and entertainment/movies and tv/movies\" as the most confident classification.    ### Sentiment  Determine whether your content conveys postive or negative sentiment. Sentiment information can be returned for detected entities, keywords, or user-specified target phrases found in the text.    ### Emotion  Detect anger, disgust, fear, joy, or sadness that is conveyed by your content. Emotion information can be returned for detected entities, keywords, or user-specified target phrases found in the text.    ### Relations  Recognize when two entities are related, and identify the type of relation.  For example, you can identify an \"awardedTo\" relation between an award and its recipient.    ### Semantic Roles  Parse sentences into subject-action-object form, and identify entities and keywords that are subjects or objects of an action.    ### Metadata  Get author information, publication date, and the title of your text/HTML content.  
  *
@@ -28,11 +40,23 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
 
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 /**
  * Analysis features and options
  */
 @ApiModel(description = "Analysis features and options")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T10:04:55.395+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:50:49.993+05:30")
 public class Features   {
   @JsonProperty("concepts")
   private ConceptsOptions concepts = null;
@@ -72,7 +96,6 @@ public class Features   {
   **/
   @JsonProperty("concepts")
   @ApiModelProperty(value = "Whether or not to return the concepts that are mentioned in the analyzed text")
-
   public ConceptsOptions getConcepts() {
     return concepts;
   }
@@ -92,7 +115,6 @@ public class Features   {
   **/
   @JsonProperty("emotion")
   @ApiModelProperty(value = "Whether or not to extract the emotions implied in the analyzed text")
-
   public EmotionOptions getEmotion() {
     return emotion;
   }
@@ -112,7 +134,6 @@ public class Features   {
   **/
   @JsonProperty("entities")
   @ApiModelProperty(value = "Whether or not to extract detected entity objects from the analyzed text")
-
   public EntitiesOptions getEntities() {
     return entities;
   }
@@ -132,7 +153,6 @@ public class Features   {
   **/
   @JsonProperty("keywords")
   @ApiModelProperty(value = "Whether or not to return the keywords in the analyzed text")
-
   public KeywordsOptions getKeywords() {
     return keywords;
   }
@@ -152,7 +172,6 @@ public class Features   {
   **/
   @JsonProperty("metadata")
   @ApiModelProperty(value = "Whether or not the author, publication date, and title of the analyzed text should be returned. This parameter is only available for URL and HTML input")
-
   public MetadataOptions getMetadata() {
     return metadata;
   }
@@ -172,7 +191,6 @@ public class Features   {
   **/
   @JsonProperty("relations")
   @ApiModelProperty(value = "Whether or not to return the relationships between detected entities in the analyzed text")
-
   public RelationsOptions getRelations() {
     return relations;
   }
@@ -192,7 +210,6 @@ public class Features   {
   **/
   @JsonProperty("semantic_roles")
   @ApiModelProperty(value = "Whether or not to return the subject-action-object relations from the analyzed text")
-
   public SemanticRolesOptions getSemanticRoles() {
     return semanticRoles;
   }
@@ -212,7 +229,6 @@ public class Features   {
   **/
   @JsonProperty("sentiment")
   @ApiModelProperty(value = "Whether or not to return the overall sentiment of the analyzed text")
-
   public SentimentOptions getSentiment() {
     return sentiment;
   }
@@ -232,7 +248,6 @@ public class Features   {
   **/
   @JsonProperty("categories")
   @ApiModelProperty(value = "Whether or not to return the high level category the content is categorized as (i.e. news, art)")
-
   public CategoriesOptions getCategories() {
     return categories;
   }
@@ -297,3 +312,4 @@ public class Features   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+
