@@ -1,4 +1,16 @@
 /*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
+/*
  * Conversation
  * The IBM Watson&trade; Conversation service combines machine learning, natural language understanding, and integrated dialog tools to create conversation flows between your apps and your users.
  *
@@ -22,10 +34,22 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.*;
 
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 /**
  * CreateEntity
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T13:34:31.991+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
 public class CreateEntity   {
   @JsonProperty("entity")
   private String entity = null;
@@ -53,8 +77,7 @@ public class CreateEntity   {
   **/
   @JsonProperty("entity")
   @ApiModelProperty(required = true, value = "The name of the entity.")
-  @NotNull 
-
+  @NotNull
   public String getEntity() {
     return entity;
   }
@@ -74,7 +97,6 @@ public class CreateEntity   {
   **/
   @JsonProperty("description")
   @ApiModelProperty(value = "The description of the entity.")
-
   public String getDescription() {
     return description;
   }
@@ -94,7 +116,6 @@ public class CreateEntity   {
   **/
   @JsonProperty("metadata")
   @ApiModelProperty(value = "Any metadata related to the value.")
-
   public Object getMetadata() {
     return metadata;
   }
@@ -122,7 +143,6 @@ public class CreateEntity   {
   **/
   @JsonProperty("values")
   @ApiModelProperty(value = "An array of entity values.")
-
   public List<CreateValue> getValues() {
     return values;
   }
@@ -142,7 +162,6 @@ public class CreateEntity   {
   **/
   @JsonProperty("fuzzy_match")
   @ApiModelProperty(value = "Whether to use fuzzy matching for the entity.")
-
   public Boolean getFuzzyMatch() {
     return fuzzyMatch;
   }
@@ -199,3 +218,4 @@ public class CreateEntity   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

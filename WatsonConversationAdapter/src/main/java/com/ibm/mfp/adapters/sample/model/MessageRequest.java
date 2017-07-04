@@ -1,4 +1,16 @@
 /*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
+/*
  * Conversation
  * The IBM Watson&trade; Conversation service combines machine learning, natural language understanding, and integrated dialog tools to create conversation flows between your apps and your users.
  *
@@ -26,11 +38,23 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.*;
 
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 /**
  * A request formatted for the Conversation service.
  */
 @ApiModel(description = "A request formatted for the Conversation service.")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T13:34:31.991+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
 public class MessageRequest   {
   @JsonProperty("input")
   private InputData input = null;
@@ -61,8 +85,7 @@ public class MessageRequest   {
   **/
   @JsonProperty("input")
   @ApiModelProperty(required = true, value = "")
-  @NotNull 
-
+  @NotNull
   public InputData getInput() {
     return input;
   }
@@ -82,7 +105,6 @@ public class MessageRequest   {
   **/
   @JsonProperty("alternate_intents")
   @ApiModelProperty(value = "Whether to return more than one intent. Set to `true` to return all matching intents.")
-
   public Boolean getAlternateIntents() {
     return alternateIntents;
   }
@@ -102,7 +124,6 @@ public class MessageRequest   {
   **/
   @JsonProperty("context")
   @ApiModelProperty(value = "")
-
   public Context getContext() {
     return context;
   }
@@ -130,7 +151,6 @@ public class MessageRequest   {
   **/
   @JsonProperty("entities")
   @ApiModelProperty(value = "Include the entities from the previous response when they do not need to change and to prevent Watson from trying to identify them.")
-
   public List<RuntimeEntity> getEntities() {
     return entities;
   }
@@ -158,7 +178,6 @@ public class MessageRequest   {
   **/
   @JsonProperty("intents")
   @ApiModelProperty(value = "An array of name-confidence pairs for the user input. Include the intents from the previous response when they do not need to change and to prevent Watson from trying to identify them.")
-
   public List<RuntimeIntent> getIntents() {
     return intents;
   }
@@ -178,7 +197,6 @@ public class MessageRequest   {
   **/
   @JsonProperty("output")
   @ApiModelProperty(value = "")
-
   public OutputData getOutput() {
     return output;
   }
@@ -237,3 +255,4 @@ public class MessageRequest   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

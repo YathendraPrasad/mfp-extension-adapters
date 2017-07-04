@@ -1,4 +1,16 @@
 /*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
+/*
  * Conversation
  * The IBM Watson&trade; Conversation service combines machine learning, natural language understanding, and integrated dialog tools to create conversation flows between your apps and your users.
  *
@@ -32,10 +44,22 @@ import java.util.List;
 import org.joda.time.DateTime;
 import javax.validation.constraints.*;
 
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 /**
  * WorkspaceExportResponse
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T13:34:31.991+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
 public class WorkspaceExportResponse   {
   @JsonProperty("name")
   private String name = null;
@@ -57,6 +81,18 @@ public class WorkspaceExportResponse   {
 
   @JsonProperty("workspace_id")
   private String workspaceId = null;
+
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
 
 /**
    * The current status of the workspace.
@@ -94,6 +130,7 @@ public class WorkspaceExportResponse   {
       return null;
     }
   }
+
   @JsonProperty("status")
   private StatusEnum status = null;
 
@@ -120,8 +157,7 @@ public class WorkspaceExportResponse   {
   **/
   @JsonProperty("name")
   @ApiModelProperty(required = true, value = "The name of the workspace.")
-  @NotNull 
-
+  @NotNull
   public String getName() {
     return name;
   }
@@ -141,8 +177,7 @@ public class WorkspaceExportResponse   {
   **/
   @JsonProperty("description")
   @ApiModelProperty(required = true, value = "The description of the workspace.")
-  @NotNull 
-
+  @NotNull
   public String getDescription() {
     return description;
   }
@@ -162,8 +197,7 @@ public class WorkspaceExportResponse   {
   **/
   @JsonProperty("language")
   @ApiModelProperty(required = true, value = "The language of the workspace.")
-  @NotNull 
-
+  @NotNull
   public String getLanguage() {
     return language;
   }
@@ -183,8 +217,7 @@ public class WorkspaceExportResponse   {
   **/
   @JsonProperty("metadata")
   @ApiModelProperty(required = true, value = "Any metadata that is required by the workspace.")
-  @NotNull 
-
+  @NotNull
   public Object getMetadata() {
     return metadata;
   }
@@ -204,8 +237,7 @@ public class WorkspaceExportResponse   {
   **/
   @JsonProperty("created")
   @ApiModelProperty(required = true, value = "The timestamp for creation of the workspace.")
-  @NotNull 
-
+  @NotNull
   public DateTime getCreated() {
     return created;
   }
@@ -225,8 +257,7 @@ public class WorkspaceExportResponse   {
   **/
   @JsonProperty("updated")
   @ApiModelProperty(required = true, value = "The timestamp for the last update to the workspace.")
-  @NotNull 
-
+  @NotNull
   public DateTime getUpdated() {
     return updated;
   }
@@ -246,8 +277,7 @@ public class WorkspaceExportResponse   {
   **/
   @JsonProperty("workspace_id")
   @ApiModelProperty(required = true, value = "The workspace ID.")
-  @NotNull 
-
+  @NotNull
   public String getWorkspaceId() {
     return workspaceId;
   }
@@ -267,8 +297,7 @@ public class WorkspaceExportResponse   {
   **/
   @JsonProperty("status")
   @ApiModelProperty(required = true, value = "The current status of the workspace.")
-  @NotNull 
-
+  @NotNull
   public StatusEnum getStatus() {
     return status;
   }
@@ -296,7 +325,6 @@ public class WorkspaceExportResponse   {
   **/
   @JsonProperty("intents")
   @ApiModelProperty(value = "An array of intents.")
-
   public List<IntentExportResponse> getIntents() {
     return intents;
   }
@@ -324,7 +352,6 @@ public class WorkspaceExportResponse   {
   **/
   @JsonProperty("entities")
   @ApiModelProperty(value = "An array of entities.")
-
   public List<EntityExportResponse> getEntities() {
     return entities;
   }
@@ -352,7 +379,6 @@ public class WorkspaceExportResponse   {
   **/
   @JsonProperty("counterexamples")
   @ApiModelProperty(value = "An array of counterexamples.")
-
   public List<ExampleResponse> getCounterexamples() {
     return counterexamples;
   }
@@ -380,7 +406,6 @@ public class WorkspaceExportResponse   {
   **/
   @JsonProperty("dialog_nodes")
   @ApiModelProperty(value = "An array of objects describing the dialog nodes in the workspace.")
-
   public List<DialogNodeResponse> getDialogNodes() {
     return dialogNodes;
   }
@@ -451,3 +476,4 @@ public class WorkspaceExportResponse   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

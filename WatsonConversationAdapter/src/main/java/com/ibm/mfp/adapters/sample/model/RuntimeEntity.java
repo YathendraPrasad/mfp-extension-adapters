@@ -1,4 +1,16 @@
 /*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
+/*
  * Conversation
  * The IBM Watson&trade; Conversation service combines machine learning, natural language understanding, and integrated dialog tools to create conversation flows between your apps and your users.
  *
@@ -22,11 +34,23 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.*;
 
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 /**
  * A term from the request that was identified as an entity.
  */
 @ApiModel(description = "A term from the request that was identified as an entity.")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T13:34:31.991+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
 public class RuntimeEntity   {
   @JsonProperty("entity")
   private String entity = null;
@@ -51,8 +75,7 @@ public class RuntimeEntity   {
   **/
   @JsonProperty("entity")
   @ApiModelProperty(required = true, value = "The recognized entity from a term in the input.")
-  @NotNull 
-
+  @NotNull
   public String getEntity() {
     return entity;
   }
@@ -77,9 +100,8 @@ public class RuntimeEntity   {
   **/
   @JsonProperty("location")
   @ApiModelProperty(required = true, value = "Zero-based character offsets that indicate where the entity value begins and ends in the input text.")
-  @NotNull 
- @Size(min=2,max=2)
-  public List<Integer> getLocation() {
+  @NotNull
+ @Size(min=2,max=2)  public List<Integer> getLocation() {
     return location;
   }
 
@@ -98,8 +120,7 @@ public class RuntimeEntity   {
   **/
   @JsonProperty("value")
   @ApiModelProperty(required = true, value = "The term in the input text that was recognized.")
-  @NotNull 
-
+  @NotNull
   public String getValue() {
     return value;
   }
@@ -119,8 +140,7 @@ public class RuntimeEntity   {
   **/
   @JsonProperty("confidence")
   @ApiModelProperty(required = true, value = "A decimal percentage that represents Watson's confidence in the entity.")
-  @NotNull 
-
+  @NotNull
   public BigDecimal getConfidence() {
     return confidence;
   }
@@ -175,3 +195,4 @@ public class RuntimeEntity   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

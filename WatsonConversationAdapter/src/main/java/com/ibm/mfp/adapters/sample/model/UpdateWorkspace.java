@@ -1,4 +1,16 @@
 /*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
+/*
  * Conversation
  * The IBM Watson&trade; Conversation service combines machine learning, natural language understanding, and integrated dialog tools to create conversation flows between your apps and your users.
  *
@@ -26,10 +38,22 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.*;
 
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 /**
  * UpdateWorkspace
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T13:34:31.991+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
 public class UpdateWorkspace   {
   @JsonProperty("name")
   private String name = null;
@@ -66,7 +90,6 @@ public class UpdateWorkspace   {
   **/
   @JsonProperty("name")
   @ApiModelProperty(value = "The name of the workspace.")
-
   public String getName() {
     return name;
   }
@@ -86,7 +109,6 @@ public class UpdateWorkspace   {
   **/
   @JsonProperty("description")
   @ApiModelProperty(value = "The description of the workspace.")
-
   public String getDescription() {
     return description;
   }
@@ -106,7 +128,6 @@ public class UpdateWorkspace   {
   **/
   @JsonProperty("language")
   @ApiModelProperty(value = "The language of the workspace.")
-
   public String getLanguage() {
     return language;
   }
@@ -134,7 +155,6 @@ public class UpdateWorkspace   {
   **/
   @JsonProperty("intents")
   @ApiModelProperty(value = "An array of objects defining the intents for the workspace.")
-
   public List<CreateIntent> getIntents() {
     return intents;
   }
@@ -162,7 +182,6 @@ public class UpdateWorkspace   {
   **/
   @JsonProperty("entities")
   @ApiModelProperty(value = "An array of objects defining the entities for the workspace.")
-
   public List<CreateEntity> getEntities() {
     return entities;
   }
@@ -190,7 +209,6 @@ public class UpdateWorkspace   {
   **/
   @JsonProperty("dialog_nodes")
   @ApiModelProperty(value = "An array of objects defining the nodes in the workspace dialog.")
-
   public List<CreateDialogNode> getDialogNodes() {
     return dialogNodes;
   }
@@ -218,7 +236,6 @@ public class UpdateWorkspace   {
   **/
   @JsonProperty("counterexamples")
   @ApiModelProperty(value = "An array of objects defining input examples that have been marked as irrelevant input.")
-
   public List<CreateExample> getCounterexamples() {
     return counterexamples;
   }
@@ -238,7 +255,6 @@ public class UpdateWorkspace   {
   **/
   @JsonProperty("metadata")
   @ApiModelProperty(value = "Any metadata related to the workspace.")
-
   public Object getMetadata() {
     return metadata;
   }
@@ -301,3 +317,4 @@ public class UpdateWorkspace   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

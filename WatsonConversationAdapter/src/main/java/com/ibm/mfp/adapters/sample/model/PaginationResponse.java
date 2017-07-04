@@ -1,4 +1,16 @@
 /*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
+/*
  * Conversation
  * The IBM Watson&trade; Conversation service combines machine learning, natural language understanding, and integrated dialog tools to create conversation flows between your apps and your users.
  *
@@ -19,11 +31,23 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
 
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 /**
  * The pagination data for the returned objects.
  */
 @ApiModel(description = "The pagination data for the returned objects.")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T13:34:31.991+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
 public class PaginationResponse   {
   @JsonProperty("refresh_url")
   private String refreshUrl = null;
@@ -48,8 +72,7 @@ public class PaginationResponse   {
   **/
   @JsonProperty("refresh_url")
   @ApiModelProperty(required = true, value = "The URL that will return the same page of results.")
-  @NotNull 
-
+  @NotNull
   public String getRefreshUrl() {
     return refreshUrl;
   }
@@ -69,7 +92,6 @@ public class PaginationResponse   {
   **/
   @JsonProperty("next_url")
   @ApiModelProperty(value = "The URL that will return the next page of results.")
-
   public String getNextUrl() {
     return nextUrl;
   }
@@ -89,7 +111,6 @@ public class PaginationResponse   {
   **/
   @JsonProperty("total")
   @ApiModelProperty(value = "Reserved for future use.")
-
   public Integer getTotal() {
     return total;
   }
@@ -109,7 +130,6 @@ public class PaginationResponse   {
   **/
   @JsonProperty("matched")
   @ApiModelProperty(value = "Reserved for future use.")
-
   public Integer getMatched() {
     return matched;
   }
@@ -164,3 +184,4 @@ public class PaginationResponse   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

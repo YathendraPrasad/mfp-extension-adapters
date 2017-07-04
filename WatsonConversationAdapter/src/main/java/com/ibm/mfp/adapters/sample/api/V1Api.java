@@ -1,6 +1,18 @@
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 package com.ibm.mfp.adapters.sample.api;
 
-import com.ibm.mfp.adapters.sample.model.*;
+import com.ibm.mfp.adapters.sample.*;
 import com.ibm.mfp.adapters.sample.api.V1ApiService;
 
 import io.swagger.annotations.ApiParam;
@@ -52,6 +64,8 @@ import com.ibm.mfp.adapter.api.OAuthSecurity;
 import com.ibm.mfp.adapter.api.ConfigurationAPI;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
+
 import javax.ws.rs.core.SecurityContext;
 import javax.ws.rs.*;
 import javax.validation.constraints.*;
@@ -60,7 +74,7 @@ import javax.validation.constraints.*;
 
 
 @io.swagger.annotations.Api(description = "the v1 API")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T13:34:31.991+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-07-03T17:42:47.987+05:30")
 public class V1Api  {
 	@Context
         ConfigurationAPI configurationApi;
@@ -76,13 +90,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 201, message = "Successful request.", response = ExampleResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = ExampleResponse.class) })
-    public Response createCounterexample(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,
-@ApiParam(value = "A CreateExample object defining the content of the new user input example." ,required=true) CreateExample body
-,@Context SecurityContext securityContext)
+    public Response createCounterexample(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "A CreateExample object defining the content of the new user input example." ,required=true) CreateExample body,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.createCounterexample(workspaceId,version,body,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -97,11 +105,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.createCounterexample(workspaceId,version,body); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.createCounterexample(workspaceId,version,body);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#createCounterexample");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#createCounterexample");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -124,13 +139,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 201, message = "Successful request.", response = EntityResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = EntityResponse.class) })
-    public Response createEntity(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,
-@ApiParam(value = "A CreateEntity object defining the content of the new entity." ,required=true) CreateEntity body
-,@Context SecurityContext securityContext)
+    public Response createEntity(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "A CreateEntity object defining the content of the new entity." ,required=true) CreateEntity body,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.createEntity(workspaceId,version,body,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -145,11 +154,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.createEntity(workspaceId,version,body); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.createEntity(workspaceId,version,body);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#createEntity");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#createEntity");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -172,15 +188,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 201, message = "Successful request.", response = ExampleResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = ExampleResponse.class) })
-    public Response createExample(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The intent name (for example, `pizza_order`).",required=true) @PathParam("intent") String intent
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,
-@ApiParam(value = "A CreateExample object defining the content of the new user input example." ,required=true) CreateExample body
-,@Context SecurityContext securityContext)
+    public Response createExample(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The intent name (for example, `pizza_order`).",required=true) @PathParam("intent") String intent,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "A CreateExample object defining the content of the new user input example." ,required=true) CreateExample body,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.createExample(workspaceId,intent,version,body,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -195,11 +203,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.createExample(workspaceId,intent,version,body); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.createExample(workspaceId,intent,version,body);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#createExample");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#createExample");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -222,13 +237,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 201, message = "Successful request.", response = IntentResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = IntentResponse.class) })
-    public Response createIntent(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,
-@ApiParam(value = "A CreateIntent object defining the content of the new intent." ,required=true) CreateIntent body
-,@Context SecurityContext securityContext)
+    public Response createIntent(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "A CreateIntent object defining the content of the new intent." ,required=true) CreateIntent body,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.createIntent(workspaceId,version,body,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -243,11 +252,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.createIntent(workspaceId,version,body); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.createIntent(workspaceId,version,body);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#createIntent");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#createIntent");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -270,17 +286,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 201, message = "Successful request.", response = SynonymResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = SynonymResponse.class) })
-    public Response createSynonym(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity
-,
-@ApiParam(value = "The text of the entity value.",required=true) @PathParam("value") String value
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,
-@ApiParam(value = "A CreateSynonym object defining the new synonym for the entity value." ,required=true) CreateSynonym body
-,@Context SecurityContext securityContext)
+    public Response createSynonym(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity,@ApiParam(value = "The text of the entity value.",required=true) @PathParam("value") String value,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "A CreateSynonym object defining the new synonym for the entity value." ,required=true) CreateSynonym body,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.createSynonym(workspaceId,entity,value,version,body,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -295,11 +301,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.createSynonym(workspaceId,entity,value,version,body); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.createSynonym(workspaceId,entity,value,version,body);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#createSynonym");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#createSynonym");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -322,15 +335,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 201, message = "Successful request.", response = ValueResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = ValueResponse.class) })
-    public Response createValue(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,
-@ApiParam(value = "A CreateValue object defining the content of the new value for the entity." ,required=true) CreateValue body
-,@Context SecurityContext securityContext)
+    public Response createValue(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "A CreateValue object defining the content of the new value for the entity." ,required=true) CreateValue body,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.createValue(workspaceId,entity,version,body,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -345,11 +350,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.createValue(workspaceId,entity,version,body); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.createValue(workspaceId,entity,version,body);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#createValue");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#createValue");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -372,11 +384,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 201, message = "Successful request.", response = WorkspaceResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = WorkspaceResponse.class) })
-    public Response createWorkspace(@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,
-@ApiParam(value = "Valid JSON data defining the content of the new workspace." ) CreateWorkspace body
-,@Context SecurityContext securityContext)
+    public Response createWorkspace(@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "Valid JSON data defining the content of the new workspace." ) CreateWorkspace body,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.createWorkspace(version,body,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -391,11 +399,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.createWorkspace(version,body); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.createWorkspace(version,body);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#createWorkspace");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#createWorkspace");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -418,13 +433,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = EmptyObject.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = EmptyObject.class) })
-    public Response deleteCounterexample(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The text of a user input counterexample (for example, `What are you wearing?`).",required=true) @PathParam("text") String text
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,@Context SecurityContext securityContext)
+    public Response deleteCounterexample(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The text of a user input counterexample (for example, `What are you wearing?`).",required=true) @PathParam("text") String text,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.deleteCounterexample(workspaceId,text,version,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -439,11 +448,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.deleteCounterexample(workspaceId,text,version); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.deleteCounterexample(workspaceId,text,version);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#deleteCounterexample");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#deleteCounterexample");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -466,13 +482,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = EmptyObject.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = EmptyObject.class) })
-    public Response deleteEntity(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,@Context SecurityContext securityContext)
+    public Response deleteEntity(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.deleteEntity(workspaceId,entity,version,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -487,11 +497,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.deleteEntity(workspaceId,entity,version); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.deleteEntity(workspaceId,entity,version);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#deleteEntity");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#deleteEntity");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -514,15 +531,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = EmptyObject.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request", response = EmptyObject.class) })
-    public Response deleteExample(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The intent name (for example, `pizza_order`).",required=true) @PathParam("intent") String intent
-,
-@ApiParam(value = "The text of the user input example.",required=true) @PathParam("text") String text
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,@Context SecurityContext securityContext)
+    public Response deleteExample(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The intent name (for example, `pizza_order`).",required=true) @PathParam("intent") String intent,@ApiParam(value = "The text of the user input example.",required=true) @PathParam("text") String text,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.deleteExample(workspaceId,intent,text,version,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -537,11 +546,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.deleteExample(workspaceId,intent,text,version); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.deleteExample(workspaceId,intent,text,version);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#deleteExample");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#deleteExample");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -564,13 +580,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = EmptyObject.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = EmptyObject.class) })
-    public Response deleteIntent(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The intent name (for example, `pizza_order`).",required=true) @PathParam("intent") String intent
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,@Context SecurityContext securityContext)
+    public Response deleteIntent(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The intent name (for example, `pizza_order`).",required=true) @PathParam("intent") String intent,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.deleteIntent(workspaceId,intent,version,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -585,11 +595,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.deleteIntent(workspaceId,intent,version); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.deleteIntent(workspaceId,intent,version);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#deleteIntent");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#deleteIntent");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -612,17 +629,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = EmptyObject.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = EmptyObject.class) })
-    public Response deleteSynonym(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity
-,
-@ApiParam(value = "The text of the entity value.",required=true) @PathParam("value") String value
-,
-@ApiParam(value = "The text of the synonym.",required=true) @PathParam("synonym") String synonym
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,@Context SecurityContext securityContext)
+    public Response deleteSynonym(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity,@ApiParam(value = "The text of the entity value.",required=true) @PathParam("value") String value,@ApiParam(value = "The text of the synonym.",required=true) @PathParam("synonym") String synonym,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.deleteSynonym(workspaceId,entity,value,synonym,version,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -637,11 +644,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.deleteSynonym(workspaceId,entity,value,synonym,version); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.deleteSynonym(workspaceId,entity,value,synonym,version);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#deleteSynonym");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#deleteSynonym");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -664,15 +678,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = EmptyObject.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = EmptyObject.class) })
-    public Response deleteValue(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity
-,
-@ApiParam(value = "The text of the entity value.",required=true) @PathParam("value") String value
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,@Context SecurityContext securityContext)
+    public Response deleteValue(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity,@ApiParam(value = "The text of the entity value.",required=true) @PathParam("value") String value,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.deleteValue(workspaceId,entity,value,version,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -687,11 +693,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.deleteValue(workspaceId,entity,value,version); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.deleteValue(workspaceId,entity,value,version);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#deleteValue");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#deleteValue");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -714,11 +727,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = EmptyObject.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = EmptyObject.class) })
-    public Response deleteWorkspace(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,@Context SecurityContext securityContext)
+    public Response deleteWorkspace(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.deleteWorkspace(workspaceId,version,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -733,11 +742,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.deleteWorkspace(workspaceId,version); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.deleteWorkspace(workspaceId,version);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#deleteWorkspace");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#deleteWorkspace");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -760,13 +776,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = ExampleResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = ExampleResponse.class) })
-    public Response getCounterexample(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The text of a user input counterexample (for example, `What are you wearing?`).",required=true) @PathParam("text") String text
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,@Context SecurityContext securityContext)
+    public Response getCounterexample(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The text of a user input counterexample (for example, `What are you wearing?`).",required=true) @PathParam("text") String text,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.getCounterexample(workspaceId,text,version,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -781,11 +791,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.getCounterexample(workspaceId,text,version); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.getCounterexample(workspaceId,text,version);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#getCounterexample");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#getCounterexample");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -808,15 +825,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = EntityExportResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = EntityExportResponse.class) })
-    public Response getEntity(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,@ApiParam(value = "Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.", defaultValue="false") @DefaultValue("false") @QueryParam("export") Boolean export
-
-,@Context SecurityContext securityContext)
+    public Response getEntity(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.", defaultValue="false") @DefaultValue("false") @QueryParam("export") Boolean export,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.getEntity(workspaceId,entity,version,export,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -831,11 +840,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.getEntity(workspaceId,entity,version,export); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.getEntity(workspaceId,entity,version,export);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#getEntity");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#getEntity");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -858,15 +874,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = ExampleResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = ExampleResponse.class) })
-    public Response getExample(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The intent name (for example, `pizza_order`).",required=true) @PathParam("intent") String intent
-,
-@ApiParam(value = "The text of the user input example.",required=true) @PathParam("text") String text
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,@Context SecurityContext securityContext)
+    public Response getExample(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The intent name (for example, `pizza_order`).",required=true) @PathParam("intent") String intent,@ApiParam(value = "The text of the user input example.",required=true) @PathParam("text") String text,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.getExample(workspaceId,intent,text,version,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -881,11 +889,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.getExample(workspaceId,intent,text,version); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.getExample(workspaceId,intent,text,version);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#getExample");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#getExample");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -908,15 +923,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = IntentExportResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = IntentExportResponse.class) })
-    public Response getIntent(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The intent name (for example, `pizza_order`).",required=true) @PathParam("intent") String intent
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,@ApiParam(value = "Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.", defaultValue="false") @DefaultValue("false") @QueryParam("export") Boolean export
-
-,@Context SecurityContext securityContext)
+    public Response getIntent(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The intent name (for example, `pizza_order`).",required=true) @PathParam("intent") String intent,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.", defaultValue="false") @DefaultValue("false") @QueryParam("export") Boolean export,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.getIntent(workspaceId,intent,version,export,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -931,11 +938,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.getIntent(workspaceId,intent,version,export); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.getIntent(workspaceId,intent,version,export);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#getIntent");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#getIntent");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -958,17 +972,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = SynonymResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = SynonymResponse.class) })
-    public Response getSynonym(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity
-,
-@ApiParam(value = "The text of the entity value.",required=true) @PathParam("value") String value
-,
-@ApiParam(value = "The text of the synonym.",required=true) @PathParam("synonym") String synonym
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,@Context SecurityContext securityContext)
+    public Response getSynonym(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity,@ApiParam(value = "The text of the entity value.",required=true) @PathParam("value") String value,@ApiParam(value = "The text of the synonym.",required=true) @PathParam("synonym") String synonym,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.getSynonym(workspaceId,entity,value,synonym,version,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -983,11 +987,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.getSynonym(workspaceId,entity,value,synonym,version); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.getSynonym(workspaceId,entity,value,synonym,version);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#getSynonym");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#getSynonym");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -1010,17 +1021,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = ValueExportResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = ValueExportResponse.class) })
-    public Response getValue(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity
-,
-@ApiParam(value = "The text of the entity value.",required=true) @PathParam("value") String value
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,@ApiParam(value = "Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.", defaultValue="false") @DefaultValue("false") @QueryParam("export") Boolean export
-
-,@Context SecurityContext securityContext)
+    public Response getValue(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity,@ApiParam(value = "The text of the entity value.",required=true) @PathParam("value") String value,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.", defaultValue="false") @DefaultValue("false") @QueryParam("export") Boolean export,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.getValue(workspaceId,entity,value,version,export,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1035,11 +1036,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.getValue(workspaceId,entity,value,version,export); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.getValue(workspaceId,entity,value,version,export);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#getValue");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#getValue");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -1062,13 +1070,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = WorkspaceExportResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = WorkspaceExportResponse.class) })
-    public Response getWorkspace(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,@ApiParam(value = "Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.", defaultValue="false") @DefaultValue("false") @QueryParam("export") Boolean export
-
-,@Context SecurityContext securityContext)
+    public Response getWorkspace(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.", defaultValue="false") @DefaultValue("false") @QueryParam("export") Boolean export,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.getWorkspace(workspaceId,version,export,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1083,11 +1085,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.getWorkspace(workspaceId,version,export); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.getWorkspace(workspaceId,version,export);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#getWorkspace");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#getWorkspace");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -1110,19 +1119,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = CounterexampleCollectionResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = CounterexampleCollectionResponse.class) })
-    public Response listCounterexamples(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,@ApiParam(value = "The number of records to return in each page of results. The default page limit is 100.") @QueryParam("page_limit") Integer pageLimit
-
-,@ApiParam(value = "Whether to include information about the number of records returned.", defaultValue="false") @DefaultValue("false") @QueryParam("include_count") Boolean includeCount
-
-,@ApiParam(value = "Sorts the response according to the value of the specified property, in ascending or descending order.") @QueryParam("sort") String sort
-
-,@ApiParam(value = "A token identifying the last value from the previous page of results.") @QueryParam("cursor") String cursor
-
-,@Context SecurityContext securityContext)
+    public Response listCounterexamples(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "The number of records to return in each page of results. The default page limit is 100.") @QueryParam("page_limit") Integer pageLimit,@ApiParam(value = "Whether to include information about the number of records returned.", defaultValue="false") @DefaultValue("false") @QueryParam("include_count") Boolean includeCount,@ApiParam(value = "Sorts the response according to the value of the specified property, in ascending or descending order.") @QueryParam("sort") String sort,@ApiParam(value = "A token identifying the last value from the previous page of results.") @QueryParam("cursor") String cursor,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.listCounterexamples(workspaceId,version,pageLimit,includeCount,sort,cursor,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1137,11 +1134,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.listCounterexamples(workspaceId,version,pageLimit,includeCount,sort,cursor); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.listCounterexamples(workspaceId,version,pageLimit,includeCount,sort,cursor);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#listCounterexamples");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#listCounterexamples");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -1164,21 +1168,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = EntityCollectionResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = EntityCollectionResponse.class) })
-    public Response listEntities(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,@ApiParam(value = "Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.", defaultValue="false") @DefaultValue("false") @QueryParam("export") Boolean export
-
-,@ApiParam(value = "The number of records to return in each page of results. The default page limit is 100.") @QueryParam("page_limit") Integer pageLimit
-
-,@ApiParam(value = "Whether to include information about the number of records returned.", defaultValue="false") @DefaultValue("false") @QueryParam("include_count") Boolean includeCount
-
-,@ApiParam(value = "Sorts the response according to the value of the specified property, in ascending or descending order.") @QueryParam("sort") String sort
-
-,@ApiParam(value = "A token identifying the last value from the previous page of results.") @QueryParam("cursor") String cursor
-
-,@Context SecurityContext securityContext)
+    public Response listEntities(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.", defaultValue="false") @DefaultValue("false") @QueryParam("export") Boolean export,@ApiParam(value = "The number of records to return in each page of results. The default page limit is 100.") @QueryParam("page_limit") Integer pageLimit,@ApiParam(value = "Whether to include information about the number of records returned.", defaultValue="false") @DefaultValue("false") @QueryParam("include_count") Boolean includeCount,@ApiParam(value = "Sorts the response according to the value of the specified property, in ascending or descending order.") @QueryParam("sort") String sort,@ApiParam(value = "A token identifying the last value from the previous page of results.") @QueryParam("cursor") String cursor,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.listEntities(workspaceId,version,export,pageLimit,includeCount,sort,cursor,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1193,11 +1183,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.listEntities(workspaceId,version,export,pageLimit,includeCount,sort,cursor); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.listEntities(workspaceId,version,export,pageLimit,includeCount,sort,cursor);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#listEntities");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#listEntities");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -1220,21 +1217,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = ExampleCollectionResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = ExampleCollectionResponse.class) })
-    public Response listExamples(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The intent name (for example, `pizza_order`).",required=true) @PathParam("intent") String intent
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,@ApiParam(value = "The number of records to return in each page of results. The default page limit is 100.") @QueryParam("page_limit") Integer pageLimit
-
-,@ApiParam(value = "Whether to include information about the number of records returned.", defaultValue="false") @DefaultValue("false") @QueryParam("include_count") Boolean includeCount
-
-,@ApiParam(value = "Sorts the response according to the value of the specified property, in ascending or descending order.") @QueryParam("sort") String sort
-
-,@ApiParam(value = "A token identifying the last value from the previous page of results.") @QueryParam("cursor") String cursor
-
-,@Context SecurityContext securityContext)
+    public Response listExamples(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The intent name (for example, `pizza_order`).",required=true) @PathParam("intent") String intent,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "The number of records to return in each page of results. The default page limit is 100.") @QueryParam("page_limit") Integer pageLimit,@ApiParam(value = "Whether to include information about the number of records returned.", defaultValue="false") @DefaultValue("false") @QueryParam("include_count") Boolean includeCount,@ApiParam(value = "Sorts the response according to the value of the specified property, in ascending or descending order.") @QueryParam("sort") String sort,@ApiParam(value = "A token identifying the last value from the previous page of results.") @QueryParam("cursor") String cursor,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.listExamples(workspaceId,intent,version,pageLimit,includeCount,sort,cursor,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1249,11 +1232,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.listExamples(workspaceId,intent,version,pageLimit,includeCount,sort,cursor); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.listExamples(workspaceId,intent,version,pageLimit,includeCount,sort,cursor);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#listExamples");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#listExamples");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -1276,21 +1266,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = IntentCollectionResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = IntentCollectionResponse.class) })
-    public Response listIntents(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,@ApiParam(value = "Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.", defaultValue="false") @DefaultValue("false") @QueryParam("export") Boolean export
-
-,@ApiParam(value = "The number of records to return in each page of results. The default page limit is 100.") @QueryParam("page_limit") Integer pageLimit
-
-,@ApiParam(value = "Whether to include information about the number of records returned.", defaultValue="false") @DefaultValue("false") @QueryParam("include_count") Boolean includeCount
-
-,@ApiParam(value = "Sorts the response according to the value of the specified property, in ascending or descending order.") @QueryParam("sort") String sort
-
-,@ApiParam(value = "A token identifying the last value from the previous page of results.") @QueryParam("cursor") String cursor
-
-,@Context SecurityContext securityContext)
+    public Response listIntents(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.", defaultValue="false") @DefaultValue("false") @QueryParam("export") Boolean export,@ApiParam(value = "The number of records to return in each page of results. The default page limit is 100.") @QueryParam("page_limit") Integer pageLimit,@ApiParam(value = "Whether to include information about the number of records returned.", defaultValue="false") @DefaultValue("false") @QueryParam("include_count") Boolean includeCount,@ApiParam(value = "Sorts the response according to the value of the specified property, in ascending or descending order.") @QueryParam("sort") String sort,@ApiParam(value = "A token identifying the last value from the previous page of results.") @QueryParam("cursor") String cursor,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.listIntents(workspaceId,version,export,pageLimit,includeCount,sort,cursor,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1305,11 +1281,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.listIntents(workspaceId,version,export,pageLimit,includeCount,sort,cursor); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.listIntents(workspaceId,version,export,pageLimit,includeCount,sort,cursor);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#listIntents");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#listIntents");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -1332,23 +1315,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = SynonymCollectionResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = SynonymCollectionResponse.class) })
-    public Response listSynonyms(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity
-,
-@ApiParam(value = "The text of the entity value.",required=true) @PathParam("value") String value
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,@ApiParam(value = "The number of records to return in each page of results. The default page limit is 100.") @QueryParam("page_limit") Integer pageLimit
-
-,@ApiParam(value = "Whether to include information about the number of records returned.", defaultValue="false") @DefaultValue("false") @QueryParam("include_count") Boolean includeCount
-
-,@ApiParam(value = "Sorts the response according to the value of the specified property, in ascending or descending order.") @QueryParam("sort") String sort
-
-,@ApiParam(value = "A token identifying the last value from the previous page of results.") @QueryParam("cursor") String cursor
-
-,@Context SecurityContext securityContext)
+    public Response listSynonyms(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity,@ApiParam(value = "The text of the entity value.",required=true) @PathParam("value") String value,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "The number of records to return in each page of results. The default page limit is 100.") @QueryParam("page_limit") Integer pageLimit,@ApiParam(value = "Whether to include information about the number of records returned.", defaultValue="false") @DefaultValue("false") @QueryParam("include_count") Boolean includeCount,@ApiParam(value = "Sorts the response according to the value of the specified property, in ascending or descending order.") @QueryParam("sort") String sort,@ApiParam(value = "A token identifying the last value from the previous page of results.") @QueryParam("cursor") String cursor,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.listSynonyms(workspaceId,entity,value,version,pageLimit,includeCount,sort,cursor,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1363,11 +1330,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.listSynonyms(workspaceId,entity,value,version,pageLimit,includeCount,sort,cursor); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.listSynonyms(workspaceId,entity,value,version,pageLimit,includeCount,sort,cursor);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#listSynonyms");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#listSynonyms");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -1390,23 +1364,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = ValueCollectionResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = ValueCollectionResponse.class) })
-    public Response listValues(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,@ApiParam(value = "Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.", defaultValue="false") @DefaultValue("false") @QueryParam("export") Boolean export
-
-,@ApiParam(value = "The number of records to return in each page of results. The default page limit is 100.") @QueryParam("page_limit") Integer pageLimit
-
-,@ApiParam(value = "Whether to include information about the number of records returned.", defaultValue="false") @DefaultValue("false") @QueryParam("include_count") Boolean includeCount
-
-,@ApiParam(value = "Sorts the response according to the value of the specified property, in ascending or descending order.") @QueryParam("sort") String sort
-
-,@ApiParam(value = "A token identifying the last value from the previous page of results.") @QueryParam("cursor") String cursor
-
-,@Context SecurityContext securityContext)
+    public Response listValues(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "Whether to include all element content in the returned data. If export=`false`, the returned data includes only information about the element itself. If export=`true`, all content, including subelements, is included. The default value is `false`.", defaultValue="false") @DefaultValue("false") @QueryParam("export") Boolean export,@ApiParam(value = "The number of records to return in each page of results. The default page limit is 100.") @QueryParam("page_limit") Integer pageLimit,@ApiParam(value = "Whether to include information about the number of records returned.", defaultValue="false") @DefaultValue("false") @QueryParam("include_count") Boolean includeCount,@ApiParam(value = "Sorts the response according to the value of the specified property, in ascending or descending order.") @QueryParam("sort") String sort,@ApiParam(value = "A token identifying the last value from the previous page of results.") @QueryParam("cursor") String cursor,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.listValues(workspaceId,entity,version,export,pageLimit,includeCount,sort,cursor,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1421,11 +1379,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.listValues(workspaceId,entity,version,export,pageLimit,includeCount,sort,cursor); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.listValues(workspaceId,entity,version,export,pageLimit,includeCount,sort,cursor);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#listValues");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#listValues");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -1448,17 +1413,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = WorkspaceCollectionResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = WorkspaceCollectionResponse.class) })
-    public Response listWorkspaces(@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,@ApiParam(value = "The number of records to return in each page of results. The default page limit is 100.") @QueryParam("page_limit") Integer pageLimit
-
-,@ApiParam(value = "Whether to include information about the number of records returned.", defaultValue="false") @DefaultValue("false") @QueryParam("include_count") Boolean includeCount
-
-,@ApiParam(value = "Sorts the response according to the value of the specified property, in ascending or descending order.") @QueryParam("sort") String sort
-
-,@ApiParam(value = "A token identifying the last value from the previous page of results.") @QueryParam("cursor") String cursor
-
-,@Context SecurityContext securityContext)
+    public Response listWorkspaces(@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "The number of records to return in each page of results. The default page limit is 100.") @QueryParam("page_limit") Integer pageLimit,@ApiParam(value = "Whether to include information about the number of records returned.", defaultValue="false") @DefaultValue("false") @QueryParam("include_count") Boolean includeCount,@ApiParam(value = "Sorts the response according to the value of the specified property, in ascending or descending order.") @QueryParam("sort") String sort,@ApiParam(value = "A token identifying the last value from the previous page of results.") @QueryParam("cursor") String cursor,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.listWorkspaces(version,pageLimit,includeCount,sort,cursor,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1473,11 +1428,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.listWorkspaces(version,pageLimit,includeCount,sort,cursor); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.listWorkspaces(version,pageLimit,includeCount,sort,cursor);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#listWorkspaces");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#listWorkspaces");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -1500,13 +1462,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = MessageResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = MessageResponse.class) })
-    public Response message(
-@ApiParam(value = "Unique identifier of the workspace.",required=true) @PathParam("workspace_id") String workspaceId
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,
-@ApiParam(value = "The user's input, with optional intents, entities, and other properties from the response." ) MessageRequest body
-,@Context SecurityContext securityContext)
+    public Response message(@ApiParam(value = "Unique identifier of the workspace.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "The user's input, with optional intents, entities, and other properties from the response." ) MessageRequest body,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.message(workspaceId,version,body,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1521,11 +1477,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.message(workspaceId,version,body); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.message(workspaceId,version,body);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#message");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#message");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -1548,15 +1511,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = ExampleResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = ExampleResponse.class) })
-    public Response updateCounterexample(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The text of a user input counterexample (for example, `What are you wearing?`).",required=true) @PathParam("text") String text
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,
-@ApiParam(value = "An UpdateExample object defining the new text for the counterexample." ,required=true) UpdateExample body
-,@Context SecurityContext securityContext)
+    public Response updateCounterexample(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The text of a user input counterexample (for example, `What are you wearing?`).",required=true) @PathParam("text") String text,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "An UpdateExample object defining the new text for the counterexample." ,required=true) UpdateExample body,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.updateCounterexample(workspaceId,text,version,body,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1571,11 +1526,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.updateCounterexample(workspaceId,text,version,body); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.updateCounterexample(workspaceId,text,version,body);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#updateCounterexample");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#updateCounterexample");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -1598,15 +1560,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = EntityResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = EntityResponse.class) })
-    public Response updateEntity(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,
-@ApiParam(value = "An UpdateEntity object defining the updated content of the entity." ,required=true) UpdateEntity body
-,@Context SecurityContext securityContext)
+    public Response updateEntity(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "An UpdateEntity object defining the updated content of the entity." ,required=true) UpdateEntity body,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.updateEntity(workspaceId,entity,version,body,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1621,11 +1575,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.updateEntity(workspaceId,entity,version,body); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.updateEntity(workspaceId,entity,version,body);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#updateEntity");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#updateEntity");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -1648,17 +1609,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = ExampleResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = ExampleResponse.class) })
-    public Response updateExample(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The intent name (for example, `pizza_order`).",required=true) @PathParam("intent") String intent
-,
-@ApiParam(value = "The text of the user input example.",required=true) @PathParam("text") String text
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,
-@ApiParam(value = "An UpdateExample object defining the new text for the user input example." ,required=true) UpdateExample body
-,@Context SecurityContext securityContext)
+    public Response updateExample(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The intent name (for example, `pizza_order`).",required=true) @PathParam("intent") String intent,@ApiParam(value = "The text of the user input example.",required=true) @PathParam("text") String text,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "An UpdateExample object defining the new text for the user input example." ,required=true) UpdateExample body,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.updateExample(workspaceId,intent,text,version,body,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1673,11 +1624,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.updateExample(workspaceId,intent,text,version,body); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.updateExample(workspaceId,intent,text,version,body);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#updateExample");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#updateExample");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -1700,15 +1658,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = IntentResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = IntentResponse.class) })
-    public Response updateIntent(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The intent name (for example, `pizza_order`).",required=true) @PathParam("intent") String intent
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,
-@ApiParam(value = "An UpdateIntent object defining the updated content of the intent." ,required=true) UpdateIntent body
-,@Context SecurityContext securityContext)
+    public Response updateIntent(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The intent name (for example, `pizza_order`).",required=true) @PathParam("intent") String intent,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "An UpdateIntent object defining the updated content of the intent." ,required=true) UpdateIntent body,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.updateIntent(workspaceId,intent,version,body,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1723,11 +1673,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.updateIntent(workspaceId,intent,version,body); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.updateIntent(workspaceId,intent,version,body);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#updateIntent");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#updateIntent");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -1750,19 +1707,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = SynonymResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = SynonymResponse.class) })
-    public Response updateSynonym(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity
-,
-@ApiParam(value = "The text of the entity value.",required=true) @PathParam("value") String value
-,
-@ApiParam(value = "The text of the synonym.",required=true) @PathParam("synonym") String synonym
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,
-@ApiParam(value = "An UpdateSynonym object defining the new information for an entity value synonym." ,required=true) UpdateSynonym body
-,@Context SecurityContext securityContext)
+    public Response updateSynonym(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity,@ApiParam(value = "The text of the entity value.",required=true) @PathParam("value") String value,@ApiParam(value = "The text of the synonym.",required=true) @PathParam("synonym") String synonym,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "An UpdateSynonym object defining the new information for an entity value synonym." ,required=true) UpdateSynonym body,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.updateSynonym(workspaceId,entity,value,synonym,version,body,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1777,11 +1722,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.updateSynonym(workspaceId,entity,value,synonym,version,body); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.updateSynonym(workspaceId,entity,value,synonym,version,body);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#updateSynonym");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#updateSynonym");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -1804,17 +1756,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = ValueResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = ValueResponse.class) })
-    public Response updateValue(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,
-@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity
-,
-@ApiParam(value = "The text of the entity value.",required=true) @PathParam("value") String value
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,
-@ApiParam(value = "An UpdateValue object defining the new content for value for the entity." ,required=true) UpdateValue body
-,@Context SecurityContext securityContext)
+    public Response updateValue(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "The name of the entity.",required=true) @PathParam("entity") String entity,@ApiParam(value = "The text of the entity value.",required=true) @PathParam("value") String value,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "An UpdateValue object defining the new content for value for the entity." ,required=true) UpdateValue body,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.updateValue(workspaceId,entity,value,version,body,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1829,11 +1771,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.updateValue(workspaceId,entity,value,version,body); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.updateValue(workspaceId,entity,value,version,body);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#updateValue");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#updateValue");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -1856,13 +1805,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful request.", response = WorkspaceResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = WorkspaceResponse.class) })
-    public Response updateWorkspace(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,
-@ApiParam(value = "Valid JSON data defining the new workspace content. Any elements included in the new JSON will completely replace the existing elements, including all subelements. Previously existing subelements are not retained unless they are included in the new JSON." ) UpdateWorkspace body
-,@Context SecurityContext securityContext)
+    public Response updateWorkspace(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "Valid JSON data defining the new workspace content. Any elements included in the new JSON will completely replace the existing elements, including all subelements. Previously existing subelements are not retained unless they are included in the new JSON." ) UpdateWorkspace body,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.updateWorkspace(workspaceId,version,body,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1877,11 +1820,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.updateWorkspace(workspaceId,version,body); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.updateWorkspace(workspaceId,version,body);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#updateWorkspace");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#updateWorkspace");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);
@@ -1906,19 +1856,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 400, message = "Invalid request.", response = LogCollectionResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 500, message = "Internal server error.", response = LogCollectionResponse.class) })
-    public Response v1WorkspacesWorkspaceIdLogsGet(
-@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId
-,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version
-
-,@ApiParam(value = "Sorts the response according to the value of the specified property, in ascending or descending order.") @QueryParam("sort") String sort
-
-,@ApiParam(value = "A cacheable parameter that limits the results to those matching the specified filter.") @QueryParam("filter") String filter
-
-,@ApiParam(value = "The number of records to return in each page of results. The default page limit is 100.") @QueryParam("page_limit") Integer pageLimit
-
-,@ApiParam(value = "A token identifying the last value from the previous page of results.") @QueryParam("cursor") String cursor
-
-,@Context SecurityContext securityContext)
+    public Response v1WorkspacesWorkspaceIdLogsGet(@ApiParam(value = "The workspace ID.",required=true) @PathParam("workspace_id") String workspaceId,@ApiParam(value = "Release date of the API version in YYYY-MM-DD format.",required=true, defaultValue="2017-04-21") @DefaultValue("2017-04-21") @QueryParam("version") String version,@ApiParam(value = "Sorts the response according to the value of the specified property, in ascending or descending order.") @QueryParam("sort") String sort,@ApiParam(value = "A cacheable parameter that limits the results to those matching the specified filter.") @QueryParam("filter") String filter,@ApiParam(value = "The number of records to return in each page of results. The default page limit is 100.") @QueryParam("page_limit") Integer pageLimit,@ApiParam(value = "A token identifying the last value from the previous page of results.") @QueryParam("cursor") String cursor,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.v1WorkspacesWorkspaceIdLogsGet(workspaceId,version,sort,filter,pageLimit,cursor,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1933,11 +1871,18 @@ public class V1Api  {
         apiAuthInstance.setPassword(configurationApi.getPropertyValue("password"));
           try {
             System.out.println("Calling Node server.");
-          result = apiInstance.v1WorkspacesWorkspaceIdLogsGet(workspaceId,version,sort,filter,pageLimit,cursor); 
-	   System.out.println(result);
-           } catch (java.lang.Exception e) {
+            result = 	apiInstance.v1WorkspacesWorkspaceIdLogsGet(workspaceId,version,sort,filter,pageLimit,cursor);
+           System.out.println(result);
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
             System.err.println("Exception when calling V1Api#v1WorkspacesWorkspaceIdLogsGet");
             e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
+            System.err.println("Exception when calling V1Api#v1WorkspacesWorkspaceIdLogsGet");
+            e.printStackTrace();
+            return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
         }
         
         System.out.println("Return from Node server: "+ result);

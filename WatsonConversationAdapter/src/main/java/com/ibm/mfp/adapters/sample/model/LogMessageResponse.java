@@ -1,4 +1,16 @@
 /*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
+/*
  * Conversation
  * The IBM Watson&trade; Conversation service combines machine learning, natural language understanding, and integrated dialog tools to create conversation flows between your apps and your users.
  *
@@ -20,12 +32,36 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
 
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 /**
  * Log message details.
  */
 @ApiModel(description = "Log message details.")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T13:34:31.991+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
 public class LogMessageResponse   {
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 /**
    * The severity of the message.
    */
@@ -58,6 +94,7 @@ public class LogMessageResponse   {
       return null;
     }
   }
+
   @JsonProperty("level")
   private LevelEnum level = null;
 
@@ -75,7 +112,6 @@ public class LogMessageResponse   {
   **/
   @JsonProperty("level")
   @ApiModelProperty(value = "The severity of the message.")
-
   public LevelEnum getLevel() {
     return level;
   }
@@ -95,7 +131,6 @@ public class LogMessageResponse   {
   **/
   @JsonProperty("msg")
   @ApiModelProperty(value = "The text of the message.")
-
   public String getMsg() {
     return msg;
   }
@@ -146,3 +181,4 @@ public class LogMessageResponse   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

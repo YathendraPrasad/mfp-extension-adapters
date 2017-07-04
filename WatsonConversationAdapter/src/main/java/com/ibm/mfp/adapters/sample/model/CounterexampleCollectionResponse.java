@@ -1,4 +1,16 @@
 /*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
+/*
  * Conversation
  * The IBM Watson&trade; Conversation service combines machine learning, natural language understanding, and integrated dialog tools to create conversation flows between your apps and your users.
  *
@@ -23,10 +35,22 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.*;
 
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 /**
  * CounterexampleCollectionResponse
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T13:34:31.991+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
 public class CounterexampleCollectionResponse   {
   @JsonProperty("counterexamples")
   private List<ExampleResponse> counterexamples = new ArrayList<ExampleResponse>();
@@ -50,8 +74,7 @@ public class CounterexampleCollectionResponse   {
   **/
   @JsonProperty("counterexamples")
   @ApiModelProperty(required = true, value = "An array of ExampleResponse objects describing the examples marked as irrelevant input.")
-  @NotNull 
-
+  @NotNull
   public List<ExampleResponse> getCounterexamples() {
     return counterexamples;
   }
@@ -71,8 +94,7 @@ public class CounterexampleCollectionResponse   {
   **/
   @JsonProperty("pagination")
   @ApiModelProperty(required = true, value = "")
-  @NotNull 
-
+  @NotNull
   public PaginationResponse getPagination() {
     return pagination;
   }
@@ -123,3 +145,4 @@ public class CounterexampleCollectionResponse   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

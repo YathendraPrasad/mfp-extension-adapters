@@ -1,4 +1,16 @@
 /*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
+/*
  * Conversation
  * The IBM Watson&trade; Conversation service combines machine learning, natural language understanding, and integrated dialog tools to create conversation flows between your apps and your users.
  *
@@ -25,10 +37,22 @@ import java.util.List;
 import org.joda.time.DateTime;
 import javax.validation.constraints.*;
 
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 /**
  * EntityExportResponse
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T13:34:31.991+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:01:40.287+05:30")
 public class EntityExportResponse   {
   @JsonProperty("entity")
   private String entity = null;
@@ -62,8 +86,7 @@ public class EntityExportResponse   {
   **/
   @JsonProperty("entity")
   @ApiModelProperty(required = true, value = "The name of the entity.")
-  @NotNull 
-
+  @NotNull
   public String getEntity() {
     return entity;
   }
@@ -83,8 +106,7 @@ public class EntityExportResponse   {
   **/
   @JsonProperty("created")
   @ApiModelProperty(required = true, value = "The timestamp for creation of the entity.")
-  @NotNull 
-
+  @NotNull
   public DateTime getCreated() {
     return created;
   }
@@ -104,8 +126,7 @@ public class EntityExportResponse   {
   **/
   @JsonProperty("updated")
   @ApiModelProperty(required = true, value = "The timestamp for the last update to the entity.")
-  @NotNull 
-
+  @NotNull
   public DateTime getUpdated() {
     return updated;
   }
@@ -125,7 +146,6 @@ public class EntityExportResponse   {
   **/
   @JsonProperty("description")
   @ApiModelProperty(value = "The description of the entity.")
-
   public String getDescription() {
     return description;
   }
@@ -145,7 +165,6 @@ public class EntityExportResponse   {
   **/
   @JsonProperty("metadata")
   @ApiModelProperty(value = "Any metadata related to the entity.")
-
   public Object getMetadata() {
     return metadata;
   }
@@ -165,7 +184,6 @@ public class EntityExportResponse   {
   **/
   @JsonProperty("fuzzy_match")
   @ApiModelProperty(value = "Whether fuzzy matching is used for the entity.")
-
   public Boolean getFuzzyMatch() {
     return fuzzyMatch;
   }
@@ -193,7 +211,6 @@ public class EntityExportResponse   {
   **/
   @JsonProperty("values")
   @ApiModelProperty(value = "An array of entity values.")
-
   public List<ValueExportResponse> getValues() {
     return values;
   }
@@ -254,3 +271,4 @@ public class EntityExportResponse   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+
