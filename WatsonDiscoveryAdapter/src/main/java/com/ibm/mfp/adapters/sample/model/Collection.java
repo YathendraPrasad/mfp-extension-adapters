@@ -1,4 +1,16 @@
 /*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
+/*
  * Discovery
  * The IBM Watson&trade; Discovery Service is a cognitive search and content analytics engine that you can add to applications to identify patterns, trends and actionable insights to drive better decision-making. Securely unify structured and unstructured data with pre-enriched content, and use a simplified query language to eliminate the need for manual filtering of results. 
  *
@@ -21,11 +33,23 @@ import io.swagger.annotations.ApiModelProperty;
 import org.joda.time.DateTime;
 import javax.validation.constraints.*;
 
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 /**
  * A collection for storing documents
  */
 @ApiModel(description = "A collection for storing documents")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T15:47:02.385+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:39:34.122+05:30")
 public class Collection   {
   @JsonProperty("collection_id")
   private String collectionId = null;
@@ -60,7 +84,6 @@ public class Collection   {
   **/
   @JsonProperty("collection_id")
   @ApiModelProperty(value = "The unique identifier of the collection")
-
   public String getCollectionId() {
     return collectionId;
   }
@@ -76,8 +99,7 @@ public class Collection   {
   **/
   @JsonProperty("name")
   @ApiModelProperty(value = "The name of the collection")
- @Size(min=0,max=255)
-  public String getName() {
+ @Size(min=0,max=255)  public String getName() {
     return name;
   }
 
@@ -96,7 +118,6 @@ public class Collection   {
   **/
   @JsonProperty("description")
   @ApiModelProperty(value = "The description of the collection")
-
   public String getDescription() {
     return description;
   }
@@ -111,7 +132,6 @@ public class Collection   {
   **/
   @JsonProperty("created")
   @ApiModelProperty(value = "The creation date of the collection in the format yyyy-MM-dd'T'HH:mmcon:ss.SSS'Z'")
-
   public DateTime getCreated() {
     return created;
   }
@@ -122,7 +142,6 @@ public class Collection   {
   **/
   @JsonProperty("updated")
   @ApiModelProperty(value = "The timestamp of when the collection was last updated in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-
   public DateTime getUpdated() {
     return updated;
   }
@@ -133,7 +152,6 @@ public class Collection   {
   **/
   @JsonProperty("status")
   @ApiModelProperty(value = "The status of the collection")
-
   public String getStatus() {
     return status;
   }
@@ -149,7 +167,6 @@ public class Collection   {
   **/
   @JsonProperty("configuration_id")
   @ApiModelProperty(value = "The unique identifier of the collection's configuration")
-
   public String getConfigurationId() {
     return configurationId;
   }
@@ -169,7 +186,6 @@ public class Collection   {
   **/
   @JsonProperty("language")
   @ApiModelProperty(value = "The language of the documents stored in the collection. The only currently accepted value is en_us (U.S. English)")
-
   public String getLanguage() {
     return language;
   }
@@ -189,7 +205,6 @@ public class Collection   {
   **/
   @JsonProperty("document_counts")
   @ApiModelProperty(value = "The object providing information about the documents in the collection. Present only when retrieving details of a colleciton")
-
   public DocumentCounts getDocumentCounts() {
     return documentCounts;
   }
@@ -254,3 +269,4 @@ public class Collection   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

@@ -1,4 +1,16 @@
 /*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
+/*
  * Discovery
  * The IBM Watson&trade; Discovery Service is a cognitive search and content analytics engine that you can add to applications to identify patterns, trends and actionable insights to drive better decision-making. Securely unify structured and unstructured data with pre-enriched content, and use a simplified query language to eliminate the need for manual filtering of results. 
  *
@@ -20,10 +32,22 @@ import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import javax.validation.constraints.*;
 
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 /**
  * FontSetting
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T15:47:02.385+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:39:34.122+05:30")
 public class FontSetting   {
   @JsonProperty("level")
   private BigDecimal level = null;
@@ -54,7 +78,6 @@ public class FontSetting   {
   **/
   @JsonProperty("level")
   @ApiModelProperty(value = "")
-
   public BigDecimal getLevel() {
     return level;
   }
@@ -74,7 +97,6 @@ public class FontSetting   {
   **/
   @JsonProperty("min_size")
   @ApiModelProperty(value = "")
-
   public BigDecimal getMinSize() {
     return minSize;
   }
@@ -94,7 +116,6 @@ public class FontSetting   {
   **/
   @JsonProperty("max_size")
   @ApiModelProperty(value = "")
-
   public BigDecimal getMaxSize() {
     return maxSize;
   }
@@ -114,7 +135,6 @@ public class FontSetting   {
   **/
   @JsonProperty("bold")
   @ApiModelProperty(value = "")
-
   public Boolean getBold() {
     return bold;
   }
@@ -134,7 +154,6 @@ public class FontSetting   {
   **/
   @JsonProperty("italic")
   @ApiModelProperty(value = "")
-
   public Boolean getItalic() {
     return italic;
   }
@@ -154,7 +173,6 @@ public class FontSetting   {
   **/
   @JsonProperty("name")
   @ApiModelProperty(value = "")
-
   public String getName() {
     return name;
   }
@@ -213,3 +231,4 @@ public class FontSetting   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

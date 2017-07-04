@@ -1,4 +1,16 @@
 /*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
+/*
  * Discovery
  * The IBM Watson&trade; Discovery Service is a cognitive search and content analytics engine that you can add to applications to identify patterns, trends and actionable insights to drive better decision-making. Securely unify structured and unstructured data with pre-enriched content, and use a simplified query language to eliminate the need for manual filtering of results. 
  *
@@ -21,10 +33,22 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.validation.constraints.*;
 
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 /**
  * QueryResult
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T15:47:02.385+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:39:34.122+05:30")
 public class QueryResult extends HashMap<String, Object>  {
   @JsonProperty("id")
   private String id = null;
@@ -46,7 +70,6 @@ public class QueryResult extends HashMap<String, Object>  {
   **/
   @JsonProperty("id")
   @ApiModelProperty(value = "The unique identifier of the document.")
-
   public String getId() {
     return id;
   }
@@ -66,7 +89,6 @@ public class QueryResult extends HashMap<String, Object>  {
   **/
   @JsonProperty("score")
   @ApiModelProperty(value = "The confidence score of the result's analysis. Scores range from 0 to 1, with a higher score indicating greater confidence.")
-
   public Double getScore() {
     return score;
   }
@@ -86,7 +108,6 @@ public class QueryResult extends HashMap<String, Object>  {
   **/
   @JsonProperty("metadata")
   @ApiModelProperty(value = "Metadata of the document.")
-
   public Object getMetadata() {
     return metadata;
   }
@@ -140,3 +161,4 @@ public class QueryResult extends HashMap<String, Object>  {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

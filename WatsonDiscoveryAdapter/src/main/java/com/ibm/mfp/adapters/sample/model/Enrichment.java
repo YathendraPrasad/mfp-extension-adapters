@@ -1,4 +1,16 @@
 /*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
+/*
  * Discovery
  * The IBM Watson&trade; Discovery Service is a cognitive search and content analytics engine that you can add to applications to identify patterns, trends and actionable insights to drive better decision-making. Securely unify structured and unstructured data with pre-enriched content, and use a simplified query language to eliminate the need for manual filtering of results. 
  *
@@ -20,10 +32,22 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
 
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 /**
  * Enrichment
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T15:47:02.385+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:39:34.122+05:30")
 public class Enrichment   {
   @JsonProperty("description")
   private String description = "";
@@ -57,7 +81,6 @@ public class Enrichment   {
   **/
   @JsonProperty("description")
   @ApiModelProperty(value = "Describes what the enrichment step does")
-
   public String getDescription() {
     return description;
   }
@@ -77,8 +100,7 @@ public class Enrichment   {
   **/
   @JsonProperty("destination_field")
   @ApiModelProperty(required = true, value = "Field where enrichments will be stored. This field must already exist or be at most 1 level deeper than an existing field. For example, if `text` is a top-level field with no sub-fields, `text.foo` is a valid destination but `text.foo.bar` is not.")
-  @NotNull 
-
+  @NotNull
   public String getDestinationField() {
     return destinationField;
   }
@@ -98,8 +120,7 @@ public class Enrichment   {
   **/
   @JsonProperty("source_field")
   @ApiModelProperty(required = true, value = "Field to be enriched.")
-  @NotNull 
-
+  @NotNull
   public String getSourceField() {
     return sourceField;
   }
@@ -119,7 +140,6 @@ public class Enrichment   {
   **/
   @JsonProperty("overwrite")
   @ApiModelProperty(value = "Indicates that the enrichments will overwrite the destination_field field if it already exists.")
-
   public Boolean getOverwrite() {
     return overwrite;
   }
@@ -139,8 +159,7 @@ public class Enrichment   {
   **/
   @JsonProperty("enrichment")
   @ApiModelProperty(required = true, value = "Name of the enrichment service to call. Currently the only valid value is `alchemy_language`.")
-  @NotNull 
-
+  @NotNull
   public String getEnrichment() {
     return enrichment;
   }
@@ -160,7 +179,6 @@ public class Enrichment   {
   **/
   @JsonProperty("ignore_downstream_errors")
   @ApiModelProperty(value = "If true, then most errors generated during the enrichment process will be treated as warnings and wil not cause the document to fail processing.")
-
   public Boolean getIgnoreDownstreamErrors() {
     return ignoreDownstreamErrors;
   }
@@ -180,7 +198,6 @@ public class Enrichment   {
   **/
   @JsonProperty("options")
   @ApiModelProperty(value = "A list of options specific to the enrichment")
-
   public EnrichmentOptions getOptions() {
     return options;
   }
@@ -241,3 +258,4 @@ public class Enrichment   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

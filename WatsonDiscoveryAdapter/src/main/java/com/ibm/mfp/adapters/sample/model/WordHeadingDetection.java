@@ -1,4 +1,16 @@
 /*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
+/*
  * Discovery
  * The IBM Watson&trade; Discovery Service is a cognitive search and content analytics engine that you can add to applications to identify patterns, trends and actionable insights to drive better decision-making. Securely unify structured and unstructured data with pre-enriched content, and use a simplified query language to eliminate the need for manual filtering of results. 
  *
@@ -21,10 +33,22 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
 
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 /**
  * WordHeadingDetection
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T15:47:02.385+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:39:34.122+05:30")
 public class WordHeadingDetection   {
   @JsonProperty("fonts")
   private FontSettings fonts = null;
@@ -43,7 +67,6 @@ public class WordHeadingDetection   {
   **/
   @JsonProperty("fonts")
   @ApiModelProperty(value = "")
-
   public FontSettings getFonts() {
     return fonts;
   }
@@ -63,7 +86,6 @@ public class WordHeadingDetection   {
   **/
   @JsonProperty("styles")
   @ApiModelProperty(value = "")
-
   public WordStyles getStyles() {
     return styles;
   }
@@ -114,3 +136,4 @@ public class WordHeadingDetection   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

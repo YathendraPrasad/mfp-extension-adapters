@@ -1,4 +1,16 @@
 /*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
+/*
  * Discovery
  * The IBM Watson&trade; Discovery Service is a cognitive search and content analytics engine that you can add to applications to identify patterns, trends and actionable insights to drive better decision-making. Securely unify structured and unstructured data with pre-enriched content, and use a simplified query language to eliminate the need for manual filtering of results. 
  *
@@ -23,11 +35,23 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import javax.validation.constraints.*;
 
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 /**
  * Document conversion settings
  */
 @ApiModel(description = "Document conversion settings")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T15:47:02.385+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:39:34.122+05:30")
 public class Conversions   {
   @JsonProperty("pdf")
   private PdfSettings pdf = null;
@@ -52,7 +76,6 @@ public class Conversions   {
   **/
   @JsonProperty("pdf")
   @ApiModelProperty(value = "A list of PDF conversion settings")
-
   public PdfSettings getPdf() {
     return pdf;
   }
@@ -72,7 +95,6 @@ public class Conversions   {
   **/
   @JsonProperty("word")
   @ApiModelProperty(value = "A list of Word conversion settings")
-
   public WordSettings getWord() {
     return word;
   }
@@ -92,7 +114,6 @@ public class Conversions   {
   **/
   @JsonProperty("html")
   @ApiModelProperty(value = "A list of HTML conversion settings")
-
   public HtmlSettings getHtml() {
     return html;
   }
@@ -112,7 +133,6 @@ public class Conversions   {
   **/
   @JsonProperty("json_normalizations")
   @ApiModelProperty(value = "An array of JSON normalization operations")
-
   public Normalizations getJsonNormalizations() {
     return jsonNormalizations;
   }
@@ -167,3 +187,4 @@ public class Conversions   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

@@ -1,6 +1,18 @@
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 package com.ibm.mfp.adapters.sample.api;
 
-import com.ibm.mfp.adapters.sample.model.*;
+import com.ibm.mfp.adapters.sample.*;
 import com.ibm.mfp.adapters.sample.api.V1ApiService;
 
 import io.swagger.annotations.ApiParam;
@@ -50,7 +62,7 @@ import javax.validation.constraints.*;
 
 
 @io.swagger.annotations.Api(description = "the v1 API")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T15:47:02.385+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-07-03T18:12:38.528+05:30")
 public class V1Api  {
 	@Context
         ConfigurationAPI configurationApi;
@@ -68,23 +80,9 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 400, message = "Bad request if:   * The request is incorrectly formatted   * The `configuration_id` parameter refers to a non-existent configuration.   * The default `configuration_id` of the collection refers to a non-existent configuration and no override has been provided. The error message contains details about what caused the request to be rejected.", response = DocumentAccepted.class),
         
         @io.swagger.annotations.ApiResponse(code = 403, message = "Forbidden. Returned if you attempt to add a document to a collection in a read-only environment.", response = DocumentAccepted.class) })
-    public Response addDocument(
-@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId
-,
-@ApiParam(value = "the ID of your collection",required=true) @PathParam("collection_id") String collectionId
-,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,@ApiParam(value = "The ID of the configuration to use to process the document. If the `configuration` form part is also provided (both are present at the same time), then request will be rejected.") @QueryParam("configuration_id") String configurationId
-
-,
-
+    public Response addDocument(@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId,@ApiParam(value = "the ID of your collection",required=true) @PathParam("collection_id") String collectionId,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@ApiParam(value = "The ID of the configuration to use to process the document. If the `configuration` form part is also provided (both are present at the same time), then request will be rejected.") @QueryParam("configuration_id") String configurationId,
             @FormDataParam("file") File file
-            
-,
-@ApiParam(value = "If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected. Example:  ``` {   \"Creator\": \"Johnny Appleseed\",   \"Subject\": \"Apples\" } ```")@FormDataParam("metadata")  String metadata
-,
-@ApiParam(value = "The configuration to use to process the document. If this part is provided, then the provided configuration is used to process the document. If the `configuration_id` is also provided (both are present at the same time), then request is rejected. The maximum supported configuration size is 1 MB. Configuration parts larger than 1 MB are rejected. See the `GET /configurations/{configuration_id}` operation for an example configuration.")@FormDataParam("configuration")  String _configuration
-,@Context SecurityContext securityContext)
+            ,@ApiParam(value = "If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected. Example:  ``` {   \"Creator\": \"Johnny Appleseed\",   \"Subject\": \"Apples\" } ```")@FormDataParam("metadata")  String metadata,@ApiParam(value = "The configuration to use to process the document. If this part is provided, then the provided configuration is used to process the document. If the `configuration_id` is also provided (both are present at the same time), then request is rejected. The maximum supported configuration size is 1 MB. Configuration parts larger than 1 MB are rejected. See the `GET /configurations/{configuration_id}` operation for an example configuration.")@FormDataParam("configuration")  String _configuration,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.addDocument(environmentId,collectionId,version,configurationId,fileInputStream, fileDetail,metadata,_configuration,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -101,7 +99,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.addDocument(environmentId,collectionId,version,configurationId,file,metadata,_configuration);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#addDocument");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#addDocument");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -129,13 +133,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 400, message = "Bad request if the collection body does not match the expected format or if the `configuration_id` references a configuration that does not exist. The error string will describe why the request was rejected.", response = Collection.class),
         
         @io.swagger.annotations.ApiResponse(code = 403, message = "Forbidden. Returned if you attempt to add a collection to a read-only environment.", response = Collection.class) })
-    public Response createCollection(
-@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId
-,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,
-@ApiParam(value = "Input a JSON object that allows you to add a collection." ) CreateCollectionRequest body
-,@Context SecurityContext securityContext)
+    public Response createCollection(@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@ApiParam(value = "Input a JSON object that allows you to add a collection." ) CreateCollectionRequest body,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.createCollection(environmentId,version,body,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -152,7 +150,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.createCollection(environmentId,version,body);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#createCollection");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#createCollection");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -180,13 +184,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 400, message = "Bad request", response = ModelConfiguration.class),
         
         @io.swagger.annotations.ApiResponse(code = 403, message = "Forbidden. Returned if you attempt to add a configuration to a read-only environment.", response = ModelConfiguration.class) })
-    public Response createConfiguration(
-@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId
-,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,
-@ApiParam(value = "Input a JSON object that enables you to customize how your content is ingested and what enrichments are added to your data.   `name` is required and must be unique within the current `environment`. All other properties are optional.  If the input configuration contains the `configuration_id`, `created`, or `updated` properties, then they will be ignored and overridden by the system (an error is not returned so that the overridden fields do not need to be removed when copying a configuration).   The configuration can contain unrecognized JSON fields. Any such fields will be ignored and will not generate an error. This makes it easier to use newer configuration files with older versions of the API and the service. It also makes it possible for the tooling to add additional metadata and information to the configuration." ,required=true) ModelConfiguration _configuration
-,@Context SecurityContext securityContext)
+    public Response createConfiguration(@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@ApiParam(value = "Input a JSON object that enables you to customize how your content is ingested and what enrichments are added to your data.   `name` is required and must be unique within the current `environment`. All other properties are optional.  If the input configuration contains the `configuration_id`, `created`, or `updated` properties, then they will be ignored and overridden by the system (an error is not returned so that the overridden fields do not need to be removed when copying a configuration).   The configuration can contain unrecognized JSON fields. Any such fields will be ignored and will not generate an error. This makes it easier to use newer configuration files with older versions of the API and the service. It also makes it possible for the tooling to add additional metadata and information to the configuration." ,required=true) ModelConfiguration _configuration,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.createConfiguration(environmentId,version,_configuration,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -203,7 +201,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.createConfiguration(environmentId,version,_configuration);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#createConfiguration");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#createConfiguration");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -229,11 +233,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 201, message = "Environment successfuly added", response = Environment.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Bad request.", response = Environment.class) })
-    public Response createEnvironment(@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,
-@ApiParam(value = "A JSON object where you define an environment name, description, and size." ,required=true) CreateEnvironmentRequest body
-,@Context SecurityContext securityContext)
+    public Response createEnvironment(@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@ApiParam(value = "A JSON object where you define an environment name, description, and size." ,required=true) CreateEnvironmentRequest body,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.createEnvironment(version,body,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -250,7 +250,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.createEnvironment(version,body);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#createEnvironment");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#createEnvironment");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -280,13 +286,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 403, message = "Forbidden. Returned if you attempt to delete a collection in a read-only environment.", response = DeleteCollectionResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 404, message = "Returned any time the collection is not found (even immediately after the collection was successfully deleted).  Example error message:  `A collection with ID '2cd8bc72-d737-46e3-b26b-05a585111111' was not found.`", response = DeleteCollectionResponse.class) })
-    public Response deleteCollection(
-@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId
-,
-@ApiParam(value = "the ID of your collection",required=true) @PathParam("collection_id") String collectionId
-,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,@Context SecurityContext securityContext)
+    public Response deleteCollection(@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId,@ApiParam(value = "the ID of your collection",required=true) @PathParam("collection_id") String collectionId,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.deleteCollection(environmentId,collectionId,version,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -303,7 +303,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.deleteCollection(environmentId,collectionId,version);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#deleteCollection");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#deleteCollection");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -331,13 +337,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 400, message = "Bad request.  A bad request is returned any time there is a problem with the request itself.  Example error messages:  * `Invalid Configuration ID` - if the configuration ID is not correctly formatted. * `Invalid configurationId: 2c3a981b-dade-488c-b8c6-01ae8d111111` - if the configuration is not found.", response = DeleteConfigurationResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 403, message = "Forbidden. Returned if you attempt to delete a read-only configuration, or if you attempt to delete a configuration from a read-only environment.", response = DeleteConfigurationResponse.class) })
-    public Response deleteConfiguration(
-@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId
-,
-@ApiParam(value = "the ID of your configuration",required=true) @PathParam("configuration_id") String configurationId
-,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,@Context SecurityContext securityContext)
+    public Response deleteConfiguration(@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId,@ApiParam(value = "the ID of your configuration",required=true) @PathParam("configuration_id") String configurationId,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.deleteConfiguration(environmentId,configurationId,version,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -354,7 +354,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.deleteConfiguration(environmentId,configurationId,version);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#deleteConfiguration");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#deleteConfiguration");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -382,15 +388,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 400, message = "Bad request.  A bad request is returned any time there is a problem with the request itself.", response = DeleteDocumentResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 403, message = "Forbidden. Returned if you attempt to delete a document in a collection in a read-only environment.", response = DeleteDocumentResponse.class) })
-    public Response deleteDocument(
-@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId
-,
-@ApiParam(value = "the ID of your collection",required=true) @PathParam("collection_id") String collectionId
-,
-@ApiParam(value = "the ID of your document",required=true) @PathParam("document_id") String documentId
-,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,@Context SecurityContext securityContext)
+    public Response deleteDocument(@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId,@ApiParam(value = "the ID of your collection",required=true) @PathParam("collection_id") String collectionId,@ApiParam(value = "the ID of your document",required=true) @PathParam("document_id") String documentId,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.deleteDocument(environmentId,collectionId,documentId,version,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -407,7 +405,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.deleteDocument(environmentId,collectionId,documentId,version);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#deleteDocument");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#deleteDocument");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -437,11 +441,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 403, message = "Forbidden. Returned if you attempt to delete a read-only environment.", response = DeleteEnvironmentResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 404, message = "Returned any time the environment is not found (even immediately after the environment was successfully deleted).  Example error message:  `An environment with ID '2cd8bc72-d737-46e3-b26b-05a585111111' was not found.`", response = DeleteEnvironmentResponse.class) })
-    public Response deleteEnvironment(
-@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId
-,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,@Context SecurityContext securityContext)
+    public Response deleteEnvironment(@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.deleteEnvironment(environmentId,version,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -458,7 +458,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.deleteEnvironment(environmentId,version);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#deleteEnvironment");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#deleteEnvironment");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -484,13 +490,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Collection fetched", response = Collection.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Bad request", response = Collection.class) })
-    public Response getCollection(
-@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId
-,
-@ApiParam(value = "the ID of your collection",required=true) @PathParam("collection_id") String collectionId
-,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,@Context SecurityContext securityContext)
+    public Response getCollection(@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId,@ApiParam(value = "the ID of your collection",required=true) @PathParam("collection_id") String collectionId,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.getCollection(environmentId,collectionId,version,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -507,7 +507,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.getCollection(environmentId,collectionId,version);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#getCollection");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#getCollection");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -533,13 +539,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Configuration successfully fetched", response = ModelConfiguration.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Bad request", response = ModelConfiguration.class) })
-    public Response getConfiguration(
-@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId
-,
-@ApiParam(value = "the ID of your configuration",required=true) @PathParam("configuration_id") String configurationId
-,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,@Context SecurityContext securityContext)
+    public Response getConfiguration(@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId,@ApiParam(value = "the ID of your configuration",required=true) @PathParam("configuration_id") String configurationId,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.getConfiguration(environmentId,configurationId,version,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -556,7 +556,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.getConfiguration(environmentId,configurationId,version);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#getConfiguration");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#getConfiguration");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -584,15 +590,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 400, message = "Bad request", response = DocumentStatus.class),
         
         @io.swagger.annotations.ApiResponse(code = 403, message = "Forbidden. Returned if you attempt to get the status of a document in a collection in a read-only environment.", response = DocumentStatus.class) })
-    public Response getDocument(
-@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId
-,
-@ApiParam(value = "the ID of your collection",required=true) @PathParam("collection_id") String collectionId
-,
-@ApiParam(value = "the ID of your document",required=true) @PathParam("document_id") String documentId
-,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,@Context SecurityContext securityContext)
+    public Response getDocument(@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId,@ApiParam(value = "the ID of your collection",required=true) @PathParam("collection_id") String collectionId,@ApiParam(value = "the ID of your document",required=true) @PathParam("document_id") String documentId,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.getDocument(environmentId,collectionId,documentId,version,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -609,7 +607,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.getDocument(environmentId,collectionId,documentId,version);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#getDocument");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#getDocument");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -635,11 +639,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Environment fetched", response = Environment.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Bad request", response = Environment.class) })
-    public Response getEnvironment(
-@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId
-,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,@Context SecurityContext securityContext)
+    public Response getEnvironment(@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.getEnvironment(environmentId,version,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -656,7 +656,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.getEnvironment(environmentId,version);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#getEnvironment");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#getEnvironment");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -682,13 +688,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "The list of fetched fields.  The fields are returned using a fully-qualified name format, however, the format differs slightly from that used by the query operations. Specifically:      * fields which contain nested JSON objects are assigned a type of \"nested\".      * fields which belong to a nested object are prefixed with `.properties` (e.g., `warnings.properties.severity` means that the `warnings` object has a property called `severity`).      * fields returned from the News collection are prefixed with `v[N]-fullnews-t3-[YEAR].mappings` (e.g., `v5-fullnews-t3-2016.mappings.text.properties.author`).", response = ListCollectionFieldsResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Bad request", response = ListCollectionFieldsResponse.class) })
-    public Response listCollectionFields(
-@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId
-,
-@ApiParam(value = "the ID of your collection",required=true) @PathParam("collection_id") String collectionId
-,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,@Context SecurityContext securityContext)
+    public Response listCollectionFields(@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId,@ApiParam(value = "the ID of your collection",required=true) @PathParam("collection_id") String collectionId,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.listCollectionFields(environmentId,collectionId,version,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -705,7 +705,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.listCollectionFields(environmentId,collectionId,version);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#listCollectionFields");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#listCollectionFields");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -731,13 +737,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful response", response = ListCollectionsResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Bad request", response = ListCollectionsResponse.class) })
-    public Response listCollections(
-@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId
-,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,@ApiParam(value = "Find collections with the given name.") @QueryParam("name") String name
-
-,@Context SecurityContext securityContext)
+    public Response listCollections(@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@ApiParam(value = "Find collections with the given name.") @QueryParam("name") String name,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.listCollections(environmentId,version,name,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -754,7 +754,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.listCollections(environmentId,version,name);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#listCollections");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#listCollections");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -780,13 +786,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful response", response = ListConfigurationsResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Bad request", response = ListConfigurationsResponse.class) })
-    public Response listConfigurations(
-@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId
-,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,@ApiParam(value = "Find configurations with the given name.") @QueryParam("name") String name
-
-,@Context SecurityContext securityContext)
+    public Response listConfigurations(@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@ApiParam(value = "Find configurations with the given name.") @QueryParam("name") String name,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.listConfigurations(environmentId,version,name,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -803,7 +803,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.listConfigurations(environmentId,version,name);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#listConfigurations");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#listConfigurations");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -829,11 +835,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Successful response", response = ListEnvironmentsResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Bad request", response = ListEnvironmentsResponse.class) })
-    public Response listEnvironments(@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,@ApiParam(value = "Show only the environment with the given name.") @QueryParam("name") String name
-
-,@Context SecurityContext securityContext)
+    public Response listEnvironments(@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@ApiParam(value = "Show only the environment with the given name.") @QueryParam("name") String name,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.listEnvironments(version,name,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -850,7 +852,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.listEnvironments(version,name);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#listEnvironments");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#listEnvironments");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -876,31 +884,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Query executed successfully.", response = QueryResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Bad request", response = QueryResponse.class) })
-    public Response query(
-@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId
-,
-@ApiParam(value = "the ID of your collection",required=true) @PathParam("collection_id") String collectionId
-,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,@ApiParam(value = "A cacheable query that limits the documents returned to exclude any documents that don't mention the query content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the data set.") @QueryParam("filter") String filter
-
-,@ApiParam(value = "A query search returns all documents in your data set with full enrichments and full text, but with the most relevant documents listed first. Use a query search when you want to find the most relevant search results. You cannot use `natural_language_query` and `query` at the same time.") @QueryParam("query") String query
-
-,@ApiParam(value = "A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.") @QueryParam("natural_language_query") String naturalLanguageQuery
-
-,@ApiParam(value = "A passages query that returns the most relevant passages from the document.") @QueryParam("passages") Boolean passages
-
-,@ApiParam(value = "An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and time series. For a full list of possible aggregrations, see the Query reference.") @QueryParam("aggregation") String aggregation
-
-,@ApiParam(value = "Number of documents to return", defaultValue="10") @DefaultValue("10") @QueryParam("count") Integer count
-
-,@ApiParam(value = "A comma separated list of the portion of the document hierarchy to return.") @QueryParam("return") List<String> _return
-
-,@ApiParam(value = "The number of query results to skip at the beginning. For example, if the total number of results that are returned is 10, and the offset is 8, it returns the last two results.") @QueryParam("offset") Integer offset
-
-,@ApiParam(value = "A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no prefix is specified.") @QueryParam("sort") String sort
-
-,@Context SecurityContext securityContext)
+    public Response query(@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId,@ApiParam(value = "the ID of your collection",required=true) @PathParam("collection_id") String collectionId,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@ApiParam(value = "A cacheable query that limits the documents returned to exclude any documents that don't mention the query content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the data set.") @QueryParam("filter") String filter,@ApiParam(value = "A query search returns all documents in your data set with full enrichments and full text, but with the most relevant documents listed first. Use a query search when you want to find the most relevant search results. You cannot use `natural_language_query` and `query` at the same time.") @QueryParam("query") String query,@ApiParam(value = "A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.") @QueryParam("natural_language_query") String naturalLanguageQuery,@ApiParam(value = "A passages query that returns the most relevant passages from the document.") @QueryParam("passages") Boolean passages,@ApiParam(value = "An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and time series. For a full list of possible aggregrations, see the Query reference.") @QueryParam("aggregation") String aggregation,@ApiParam(value = "Number of documents to return", defaultValue="10") @DefaultValue("10") @QueryParam("count") Integer count,@ApiParam(value = "A comma separated list of the portion of the document hierarchy to return.") @QueryParam("return") List<String> _return,@ApiParam(value = "The number of query results to skip at the beginning. For example, if the total number of results that are returned is 10, and the offset is 8, it returns the last two results.") @QueryParam("offset") Integer offset,@ApiParam(value = "A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no prefix is specified.") @QueryParam("sort") String sort,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.query(environmentId,collectionId,version,filter,query,naturalLanguageQuery,passages,aggregation,count,_return,offset,sort,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -917,7 +901,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.query(environmentId,collectionId,version,filter,query,naturalLanguageQuery,passages,aggregation,count,_return,offset,sort);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#query");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#query");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -943,31 +933,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "Query for notices executed successfully.", response = NoticeQueryResponse.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Bad request", response = NoticeQueryResponse.class) })
-    public Response queryNotices(
-@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId
-,
-@ApiParam(value = "the ID of your collection",required=true) @PathParam("collection_id") String collectionId
-,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,@ApiParam(value = "A cacheable query that limits the documents returned to exclude any documents that don't mention the query content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the data set.") @QueryParam("filter") String filter
-
-,@ApiParam(value = "A query search returns all documents in your data set with full enrichments and full text, but with the most relevant documents listed first. Use a query search when you want to find the most relevant search results. You cannot use `natural_language_query` and `query` at the same time.") @QueryParam("query") String query
-
-,@ApiParam(value = "A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.") @QueryParam("natural_language_query") String naturalLanguageQuery
-
-,@ApiParam(value = "A passages query that returns the most relevant passages from the document.") @QueryParam("passages") Boolean passages
-
-,@ApiParam(value = "An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and time series. For a full list of possible aggregrations, see the Query reference.") @QueryParam("aggregation") String aggregation
-
-,@ApiParam(value = "Number of documents to return", defaultValue="10") @DefaultValue("10") @QueryParam("count") Integer count
-
-,@ApiParam(value = "A comma separated list of the portion of the document hierarchy to return.") @QueryParam("return") List<String> _return
-
-,@ApiParam(value = "The number of query results to skip at the beginning. For example, if the total number of results that are returned is 10, and the offset is 8, it returns the last two results.") @QueryParam("offset") Integer offset
-
-,@ApiParam(value = "A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no prefix is specified.") @QueryParam("sort") String sort
-
-,@Context SecurityContext securityContext)
+    public Response queryNotices(@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId,@ApiParam(value = "the ID of your collection",required=true) @PathParam("collection_id") String collectionId,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@ApiParam(value = "A cacheable query that limits the documents returned to exclude any documents that don't mention the query content. Filter searches are better for metadata type searches and when you are trying to get a sense of concepts in the data set.") @QueryParam("filter") String filter,@ApiParam(value = "A query search returns all documents in your data set with full enrichments and full text, but with the most relevant documents listed first. Use a query search when you want to find the most relevant search results. You cannot use `natural_language_query` and `query` at the same time.") @QueryParam("query") String query,@ApiParam(value = "A natural language query that returns relevant documents by utilizing training data and natural language understanding. You cannot use `natural_language_query` and `query` at the same time.") @QueryParam("natural_language_query") String naturalLanguageQuery,@ApiParam(value = "A passages query that returns the most relevant passages from the document.") @QueryParam("passages") Boolean passages,@ApiParam(value = "An aggregation search uses combinations of filters and query search to return an exact answer. Aggregations are useful for building applications, because you can use them to build lists, tables, and time series. For a full list of possible aggregrations, see the Query reference.") @QueryParam("aggregation") String aggregation,@ApiParam(value = "Number of documents to return", defaultValue="10") @DefaultValue("10") @QueryParam("count") Integer count,@ApiParam(value = "A comma separated list of the portion of the document hierarchy to return.") @QueryParam("return") List<String> _return,@ApiParam(value = "The number of query results to skip at the beginning. For example, if the total number of results that are returned is 10, and the offset is 8, it returns the last two results.") @QueryParam("offset") Integer offset,@ApiParam(value = "A comma separated list of fields in the document to sort on. You can optionally specify a sort direction by prefixing the field with `-` for descending or `+` for ascending. Ascending is the default sort direction if no prefix is specified.") @QueryParam("sort") String sort,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.queryNotices(environmentId,collectionId,version,filter,query,naturalLanguageQuery,passages,aggregation,count,_return,offset,sort,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -984,7 +950,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.queryNotices(environmentId,collectionId,version,filter,query,naturalLanguageQuery,passages,aggregation,count,_return,offset,sort);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#queryNotices");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#queryNotices");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -1010,23 +982,10 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 200, message = "The document was successfully processed.", response = TestDocument.class),
         
         @io.swagger.annotations.ApiResponse(code = 400, message = "Bad request if:   * The request is incorrectly formatted   * The `configuration_id` parameter refers to a non-existent configuration   * The default `configuration_id` of the collection refers to a non-existent configuration (and no override has been provided). The error message contains details about what caused the request to be rejected.", response = TestDocument.class) })
-    public Response testConfigurationInEnvironment(
-@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId
-,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,
-@ApiParam(value = "The configuration to use to process the document. If this part is provided, then the provided configuration is used to process the document. If the `configuration_id` is also provided (both are present at the same time), then request is rejected. The maximum supported configuration size is 1 MB. Configuration parts larger than 1 MB are rejected. See the `GET /configurations/{configuration_id}` operation for an example configuration.")@FormDataParam("configuration")  String _configuration
-,@ApiParam(value = "Specify to only run the input document through the given step instead of running the input document through the entire ingestion workflow. Valid values are `convert`, `enrich`, and `normalize`.", allowableValues="html_input, html_output, json_output, json_normalizations_output, enrichments_output, normalizations_output") @QueryParam("step") String step
-
-,@ApiParam(value = "The ID of the configuration to use to process the document. If the `configuration` form part is also provided (both are present at the same time), then request will be rejected.") @QueryParam("configuration_id") String configurationId
-
-,
-
+    public Response testConfigurationInEnvironment(@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@ApiParam(value = "The configuration to use to process the document. If this part is provided, then the provided configuration is used to process the document. If the `configuration_id` is also provided (both are present at the same time), then request is rejected. The maximum supported configuration size is 1 MB. Configuration parts larger than 1 MB are rejected. See the `GET /configurations/{configuration_id}` operation for an example configuration.")@FormDataParam("configuration")  String _configuration,@ApiParam(value = "Specify to only run the input document through the given step instead of running the input document through the entire ingestion workflow. Valid values are `convert`, `enrich`, and `normalize`.", allowableValues="html_input, html_output, json_output, json_normalizations_output, enrichments_output, normalizations_output"
+) @QueryParam("step") String step,@ApiParam(value = "The ID of the configuration to use to process the document. If the `configuration` form part is also provided (both are present at the same time), then request will be rejected.") @QueryParam("configuration_id") String configurationId,
             @FormDataParam("file") File file
-            
-,
-@ApiParam(value = "If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected. Example:  ``` {   \"Creator\": \"Johnny Appleseed\",   \"Subject\": \"Apples\" } ```")@FormDataParam("metadata")  String metadata
-,@Context SecurityContext securityContext)
+            ,@ApiParam(value = "If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected. Example:  ``` {   \"Creator\": \"Johnny Appleseed\",   \"Subject\": \"Apples\" } ```")@FormDataParam("metadata")  String metadata,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.testConfigurationInEnvironment(environmentId,version,_configuration,step,configurationId,fileInputStream, fileDetail,metadata,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1043,7 +1002,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.testConfigurationInEnvironment(environmentId,version,_configuration,step,configurationId,file,metadata);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#testConfigurationInEnvironment");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#testConfigurationInEnvironment");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -1071,15 +1036,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 400, message = "Bad request if the collection body does not match the expected format or if the `configuration_id` references a configuration that does not exist. The error string will describe why the request was rejected.", response = Collection.class),
         
         @io.swagger.annotations.ApiResponse(code = 403, message = "Forbidden. Returned if you attempt to update a collection in a read-only environment.", response = Collection.class) })
-    public Response updateCollection(
-@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId
-,
-@ApiParam(value = "the ID of your collection",required=true) @PathParam("collection_id") String collectionId
-,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,
-@ApiParam(value = "Input a JSON object that allows you to update a collection." ) UpdateCollectionRequest body
-,@Context SecurityContext securityContext)
+    public Response updateCollection(@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId,@ApiParam(value = "the ID of your collection",required=true) @PathParam("collection_id") String collectionId,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@ApiParam(value = "Input a JSON object that allows you to update a collection." ) UpdateCollectionRequest body,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.updateCollection(environmentId,collectionId,version,body,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1096,7 +1053,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.updateCollection(environmentId,collectionId,version,body);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#updateCollection");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#updateCollection");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -1124,15 +1087,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 400, message = "Bad request", response = ModelConfiguration.class),
         
         @io.swagger.annotations.ApiResponse(code = 403, message = "Forbidden. Returned if you attempt to update a read-only configuration or if you attempt to update a configuration in a read-only environment.", response = ModelConfiguration.class) })
-    public Response updateConfiguration(
-@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId
-,
-@ApiParam(value = "the ID of your configuration",required=true) @PathParam("configuration_id") String configurationId
-,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,
-@ApiParam(value = "Input a JSON object that enables you to update and customize how your data is ingested and what enrichments are added to your data.  The `name` parameter is required and must be unique within the current `environment`. All other properties are optional, but if they are omitted  the default values replace the current value of each omitted property.  If the input configuration contains the `configuration_id`, `created`, or `updated` properties, they are ignored and overridden by the system, and an error is not returned so that the overridden fields do not need to be removed when updating a configuration.   The configuration can contain unrecognized JSON fields. Any such fields are ignored and do not generate an error. This makes it easier to use newer configuration files with older versions of the API and the service. It also makes it possible for the tooling to add additional metadata and information to the configuration." ,required=true) ModelConfiguration _configuration
-,@Context SecurityContext securityContext)
+    public Response updateConfiguration(@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId,@ApiParam(value = "the ID of your configuration",required=true) @PathParam("configuration_id") String configurationId,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@ApiParam(value = "Input a JSON object that enables you to update and customize how your data is ingested and what enrichments are added to your data.  The `name` parameter is required and must be unique within the current `environment`. All other properties are optional, but if they are omitted  the default values replace the current value of each omitted property.  If the input configuration contains the `configuration_id`, `created`, or `updated` properties, they are ignored and overridden by the system, and an error is not returned so that the overridden fields do not need to be removed when updating a configuration.   The configuration can contain unrecognized JSON fields. Any such fields are ignored and do not generate an error. This makes it easier to use newer configuration files with older versions of the API and the service. It also makes it possible for the tooling to add additional metadata and information to the configuration." ,required=true) ModelConfiguration _configuration,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.updateConfiguration(environmentId,configurationId,version,_configuration,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1149,7 +1104,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.updateConfiguration(environmentId,configurationId,version,_configuration);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#updateConfiguration");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#updateConfiguration");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -1177,25 +1138,9 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 400, message = "Bad request if:   * the request is incorrectly formatted   * the configuration_id query parameter refers to a non-existant configuration.   * the default configuration_id of the collection refers to a non-existent configuration (and no override has been povided). The error message will contain details about what caused the request to be rejected.", response = DocumentAccepted.class),
         
         @io.swagger.annotations.ApiResponse(code = 403, message = "Forbidden. Returned if you attempt to add or update a document in a collection in a read-only environment.", response = DocumentAccepted.class) })
-    public Response updateDocument(
-@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId
-,
-@ApiParam(value = "the ID of your collection",required=true) @PathParam("collection_id") String collectionId
-,
-@ApiParam(value = "the ID of your document",required=true) @PathParam("document_id") String documentId
-,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,@ApiParam(value = "The ID of the configuration to use to process the document. If the `configuration` form part is also provided (both are present at the same time), then request will be rejected.") @QueryParam("configuration_id") String configurationId
-
-,
-
+    public Response updateDocument(@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId,@ApiParam(value = "the ID of your collection",required=true) @PathParam("collection_id") String collectionId,@ApiParam(value = "the ID of your document",required=true) @PathParam("document_id") String documentId,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@ApiParam(value = "The ID of the configuration to use to process the document. If the `configuration` form part is also provided (both are present at the same time), then request will be rejected.") @QueryParam("configuration_id") String configurationId,
             @FormDataParam("file") File file
-            
-,
-@ApiParam(value = "If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected. Example:  ``` {   \"Creator\": \"Johnny Appleseed\",   \"Subject\": \"Apples\" } ```")@FormDataParam("metadata")  String metadata
-,
-@ApiParam(value = "The configuration to use to process the document. If this part is provided, then the provided configuration is used to process the document. If the `configuration_id` is also provided (both are present at the same time), then request is rejected. The maximum supported configuration size is 1 MB. Configuration parts larger than 1 MB are rejected. See the `GET /configurations/{configuration_id}` operation for an example configuration.")@FormDataParam("configuration")  String _configuration
-,@Context SecurityContext securityContext)
+            ,@ApiParam(value = "If you're using the Data Crawler to upload your documents, you can test a document against the type of metadata that the Data Crawler might send. The maximum supported metadata file size is 1 MB. Metadata parts larger than 1 MB are rejected. Example:  ``` {   \"Creator\": \"Johnny Appleseed\",   \"Subject\": \"Apples\" } ```")@FormDataParam("metadata")  String metadata,@ApiParam(value = "The configuration to use to process the document. If this part is provided, then the provided configuration is used to process the document. If the `configuration_id` is also provided (both are present at the same time), then request is rejected. The maximum supported configuration size is 1 MB. Configuration parts larger than 1 MB are rejected. See the `GET /configurations/{configuration_id}` operation for an example configuration.")@FormDataParam("configuration")  String _configuration,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.updateDocument(environmentId,collectionId,documentId,version,configurationId,fileInputStream, fileDetail,metadata,_configuration,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1212,7 +1157,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.updateDocument(environmentId,collectionId,documentId,version,configurationId,file,metadata,_configuration);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#updateDocument");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#updateDocument");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();
@@ -1240,13 +1191,7 @@ public class V1Api  {
         @io.swagger.annotations.ApiResponse(code = 400, message = "Bad request.", response = Environment.class),
         
         @io.swagger.annotations.ApiResponse(code = 403, message = "Forbidden. Returned if you attempt to update a read-only environment.", response = Environment.class) })
-    public Response updateEnvironment(
-@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId
-,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version
-
-,
-@ApiParam(value = "" ,required=true) UpdateEnvironmentRequest body
-,@Context SecurityContext securityContext)
+    public Response updateEnvironment(@ApiParam(value = "the ID of your environment",required=true) @PathParam("environment_id") String environmentId,@ApiParam(value = "a date (`YYYY-MM-DD`) that identifies the specific version of the API to use when processing the request",required=true, defaultValue="2016-12-01") @DefaultValue("2016-12-01") @QueryParam("version") String version,@ApiParam(value = "" ,required=true) UpdateEnvironmentRequest body,@Context SecurityContext securityContext)
     throws NotFoundException {
        // return delegate.updateEnvironment(environmentId,version,body,securityContext);
         com.ibm.mfp.adapters.sample.ApiClient apiAuthInstance = new com.ibm.mfp.adapters.sample.ApiClient();
@@ -1263,7 +1208,13 @@ public class V1Api  {
             System.out.println("Calling Node server.");
             result = 	apiInstance.updateEnvironment(environmentId,version,body);
            System.out.println(result);
-           } catch (java.lang.Exception e) {
+           }
+           catch (com.ibm.mfp.adapters.sample.ApiException e) {
+            System.err.println("Exception when calling V1Api#updateEnvironment");
+            e.printStackTrace();
+            return Response.status(e.getCode()).entity(e.getResponseBody()).build();
+           }  
+           catch (java.lang.Exception e) {
             System.err.println("Exception when calling V1Api#updateEnvironment");
             e.printStackTrace();
             return Response.status(Status.BAD_REQUEST).entity(e.getMessage()).build();

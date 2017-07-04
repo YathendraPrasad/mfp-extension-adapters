@@ -1,4 +1,16 @@
 /*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
+/*
  * Discovery
  * The IBM Watson&trade; Discovery Service is a cognitive search and content analytics engine that you can add to applications to identify patterns, trends and actionable insights to drive better decision-making. Securely unify structured and unstructured data with pre-enriched content, and use a simplified query language to eliminate the need for manual filtering of results. 
  *
@@ -23,11 +35,23 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.validation.constraints.*;
 
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 /**
  * An aggregation produced by the Discovery service to analyze the input provided.
  */
 @ApiModel(description = "An aggregation produced by the Discovery service to analyze the input provided.")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T15:47:02.385+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:39:34.122+05:30")
 public class QueryAggregation   {
   @JsonProperty("type")
   private String type = null;
@@ -64,7 +88,6 @@ public class QueryAggregation   {
   **/
   @JsonProperty("type")
   @ApiModelProperty(value = "The type of aggregation command used. e.g. term, filter, max, min, etc.")
-
   public String getType() {
     return type;
   }
@@ -84,7 +107,6 @@ public class QueryAggregation   {
   **/
   @JsonProperty("field")
   @ApiModelProperty(value = "The field where the aggregation is located in the document.")
-
   public String getField() {
     return field;
   }
@@ -112,7 +134,6 @@ public class QueryAggregation   {
   **/
   @JsonProperty("results")
   @ApiModelProperty(value = "")
-
   public List<AggregationResult> getResults() {
     return results;
   }
@@ -132,7 +153,6 @@ public class QueryAggregation   {
   **/
   @JsonProperty("match")
   @ApiModelProperty(value = "The match the aggregated results queried for.")
-
   public String getMatch() {
     return match;
   }
@@ -152,7 +172,6 @@ public class QueryAggregation   {
   **/
   @JsonProperty("matching_results")
   @ApiModelProperty(value = "Number of matching results.")
-
   public Integer getMatchingResults() {
     return matchingResults;
   }
@@ -180,7 +199,6 @@ public class QueryAggregation   {
   **/
   @JsonProperty("aggregations")
   @ApiModelProperty(value = "Aggregations returned by the Discovery service.")
-
   public List<QueryAggregation> getAggregations() {
     return aggregations;
   }
@@ -200,7 +218,6 @@ public class QueryAggregation   {
   **/
   @JsonProperty("interval")
   @ApiModelProperty(value = "Interval specified by using aggregation type 'timeslice'.")
-
   public Integer getInterval() {
     return interval;
   }
@@ -220,7 +237,6 @@ public class QueryAggregation   {
   **/
   @JsonProperty("value")
   @ApiModelProperty(value = "Value of the aggregation. (For 'max' and 'min' type).")
-
   public Double getValue() {
     return value;
   }
@@ -283,3 +299,4 @@ public class QueryAggregation   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

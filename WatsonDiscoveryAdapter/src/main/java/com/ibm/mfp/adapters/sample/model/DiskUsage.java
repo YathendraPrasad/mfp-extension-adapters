@@ -1,4 +1,16 @@
 /*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
+/*
  * Discovery
  * The IBM Watson&trade; Discovery Service is a cognitive search and content analytics engine that you can add to applications to identify patterns, trends and actionable insights to drive better decision-making. Securely unify structured and unstructured data with pre-enriched content, and use a simplified query language to eliminate the need for manual filtering of results. 
  *
@@ -20,11 +32,23 @@ import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
 import javax.validation.constraints.*;
 
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 /**
  * Summary of the disk usage statistics for this environment
  */
 @ApiModel(description = "Summary of the disk usage statistics for this environment")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T15:47:02.385+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:39:34.122+05:30")
 public class DiskUsage   {
   @JsonProperty("used_bytes")
   private Integer usedBytes = null;
@@ -47,7 +71,6 @@ public class DiskUsage   {
   **/
   @JsonProperty("used_bytes")
   @ApiModelProperty(value = "Number of bytes used on the environment's disk capacity")
-
   public Integer getUsedBytes() {
     return usedBytes;
   }
@@ -58,7 +81,6 @@ public class DiskUsage   {
   **/
   @JsonProperty("total_bytes")
   @ApiModelProperty(value = "Total number of bytes available in the environment's disk capacity")
-
   public BigDecimal getTotalBytes() {
     return totalBytes;
   }
@@ -69,7 +91,6 @@ public class DiskUsage   {
   **/
   @JsonProperty("used")
   @ApiModelProperty(value = "Amount of disk capacity used, in KB or GB format")
-
   public String getUsed() {
     return used;
   }
@@ -80,7 +101,6 @@ public class DiskUsage   {
   **/
   @JsonProperty("total")
   @ApiModelProperty(value = "Total amount of the environment's disk capacity, in KB or GB format")
-
   public String getTotal() {
     return total;
   }
@@ -91,7 +111,6 @@ public class DiskUsage   {
   **/
   @JsonProperty("percent_used")
   @ApiModelProperty(value = "Percentage of the environment's disk capacity that is being used")
-
   public Double getPercentUsed() {
     return percentUsed;
   }
@@ -144,3 +163,4 @@ public class DiskUsage   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+

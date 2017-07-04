@@ -1,4 +1,16 @@
 /*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
+/*
  * Discovery
  * The IBM Watson&trade; Discovery Service is a cognitive search and content analytics engine that you can add to applications to identify patterns, trends and actionable insights to drive better decision-making. Securely unify structured and unstructured data with pre-enriched content, and use a simplified query language to eliminate the need for manual filtering of results. 
  *
@@ -22,11 +34,23 @@ import io.swagger.annotations.ApiModelProperty;
 import org.joda.time.DateTime;
 import javax.validation.constraints.*;
 
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
+
 /**
  * Details about an environment
  */
 @ApiModel(description = "Details about an environment")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-05-19T15:47:02.385+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:39:34.122+05:30")
 public class Environment   {
   @JsonProperty("environment_id")
   private String environmentId = null;
@@ -48,6 +72,18 @@ public class Environment   {
 
   @JsonProperty("read_only")
   private Boolean readOnly = null;
+
+/*
+ *  IBM Confidential OCO Source Materials
+ *                                                                 
+ *  5725-I43 Copyright IBM Corp. 2011, 2017
+ *                                                                   
+ *  The source code for this program is not published or otherwise
+ *  divested of its trade secrets, irrespective of what has
+ *  been deposited with the U.S. Copyright Office.
+ *                   
+ */
+
 
 /**
    * Size of the environment
@@ -83,6 +119,7 @@ public class Environment   {
       return null;
     }
   }
+
   @JsonProperty("size")
   private SizeEnum size = SizeEnum._1;
 
@@ -95,7 +132,6 @@ public class Environment   {
   **/
   @JsonProperty("environment_id")
   @ApiModelProperty(value = "Unique identifier for this environment")
-
   public String getEnvironmentId() {
     return environmentId;
   }
@@ -111,8 +147,7 @@ public class Environment   {
   **/
   @JsonProperty("name")
   @ApiModelProperty(value = "Name that identifies this environment")
- @Size(min=0,max=255)
-  public String getName() {
+ @Size(min=0,max=255)  public String getName() {
     return name;
   }
 
@@ -131,7 +166,6 @@ public class Environment   {
   **/
   @JsonProperty("description")
   @ApiModelProperty(value = "Description of the environment")
-
   public String getDescription() {
     return description;
   }
@@ -146,7 +180,6 @@ public class Environment   {
   **/
   @JsonProperty("created")
   @ApiModelProperty(value = "Creation date of the environment, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-
   public DateTime getCreated() {
     return created;
   }
@@ -157,7 +190,6 @@ public class Environment   {
   **/
   @JsonProperty("updated")
   @ApiModelProperty(value = "Date of most recent environment update, in the format yyyy-MM-dd'T'HH:mm:ss.SSS'Z'")
-
   public DateTime getUpdated() {
     return updated;
   }
@@ -168,7 +200,6 @@ public class Environment   {
   **/
   @JsonProperty("status")
   @ApiModelProperty(value = "Status of the environment")
-
   public String getStatus() {
     return status;
   }
@@ -179,7 +210,6 @@ public class Environment   {
   **/
   @JsonProperty("read_only")
   @ApiModelProperty(value = "If true, then the environment contains read-only collections which are maintained by IBM.")
-
   public Boolean getReadOnly() {
     return readOnly;
   }
@@ -195,7 +225,6 @@ public class Environment   {
   **/
   @JsonProperty("size")
   @ApiModelProperty(value = "Size of the environment")
-
   public SizeEnum getSize() {
     return size;
   }
@@ -215,7 +244,6 @@ public class Environment   {
   **/
   @JsonProperty("index_capacity")
   @ApiModelProperty(value = "Object containing information about disk and memory usage")
-
   public IndexCapacity getIndexCapacity() {
     return indexCapacity;
   }
@@ -280,3 +308,4 @@ public class Environment   {
     return o.toString().replace("\n", "\n    ");
   }
 }
+
