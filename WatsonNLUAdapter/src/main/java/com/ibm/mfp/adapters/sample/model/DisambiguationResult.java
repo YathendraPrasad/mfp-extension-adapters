@@ -27,7 +27,6 @@ package com.ibm.mfp.adapters.sample.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.ibm.mfp.adapters.sample.model.DBpediaResource;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.ArrayList;
@@ -50,13 +49,13 @@ import javax.validation.constraints.*;
  * Disambiguation information for the entity
  */
 @ApiModel(description = "Disambiguation information for the entity")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:50:49.993+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-07-18T18:06:10.304+05:30")
 public class DisambiguationResult   {
   @JsonProperty("name")
   private String name = null;
 
   @JsonProperty("dbpedia_resource")
-  private DBpediaResource dbpediaResource = null;
+  private String dbpediaResource = null;
 
   @JsonProperty("subtype")
   private List<String> subtype = null;
@@ -80,7 +79,7 @@ public class DisambiguationResult   {
     this.name = name;
   }
 
-  public DisambiguationResult dbpediaResource(DBpediaResource dbpediaResource) {
+  public DisambiguationResult dbpediaResource(String dbpediaResource) {
     this.dbpediaResource = dbpediaResource;
     return this;
   }
@@ -91,11 +90,11 @@ public class DisambiguationResult   {
   **/
   @JsonProperty("dbpedia_resource")
   @ApiModelProperty(value = "Link to the corresponding DBpedia resource")
-  public DBpediaResource getDbpediaResource() {
+  public String getDbpediaResource() {
     return dbpediaResource;
   }
 
-  public void setDbpediaResource(DBpediaResource dbpediaResource) {
+  public void setDbpediaResource(String dbpediaResource) {
     this.dbpediaResource = dbpediaResource;
   }
 

@@ -27,7 +27,6 @@ package com.ibm.mfp.adapters.sample.model;
 import java.util.Objects;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonCreator;
-import com.ibm.mfp.adapters.sample.model.DBpediaResource;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.math.BigDecimal;
@@ -49,7 +48,7 @@ import javax.validation.constraints.*;
  * The general concepts referenced or alluded to in the specified content
  */
 @ApiModel(description = "The general concepts referenced or alluded to in the specified content")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:50:49.993+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-07-18T18:06:10.304+05:30")
 public class ConceptsResult   {
   @JsonProperty("text")
   private String text = null;
@@ -58,7 +57,7 @@ public class ConceptsResult   {
   private BigDecimal relevance = null;
 
   @JsonProperty("dbpedia_resource")
-  private DBpediaResource dbpediaResource = null;
+  private String dbpediaResource = null;
 
   public ConceptsResult text(String text) {
     this.text = text;
@@ -98,7 +97,7 @@ public class ConceptsResult   {
     this.relevance = relevance;
   }
 
-  public ConceptsResult dbpediaResource(DBpediaResource dbpediaResource) {
+  public ConceptsResult dbpediaResource(String dbpediaResource) {
     this.dbpediaResource = dbpediaResource;
     return this;
   }
@@ -109,11 +108,11 @@ public class ConceptsResult   {
   **/
   @JsonProperty("dbpedia_resource")
   @ApiModelProperty(value = "Link to the corresponding DBpedia resource")
-  public DBpediaResource getDbpediaResource() {
+  public String getDbpediaResource() {
     return dbpediaResource;
   }
 
-  public void setDbpediaResource(DBpediaResource dbpediaResource) {
+  public void setDbpediaResource(String dbpediaResource) {
     this.dbpediaResource = dbpediaResource;
   }
 

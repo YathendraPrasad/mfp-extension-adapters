@@ -60,7 +60,7 @@ import javax.validation.constraints.*;
  * Results of the analysis, organized by feature
  */
 @ApiModel(description = "Results of the analysis, organized by feature")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:50:49.993+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-07-18T18:06:10.304+05:30")
 public class AnalysisResults   {
   @JsonProperty("concepts")
   private List<ConceptsResult> concepts = null;

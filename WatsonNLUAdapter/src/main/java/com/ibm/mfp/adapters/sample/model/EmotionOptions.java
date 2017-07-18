@@ -49,7 +49,7 @@ import javax.validation.constraints.*;
  * Whether or not to return emotion analysis of the content
  */
 @ApiModel(description = "Whether or not to return emotion analysis of the content")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:50:49.993+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-07-18T18:06:10.304+05:30")
 public class EmotionOptions   {
   @JsonProperty("document")
   private Boolean document = true;

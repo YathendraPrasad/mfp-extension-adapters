@@ -772,15 +772,12 @@
           "description": "Relevance score between 0 and 1. Higher scores indicate greater relevance"
         },
         "dbpedia_resource": {
-          "description": "Link to the corresponding DBpedia resource",
-          "$ref": "#/definitions/DBpediaResource"
+	  "type" : "string",
+          "description": "Link to the corresponding DBpedia resource"
         }
       }
     },
-    "DBpediaResource": {
-      "type": "string",
-      "description": "Link to the corresponding DBpedia resource"
-    },
+
     "DisambiguationResult": {
       "description": "Disambiguation information for the entity",
       "type": "object",
@@ -790,8 +787,8 @@
           "description": "Common entity name"
         },
         "dbpedia_resource": {
-          "description": "Link to the corresponding DBpedia resource",
-          "$ref": "#/definitions/DBpediaResource"
+	  "type" : "string",
+          "description": "Link to the corresponding DBpedia resource"
         },
         "subtype": {
           "type": "array",

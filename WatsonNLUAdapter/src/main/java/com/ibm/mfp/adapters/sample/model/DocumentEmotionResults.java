@@ -48,7 +48,7 @@ import javax.validation.constraints.*;
  * An object containing the emotion results of a document
  */
 @ApiModel(description = "An object containing the emotion results of a document")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:50:49.993+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-07-18T18:06:10.304+05:30")
 public class DocumentEmotionResults   {
   @JsonProperty("emotion")
   private EmotionScores emotion = null;

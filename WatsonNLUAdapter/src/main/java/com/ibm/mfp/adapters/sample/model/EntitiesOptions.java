@@ -47,7 +47,7 @@ import javax.validation.constraints.*;
  * Whether or not to return important people, places, geopolitical, and other entities detected in the analyzed content
  */
 @ApiModel(description = "Whether or not to return important people, places, geopolitical, and other entities detected in the analyzed content")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:50:49.993+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-07-18T18:06:10.304+05:30")
 public class EntitiesOptions   {
   @JsonProperty("limit")
   private Integer limit = null;

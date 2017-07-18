@@ -45,7 +45,7 @@ import javax.validation.constraints.*;
 /**
  * MetadataResults
  */
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:50:49.993+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-07-18T18:06:10.304+05:30")
 public class MetadataResults extends ArrayList<MetadataResult>  {
 
   @Override

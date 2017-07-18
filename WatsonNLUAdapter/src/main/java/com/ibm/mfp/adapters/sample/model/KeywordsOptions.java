@@ -47,7 +47,7 @@ import javax.validation.constraints.*;
  * An option indicating whether or not important keywords from the analyzed content should be returned
  */
 @ApiModel(description = "An option indicating whether or not important keywords from the analyzed content should be returned")
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-06-21T18:50:49.993+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-07-18T18:06:10.304+05:30")
 public class KeywordsOptions   {
   @JsonProperty("limit")
   private Integer limit = null;
