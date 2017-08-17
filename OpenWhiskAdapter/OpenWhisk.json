@@ -395,10 +395,10 @@
                     {
                         "name": "payload",
                         "in": "body",
-                        "description": "The parameters for the action being invoked",
+                        "description": "The parameters for the action being invoked. eg: { \"payload\": { \"name\" : \"aaa\",\"id\" : \"1111\" }} )",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/KeyValue"
+                            "$ref": "#/definitions/PayLoad"
                         }
                     }
                 ],
@@ -1413,6 +1413,17 @@
                     "type": "string"
                 },
                 "value": {
+                    "description": "Any JSON value"
+                }
+            }
+        },
+       "PayLoad": {
+            "required": [
+                "payload"
+            ],
+            "properties": {
+                "payload": {
+		    "type": "object",
                     "description": "Any JSON value"
                 }
             }

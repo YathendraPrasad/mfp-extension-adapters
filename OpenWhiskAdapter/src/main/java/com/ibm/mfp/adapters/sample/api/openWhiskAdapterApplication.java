@@ -21,12 +21,12 @@ import java.util.logging.Logger;
 /**
  * Initializes the Adapter API 
  */
-public class openWhiskAdapterApplication extends MFPJAXRSApplication {
+public class OpenWhiskAdapterApplication extends MFPJAXRSApplication {
 
     /**
      * The logger used by the app
      */
-    static Logger logger = Logger.getLogger(openWhiskAdapterApplication.class.getName());
+    static Logger logger = Logger.getLogger(OpenWhiskAdapterApplication.class.getName());
 
     /**
      * Injected application configuration variable (injected by the MobileFirst server)

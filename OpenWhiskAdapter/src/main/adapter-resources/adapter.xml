@@ -8,7 +8,13 @@
     <displayName>OpenWhisk</displayName>
     <description>OpenWhisk</description>
 
-    <JAXRSApplicationClass>com.ibm.mfp.adapters.sample.api.openWhiskAdapterApplication</JAXRSApplicationClass>
-    <property name="username" displayName="Credentials: Username" defaultValue=""  />
-    <property name="password" displayName="Password" defaultValue=""  />
+    <JAXRSApplicationClass>com.ibm.mfp.adapters.sample.api.OpenWhiskAdapterApplication</JAXRSApplicationClass>
+    
+    
+    
+    
+        <property name="username" displayName="Credentials: Username" defaultValue=""  />
+        <property name="password" displayName="Password" defaultValue=""  />
+    
+
 </mfp:adapter>

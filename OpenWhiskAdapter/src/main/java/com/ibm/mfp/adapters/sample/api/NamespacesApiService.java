@@ -29,6 +29,7 @@ import com.ibm.mfp.adapters.sample.model.InlineResponse200;
 import com.ibm.mfp.adapters.sample.model.KeyValue;
 import com.ibm.mfp.adapters.sample.model.ModelPackage;
 import com.ibm.mfp.adapters.sample.model.PackagePut;
+import com.ibm.mfp.adapters.sample.model.PayLoad;
 import com.ibm.mfp.adapters.sample.model.Rule;
 import com.ibm.mfp.adapters.sample.model.RulePut;
 import com.ibm.mfp.adapters.sample.model.RuleSet;
@@ -43,7 +44,7 @@ import java.io.InputStream;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.SecurityContext;
 import javax.validation.constraints.*;
-@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-07-03T19:13:35.134+05:30")
+@javax.annotation.Generated(value = "com.github.mfpdev.adapters.swagger.codegen.MfpAdapterCodegen", date = "2017-08-16T15:08:23.571+05:30")
 public abstract class NamespacesApiService {
     public abstract Response deleteAction(String namespace,String actionName,SecurityContext securityContext) throws NotFoundException;
     public abstract Response deletePackage(String namespace,String packageName,SecurityContext securityContext) throws NotFoundException;
@@ -62,7 +63,7 @@ public abstract class NamespacesApiService {
     public abstract Response getPackageByName(String namespace,String packageName,SecurityContext securityContext) throws NotFoundException;
     public abstract Response getRuleByName(String namespace,String ruleName,SecurityContext securityContext) throws NotFoundException;
     public abstract Response getTriggerByName(String namespace,String triggerName,SecurityContext securityContext) throws NotFoundException;
-    public abstract Response invokeAction(String namespace,String actionName,KeyValue payload,String blocking,Integer timeout,SecurityContext securityContext) throws NotFoundException;
+    public abstract Response invokeAction(String namespace,String actionName,PayLoad payload,String blocking,Integer timeout,SecurityContext securityContext) throws NotFoundException;
     public abstract Response namespacesNamespaceActivationsActivationidLogsGet(String namespace,String activationid,SecurityContext securityContext) throws NotFoundException;
     public abstract Response namespacesNamespaceActivationsActivationidResultGet(String namespace,String activationid,SecurityContext securityContext) throws NotFoundException;
     public abstract Response setState(String namespace,String ruleName,RuleSet state,SecurityContext securityContext) throws NotFoundException;
